@@ -1,0 +1,10 @@
+# IDE
+.idea/
+
+# Node.js dependencies
+client/node_modules/
+server/node_modules/
+
+# Environment files
+server/.env
+client/src/.env
