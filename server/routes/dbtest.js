@@ -1,16 +1,9 @@
-import pool from "../config/database.js";
-import express from "express";
-const router = express.Router();
+import express from 'express';
 
-router.get("/", async (req, res) => {
-  try {
-    const [rows] = await pool.query("SELECT * FROM BOOKMARK");
-    res.json(rows);
-    console.log(rows);
-    // res.send("Hello World");
-  } catch (error) {
-    console.error(error);
-  }
-});
+const commentRouter = express.Router();
 
-export default router;
+commentRouter.get('/test', (req, res) => {
+  console.log('들어오는지 확인');
+})
+
+export default commentRouter;
