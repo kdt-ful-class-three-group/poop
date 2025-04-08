@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import dbtest from "./routes/dbtest.js";
+import userRouter from "./routes/user.js";
 
 // const router = express.Router();
 const app = express();
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 app.use(express.json());
 
 app.use("/dbtest", dbtest);
+app.use("/user", userRouter);
 
 const PORT = process.env.SERVERPORT;
 app.listen(PORT, () => {
