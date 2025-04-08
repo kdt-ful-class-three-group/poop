@@ -15,8 +15,12 @@ import dbtestRouter from './routes/dbtest.js'
 app.use(express.json())
 
 // 경로 /
+app.get('/',(req,res)=>{
+  res.send('연결됨')
+})
 
 // dbtest 라우터 사용
+app.use('/read',dbtestRouter)
 
 
 //포트
