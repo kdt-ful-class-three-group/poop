@@ -12,5 +12,5 @@ router.get("/", async (req, res) => {
     console.error(error);
   }
 });
-//? 왜안됨?
+//? 왜안됨??
 export default router;
