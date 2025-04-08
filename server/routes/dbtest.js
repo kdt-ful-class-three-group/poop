@@ -17,4 +17,4 @@ router.get('/',(req,res)=>{
 })
 
 //내보내기
-module.exports = router;
+export default router;
