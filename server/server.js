@@ -3,6 +3,7 @@ import express from 'express'
 const app = express()
 //cors
 import cors from 'cors'
+app.use(cors())
 //환경변수
 import dotenv from 'dotenv'
 dotenv.config()
