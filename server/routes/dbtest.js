@@ -1,16 +1,20 @@
-import pool from "../config/database.js";
-import express from "express";
-const router = express.Router();
+//createPool 가져오기
+import pool from '../config/database.js'
+//express
+import express from 'express'
+//router
+const router = express.Router()
 
-router.get("/", async (req, res) => {
-  try {
-    const [rows] = await pool.query("SELECT * FROM BOOKMARK");
-    res.json(rows);
-    console.log(rows);
-    // res.send("Hello World");
-  } catch (error) {
-    console.error(error);
-  }
-});
+//데이터 조회
+router.get('/',(req,res)=>{
+  pool.query(`SELECT * FROM USER`,(err,results)=>{
+    if(err){
+      console.err('데이터 조회 오류 발생',err)
+      return res.json({error:'서버 오류'})
+    }
+    res.json(results)
+  })
+})
 
-export default router;
+//내보내기
+module.exports = router;
