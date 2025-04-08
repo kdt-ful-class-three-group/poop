@@ -5,11 +5,11 @@ dotenv.config();
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
-  password: "poop123",
-  database: "poopdb",
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  waitForConnections: process.env.waitForConnections,
+  connectionLimit: process.env.connectionLimit,
+  queueLimit: process.env.queueLimit,
 });
 
 export default pool;
