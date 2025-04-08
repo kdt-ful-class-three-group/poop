@@ -6,14 +6,15 @@ import express from 'express'
 const router = express.Router()
 
 //데이터 조회
-router.get('/',(req,res)=>{
-  pool.query(`SELECT * FROM USER`,(err,results)=>{
-    if(err){
-      console.err('데이터 조회 오류 발생',err)
-      return res.json({error:'서버 오류'})
-    }
-    res.json(results)
-  })
+router.get('/',async(req,res)=>{
+  try {
+    const [rows] = await pool.query(`SELECT * FROM USER`)
+    res.json(rows)
+    // console.log('db',USER);
+  } catch(err){
+    console.log(err)
+  }
+  
 })
 
 //내보내기
