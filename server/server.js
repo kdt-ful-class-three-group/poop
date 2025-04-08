@@ -1,13 +1,23 @@
 // const express = require('express');
 import express from "express";
 import cors from "cors";
-import Router from "express";
 import dotenv from "dotenv";
+import dbtest from "./routes/dbtest.js";
+import { json } from "body-parser";
 // const router = express.Router();
 const app = express();
 app.use(express.json());
 app.use(cors());
 dotenv.config();
+
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
+
+
+app.use(express.json());
+
+app.use("/dbtest", dbtest);
 
 const PORT = process.env.SERVERPORT;
 app.listen(PORT, () => {
