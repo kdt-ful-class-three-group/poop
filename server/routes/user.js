@@ -3,7 +3,6 @@ import express from "express";
 const router = express.Router();
 import bcrypt from "bcryptjs";
 
-
 router.post("/", async (req, res) => {
     try {
         const { user_id, password, email, user_nick, gender, birth_date} = req.body;
