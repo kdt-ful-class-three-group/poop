@@ -3,7 +3,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import dbtest from "./routes/dbtest.js";
-import { json } from "body-parser";
+
 // const router = express.Router();
 const app = express();
 app.use(express.json());
@@ -13,7 +13,6 @@ dotenv.config();
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
-
 
 app.use(express.json());
 

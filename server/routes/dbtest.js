@@ -4,10 +4,13 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const [rows] = await pool.query("SELECT * FROM poopdb");
-    req.json(rows);
+    const [rows] = await pool.query("SELECT * FROM BOOKMARK");
+    res.json(rows);
     console.log(rows);
-  } catch (error) {}
+    // res.send("Hello World");
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 export default router;
