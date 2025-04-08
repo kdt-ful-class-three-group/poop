@@ -1,24 +1,23 @@
-// const express = require('express');
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import dbtest from "./routes/dbtest.js";
+//express
+import express from 'express'
+const app = express()
+//cors
+import cors from 'cors'
+//환경변수
+import dotenv from 'dotenv'
+dotenv.config()
 
-// const router = express.Router();
-const app = express();
-app.use(express.json());
-app.use(cors());
-dotenv.config();
+//라우터
+import dbtestRouter from './routes/dbtest.js'
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
+//미들웨어 설정
+app.use(express.json())
 
-app.use(express.json());
 
-app.use("/dbtest", dbtest);
-
+//포트
 const PORT = process.env.SERVERPORT;
-app.listen(PORT, () => {
-  console.log("Server running on http://localhost:8080");
-});
+
+//실행
+app.listen(PORT,()=>{
+  console.log(`실행 : http://localhost:${PORT}`)
+})
