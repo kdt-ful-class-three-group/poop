@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "react-router-dom": "^7.5.0"
+    "react-router-dom": "^7.5.0",
+    "router": "^2.2.0"
   }
 }
