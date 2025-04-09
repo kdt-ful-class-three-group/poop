@@ -8,7 +8,8 @@ const router = express.Router()
 //데이터 조회
 router.get('/',async(req,res)=>{
   try {
-    const [rows] = await pool.query(`SELECT * FROM USER`)
+    const [rows] = await pool.execute(`SELECT * FROM USER`)
+  
     res.json(rows)
     // console.log('db',USER);
   } catch(err){
