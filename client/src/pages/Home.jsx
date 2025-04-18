@@ -1,10 +1,10 @@
-//시작하기
-//왼쪽으로 넘겨주세요
+import './home.css'
+
 function Home() {
     return (
         <div>
-            <h1>시작하기</h1>
-            <p>왼쪽으로 넘겨주세요</p>
+            <h1 className="text-cyan-400">Home</h1>
+            <p>This is the Home page.</p>
         </div>
     );
 }
