@@ -11,6 +11,7 @@ import Admin from './pages/Admin.jsx';
 import Register from './pages/Register.jsx';
 import Nav from './commonComponents/Nav.jsx';
 
+import './App.css';
 
 function App() {
 
