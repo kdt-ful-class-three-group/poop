@@ -1,5 +1,5 @@
-function nav() {
+function Nav() {
 
 }
 
-export default nav
+export default Nav
