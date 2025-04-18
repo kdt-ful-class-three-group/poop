@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-import './home.css'
 import Menu from '../commonComponents/menu';
 
 
-=======
->>>>>>> 09744a79be3d954e427d451972bf37b56ac13544
 function Home() {
   const handleMenuSelect = (menu) => {
     console.log(`선택된 메뉴: ${menu}`);
