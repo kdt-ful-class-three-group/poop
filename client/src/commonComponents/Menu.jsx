@@ -22,6 +22,7 @@ function Menu() {
       <button onClick={goToKnowledge}>상식</button>
     </div>
   )
+  
 }
 
 export default Menu;
