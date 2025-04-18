@@ -1,14 +1,14 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Routes,  } from 'react-router-dom';
-import Community from './pages/Community';
-import Home from './pages/Home';
-import Horror from './pages/Horror';
-import Knowledge from './pages/Knowledge';
-import Login from './pages/Login';
-import Quiz from './pages/Quiz';
-import Mypage from './pages/Mypage';
-import Admin from './pages/Admin';
-import Register from './pages/Register';
+import Community from './pages/Community.jsx';
+import Home from './pages/Home.jsx';
+import Horror from './pages/Horror.jsx';
+import Knowledge from './pages/Knowledge.jsx';
+import Login from './pages/Login.jsx';
+import Quiz from './pages/Quiz.jsx';
+import Mypage from './pages/Mypage.jsx';
+import Admin from './pages/Admin.jsx';
+import Register from './pages/Register.jsx';
 
 
 function App() {
