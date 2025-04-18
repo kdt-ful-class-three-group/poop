@@ -1,14 +1,14 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Routes,  } from 'react-router-dom';
-import Community from './pages/Community';
-import Home from './pages/Home';
-import Horror from './pages/Horror';
-import Knowledge from './pages/Knowledge';
-import Login from './pages/Login';
-import Quiz from './pages/Quiz';
-import Mypage from './pages/Mypage';
-import Admin from './pages/Admin';
-import Register from './pages/Register';
+import Community from './pages/Community.jsx';
+import Home from './pages/Home.jsx';
+import Horror from './pages/Horror.jsx';
+import Knowledge from './pages/Knowledge.jsx';
+import Login from './pages/Login.jsx';
+import Quiz from './pages/Quiz.jsx';
+import Mypage from './pages/Mypage.jsx';
+import Admin from './pages/Admin.jsx';
+import Register from './pages/Register.jsx';
 
 
 function App() {
@@ -19,13 +19,13 @@ function App() {
                 <Routes>
                     <Route path ="/" element={<Home />} />
                     <Route path="/Community" element={<Community />} />
-                    <Router path="/Horror" element={<Horror />} />
-                    <Router path="/Knowledge" element = {<Knowledge />} />
-                    <Router path="/Login" element={<Login />} />
-                    <Router path="/Quiz" element={<Quiz />} />
-                    <Router path="/Mypage" element={<Mypage />} />
-                    <Router path="/Admin" element={<Admin />} />
-                    <Router path="/Register" element={<Register />} />
+                    <Route path="/Horror" element={<Horror />} />
+                    <Route path="/Knowledge" element = {<Knowledge />} />
+                    <Route path="/Login" element={<Login />} />
+                    <Route path="/Quiz" element={<Quiz />} />
+                    <Route path="/Mypage" element={<Mypage />} />
+                    <Route path="/Admin" element={<Admin />} />
+                    <Route path="/Register" element={<Register />} />
                 </Routes>
 
             </Router>
