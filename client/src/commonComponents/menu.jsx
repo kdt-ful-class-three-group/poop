@@ -1,5 +1,5 @@
-function menu() {
+function Menu() {
 
 }
 
-export default menu
+export default Menu
