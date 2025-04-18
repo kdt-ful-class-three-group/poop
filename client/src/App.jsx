@@ -9,7 +9,7 @@ import Quiz from './pages/Quiz.jsx';
 import Mypage from './pages/Mypage.jsx';
 import Admin from './pages/Admin.jsx';
 import Register from './pages/Register.jsx';
-import Nav from './commonComponents/nav.jsx';
+import Nav from './commonComponents/Nav.jsx';
 
 
 function App() {
