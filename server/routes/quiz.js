@@ -7,7 +7,6 @@ router.get("/", async (req, res) => {
     const [rows] = await pool.query("SELECT * FROM QUIZ");
     res.json(rows);
     console.log(rows);
-    res.send(rows);
   } catch (error) {
     console.error(error);
   }
