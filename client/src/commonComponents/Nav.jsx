@@ -19,7 +19,7 @@ function Nav() {
   return(
     <div
       onClick={() => setOpen(!open)}
-      className={`fixed left-1/2 transform -translate-x-1/2 bg-gray-200 rounded-full overflow-hidden transition-all duration-500 ease-in-out cursor-pointer rounded-full ${
+      className={`fixed left-1/2 transform -translate-x-1/2 bg-gray-200 overflow-hidden transition-all duration-500 ease-in-out cursor-pointer rounded-full ${
         open ? 'w-[450px] h-[450px] bottom-[-200px]' : 'w-[70px] h-[70px] bottom-[20px]'
       }`}
     >
