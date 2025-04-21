@@ -4,7 +4,6 @@ import cors from "cors";
 import dotenv from "dotenv";
 import quiz from "./routes/quiz.js";
 
-const router = express.Router();
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -16,7 +15,6 @@ app.get("/", (req, res) => {
 
 app.use(express.json());
 
-// app.use("/dbtest", dbtest);
 app.use("/quiz", quiz);
 
 const PORT = process.env.SERVERPORT;
