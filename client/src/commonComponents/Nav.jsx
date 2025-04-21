@@ -1,18 +1,44 @@
-import {useEffect, useState} from 'react'
+import { useState } from 'react';
 
 function Nav() {
-
-  // const [usualNav, setUsualNav]= useState("flex justify-center align-bottom absolute w-full bottom-[20px]")
-  // const [isClicked, setIsClicked] = useState(false)
+  const [open, setOpen] = useState(false);
 
   return(
-    <div className='fixed bottom-[-200px] left-1/2 transform -translate-x-1/2 w-[450px] h-[450px] bg-gray-200 rounded-full'>
-      <div className='absolute w-[70px] h-[70px] bg-gray-400 bottom-1/2 left-[20px]'>1</div>
-      <div className='absolute w-[70px] h-[70px] bg-gray-400 left-1/2 transform -translate-x-1/2 top-[20px]'>2</div>
-      <div className='absolute w-[70px] h-[70px] bg-gray-400 bottom-1/2 right-[20px]'>3</div>
-      <div className='absolute w-[70px] h-[70px] bg-gray-400 bottom-1/2 left-1/2 transform -translate-x-1/2'>4</div>
+    <div
+      onClick={() => setOpen(!open)}
+      className={`fixed left-1/2 transform -translate-x-1/2 bg-gray-200 rounded-full overflow-hidden transition-all duration-500 ease-in-out cursor-pointer rounded-full ${
+        open ? 'w-[450px] h-[450px] bottom-[-200px]' : 'w-[70px] h-[70px] bottom-[20px]'
+      }`}
+    >
+      {/* 버튼 1 */}
+      <div className={`absolute w-[70px] h-[70px] bg-gray-400 bottom-1/2 left-[20px] transition-all duration-500 ease-in-out cursor-pointer rounded-full flex items-center justify-center ${
+        open ? 'opacity-100' : 'opacity-0'
+      }`}>
+        유머
+      </div>
+      
+      {/* 버튼 2 */}
+      <div className={`absolute w-[70px] h-[70px] bg-gray-400 left-1/2 transform -translate-x-1/2 top-[20px] transition-all duration-500 ease-in-out cursor-pointer rounded-full flex items-center justify-center ${
+        open ? 'opacity-100' : 'opacity-0'
+      }`}>
+        커뮤니티
+      </div>
+
+      {/* 버튼 3 */}
+      <div className={`absolute w-[70px] h-[70px] bg-gray-400 bottom-1/2 right-[20px] transition-all duration-500 ease-in-out cursor-pointer rounded-full flex items-center justify-center ${
+        open ? 'opacity-100' : 'opacity-0'
+      }`}>
+        마이
+      </div>
+
+      {/* 버튼 4 */}
+      <div className={`absolute w-[70px] h-[70px] bg-gray-400 bottom-1/2 left-1/2 transform -translate-x-1/2 transition-all duration-500 ease-in-out cursor-pointer rounded-full flex items-center justify-center ${
+        open ? 'opacity-100' : 'opacity-0'
+      }`}>
+        닫기
+      </div>
     </div>
-  )
+  );
 }
 
 export default Nav;
