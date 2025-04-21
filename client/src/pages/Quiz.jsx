@@ -1,3 +1,5 @@
+import Menu from '../commonComponents/Menu.jsx';
+
 function Quiz() {
     return (
         <div>

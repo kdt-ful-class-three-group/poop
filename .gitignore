@@ -7,8 +7,6 @@ server/node_modules/
 
 # Environment files
 server/.env
-server/package.json
 server/package-lock.json
 client/src/.env
-client/package.json
 client/package-lock.json
