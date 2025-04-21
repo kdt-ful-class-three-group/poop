@@ -12,20 +12,21 @@ import Nav from './commonComponents/Nav.jsx';
 
 function App() {
 
-  return (
-    <div className="App">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Community" element={<Community />} />
-          <Route path="/KnowledgeHorror" element={<KnowledgeHorror />} />
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Quiz" element={<Quiz />} />
-          <Route path="/Mypage" element={<Mypage />} />
-          <Route path="/Admin" element={<Admin />} />
-          <Route path="/Register" element={<Register />} />
-        </Routes>
-        <Nav/>
+    return (
+        <div className="App">
+            
+            <Router>
+                <Routes>
+                    <Route path ="/" element={<Home />} />
+                    <Route path="/Community" element={<Community />} />
+                    <Route path="/Horror" element={<Horror />} />
+                    <Route path="/Knowledge" element = {<Knowledge />} />
+                    <Route path="/Login" element={<Login />} />
+                    <Route path="/Quiz" element={<Quiz />} />
+                    <Route path="/Mypage" element={<Mypage />} />
+                    <Route path="/Admin" element={<Admin />} />
+                    <Route path="/Register" element={<Register />} />
+                </Routes>
 
       </Router>
     </div>
