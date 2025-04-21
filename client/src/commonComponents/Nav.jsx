@@ -34,7 +34,7 @@ function Nav() {
       {/* 버튼 4 */}
       <div className={`absolute w-[70px] h-[70px] bg-gray-400 bottom-1/2 left-1/2 transform -translate-x-1/2 transition-all duration-500 ease-in-out cursor-pointer rounded-full flex items-center justify-center ${
         open ? 'opacity-100' : 'opacity-0'
-      }`}>
+      }`} onClick={()=>setOpen(open)}>
         닫기
       </div>
     </div>
