@@ -1,9 +1,22 @@
 function Menu() {
+
+  const quiz = () => {
+    console.log('quiz');
+  }
+  
+  const common_sense = () => {
+    console.log('common_sense');
+  }
+
+  const horror = () => {
+    console.log('horror');
+  }
+
   return (
-    <div>
-      <button onClick={() => console.log('quiz')}>퀴즈</button>
-      <button onClick={() => console.log('common_sense')}>상식</button>
-      <button onClick={() => console.log('horror')}>괴담</button>
+    <div className="border-1 flex justify-around">
+      <button className="" onClick={() => quiz()}>퀴즈</button>
+      <button className="" onClick={() => common_sense()}>상식</button>
+      <button className="" onClick={() => horror()}>괴담</button>
     </div>
   )
 }
