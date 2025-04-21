@@ -1,15 +1,21 @@
+import { useNavigate } from 'react-router'
+
 function Menu() {
+  const navigate = useNavigate();
 
   const quiz = () => {
     console.log('quiz');
+    navigate('/Quiz');
   }
-  
+
   const common_sense = () => {
     console.log('common_sense');
+    navigate('/KnowledgeHorror');
   }
 
   const horror = () => {
     console.log('horror');
+    navigate('/KnowledgeHorror');
   }
 
   return (
