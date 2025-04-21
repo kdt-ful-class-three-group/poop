@@ -8,13 +8,13 @@ function Nav() {
 
   //버튼 정보 배열
   const buttonClass= [
-    {text:'유머', name :'bottom-1/2 left-[20px]', path:'/Quiz'},
-    {text:'커뮤니티', name:'top-[20px] left-1/2 transform -translate-x-1/2',path:'/Community'},
-    {text:'마이',name:'bottom-1/2 right-[20px]',path:'Mypage'},
+    {text:'유머', name :'bottom-1/2 left-[20px]', action:()=>navigate('/Quiz')},
+    {text:'커뮤니티', name:'top-[20px] left-1/2 transform -translate-x-1/2 top-[20px]',action:()=>navigate('/Community')},
+    {text:'마이',name:'bottom-1/2 right-[20px]',action:()=>navigate('/Mypage')},
     {text:'닫기',name:'bottom-1/2 left-1/2 transform -translate-x-1/2',action:()=>setOpen(open)}
   ]
 
-  let defaultClass= `absolute w-[70px] h-[70px] bg-gray-400 bottom-1/2 left-[20px] transition-all duration-500 ease-in-out cursor-pointer rounded-full flex items-center justify-center ${open ? 'opacity-100' : 'opacity-0'}`
+  let defaultClass= `absolute w-[70px] h-[70px] bg-gray-400 transition-all duration-500 ease-in-out cursor-pointer rounded-full flex items-center justify-center ${open ? 'opacity-100' : 'opacity-0'}`
 
   return(
     <div
@@ -26,34 +26,11 @@ function Nav() {
       {buttonClass.map((div,i)=>(
         <div 
         key={i}
-        className= {defaultClass}
-        >
+        className= {`${defaultClass} ${div.name}`}
+        onClick={div.action}
+        >{div.text}</div>
       ))}
-      {/* 버튼 1 */}
-      <div className={defaultClass} onClick={()=>navigate('/Quiz')}>
-        유머
-      </div>
       
-      {/* 버튼 2 */}
-      <div className={`absolute w-[70px] h-[70px] bg-gray-400 left-1/2 transform -translate-x-1/2 top-[20px] transition-all duration-500 ease-in-out cursor-pointer rounded-full flex items-center justify-center ${
-        open ? 'opacity-100' : 'opacity-0'
-      }`} onClick={()=>navigate('/Community')}>
-        커뮤니티
-      </div>
-
-      {/* 버튼 3 */}
-      <div className={`absolute w-[70px] h-[70px] bg-gray-400 bottom-1/2 right-[20px] transition-all duration-500 ease-in-out cursor-pointer rounded-full flex items-center justify-center ${
-        open ? 'opacity-100' : 'opacity-0'
-      }`} onClick={()=>navigate('/Mypage')}>
-        마이
-      </div>
-
-      {/* 버튼 4 */}
-      <div className={`absolute w-[70px] h-[70px] bg-gray-400 bottom-1/2 left-1/2 transform -translate-x-1/2 transition-all duration-500 ease-in-out cursor-pointer rounded-full flex items-center justify-center ${
-        open ? 'opacity-100' : 'opacity-0'
-      }`} onClick={()=>setOpen(open)}>
-        닫기
-      </div>
     </div>
   );
 }
