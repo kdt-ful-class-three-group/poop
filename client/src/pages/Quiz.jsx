@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import Menu from "../commonComponents/Menu";
 
 const Quiz = () => {
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [userAnswer, setUserAnswer] = useState('');
-  const [feedback, setFeedback] = useState('');
+  const [userAnswer, setUserAnswer] = useState("");
+  const [feedback, setFeedback] = useState("");
   const [showAnswer, setShowAnswer] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -12,21 +13,20 @@ const Quiz = () => {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        // 실제 환경에서는 API 호출로 대체
-        // const response = await fetch('/database/seed.js'); 
-        // const data = await response.json();
-        
-        const shuffled = [...data].sort(() => Math.random() - 0.5); // 문제 섞기
+        const response = await fetch("http://localhost:8080/api/questions");
+        const data = await response.json();
+        const shuffled = [...data].sort(() => Math.random() - 0.5);
         setQuestions(shuffled);
+      } catch (error) {
+        console.error("문제를 불러오는 데 실패했습니다:", error);
+      } finally {
         setLoading(false);
-        } catch (error) {
-        console.error('문제를 불러오는 데 실패했습니다.', error);
-        setLoading(false);
-        }
+      }
     };
 
     fetchQuestions();
   }, []);
+  
 
   // 정답 확인
   const checkAnswer = () => {
@@ -81,11 +81,12 @@ const Quiz = () => {
   }
 
   return (
-    <div className="max-w-md mx-auto p-4 bg-white rounded-lg shadow " >
-     
+    
+    <div className="relative min-h-screen mt-10" >
+      <Menu className="fixed top-4 left-4 z-50" />
 
       {/* 문제 영역 */}
-      <div className="min-h-48 mb-8 border rounded flex items-center justify-center ">
+      <div className="w-5/6 mx-auto p-4 bg-white rounded-lg shadow mt-10 ">
         {questions.length > 0 && (
           <div className="text-center p-4">
             <p className="mt-2">{questions[currentIndex].question}</p>
@@ -94,8 +95,8 @@ const Quiz = () => {
       </div>
 
       {/* 정답 입력 영역 */}
-      <div className="mb-6">
-        <div className="flex">
+      <div className="mb-6 flex justify-center items-center mt-4">
+        <div className="flex w-5/6 justify-center items-center">
           <input
             type="text"
             value={userAnswer}
@@ -118,12 +119,12 @@ const Quiz = () => {
       </div>
 
       {/* 정답 보기 버튼 */}
-      <div className="relative mb-4">
+      <div className="relative mb-4 flex justify-center items-center">
         <button
           onClick={toggleShowAnswer}
-          className="w-full bg-gray-200 text-gray-700 p-2 rounded flex items-center justify-center"
+          className="w-5/6 bg-gray-200 text-gray-700 p-2 rounded flex items-center justify-center"
         >
-          <span className="mr-2">정답보기</span>
+          <span className="mr-2 ">정답보기</span>
           {showAnswer && (
             <span className="inline-block ml-2">
               {questions[currentIndex]?.answer}
@@ -134,12 +135,14 @@ const Quiz = () => {
       </div>
 
       {/* 다음 문제 버튼 */}
+      <div className="relative mb-4 flex justify-center items-center">
       <button
         onClick={goToNextQuestion}
-        className="w-full bg-gray-200 text-gray-700 p-2 rounded mb-4"
+        className="w-5/6 bg-gray-200 text-gray-700 p-2 rounded mb-4 flex justify-center items-center "
       >
         다음 문제로 넘어가기
       </button>
+      </div>
 
       {/* 화살표 네비게이션 */}
       <div className="flex justify-between">
