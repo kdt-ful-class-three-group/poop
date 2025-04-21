@@ -9,12 +9,14 @@ import Mypage from './pages/Mypage.jsx';
 import Admin from './pages/Admin.jsx';
 import Register from './pages/Register.jsx';
 import Nav from './commonComponents/Nav.jsx';
+import Layout from "./layouts/Layouts.jsx";
 
 function App() {
 
   return (
     <div className="App">
       <Router>
+        <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Community" element={<Community />} />
@@ -25,6 +27,7 @@ function App() {
           <Route path="/Admin" element={<Admin />} />
           <Route path="/Register" element={<Register />} />
         </Routes>
+        </Layout>
         <Nav/>
 
       </Router>
