@@ -28,8 +28,8 @@ function Menu({setCategory}) {
   return(
     <div>
       <button onClick={goToQuiz} className='cursor-pointer'>퀴즈</button>
-      <button onClick={()=>setCategory('Horror')}className='cursor-pointer'>괴담</button>
-      <button onClick={()=>setCategory('Knowledge')}className='cursor-pointer'>상식</button>
+      <button onClick={goToHorror}className='cursor-pointer'>괴담</button>
+      <button onClick={goToKnowledge}className='cursor-pointer'>상식</button>
     </div>
   )
   
