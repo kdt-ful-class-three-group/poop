@@ -41,7 +41,7 @@ function Nav() {
       ></button>
       <div
         ref={navRef} // 이 안에 있는 요소는 이벤트 방지함
-        className={`bg-[#D9D9D9] absolute flex-col items-center justify-center p-4 w-full rounded-t-full h-[230px] ${
+        className={`bg-[#D9D9D9] absolute flex-col items-center bottom-0 justify-center p-4 w-full rounded-t-full h-[230px] ${
           btnClick ? "flex" : "hidden"
         }`}
       >
