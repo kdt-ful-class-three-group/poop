@@ -6,6 +6,14 @@ function Nav() {
 
   const navigate = useNavigate()
 
+  //버튼 정보 배열
+  const buttonClass= [
+    {text:'유머', name :'', path:'/Quiz'},
+    {text:'커뮤니티', name:'',path:'/Community'},
+    {text:'마이',name:'',path:'Mypage'},
+    {text:'닫기',name:'',action:()=>setOpen(open)}
+  ]
+
   return(
     <div
       onClick={() => setOpen(!open)}
