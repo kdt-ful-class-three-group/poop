@@ -2,7 +2,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import dbtest from "./routes/dbtest.js";
+import quiz from "./routes/quiz.js";
 
 const router = express.Router();
 const app = express();
@@ -16,7 +16,8 @@ app.get("/", (req, res) => {
 
 app.use(express.json());
 
-app.use("/dbtest", dbtest);
+// app.use("/dbtest", dbtest);
+app.use("/quiz", quiz);
 
 const PORT = process.env.SERVERPORT;
 app.listen(PORT, () => {
