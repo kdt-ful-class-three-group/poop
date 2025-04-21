@@ -1,8 +1,16 @@
 import express from "express";
+import pool from "../config/database";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  console.log("접속 테스트");
+  try {
+    const [rows] = await pool.query("SELECT * FROM QUIZ");
+    res.json(rows);
+    console.log(rows);
+    res.send(rows);
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 export default router;
