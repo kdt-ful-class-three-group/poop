@@ -8,11 +8,13 @@ function Nav() {
 
   //버튼 정보 배열
   const buttonClass= [
-    {text:'유머', name :'', path:'/Quiz'},
-    {text:'커뮤니티', name:'',path:'/Community'},
-    {text:'마이',name:'',path:'Mypage'},
-    {text:'닫기',name:'',action:()=>setOpen(open)}
+    {text:'유머', name :'bottom-1/2 left-[20px]', path:'/Quiz'},
+    {text:'커뮤니티', name:'top-[20px] left-1/2 transform -translate-x-1/2',path:'/Community'},
+    {text:'마이',name:'bottom-1/2 right-[20px]',path:'Mypage'},
+    {text:'닫기',name:'bottom-1/2 left-1/2 transform -translate-x-1/2',action:()=>setOpen(open)}
   ]
+
+  let defaultClass= `absolute w-[70px] h-[70px] bg-gray-400 bottom-1/2 left-[20px] transition-all duration-500 ease-in-out cursor-pointer rounded-full flex items-center justify-center ${open ? 'opacity-100' : 'opacity-0'}`
 
   return(
     <div
@@ -21,10 +23,14 @@ function Nav() {
         open ? 'w-[450px] h-[450px] bottom-[-200px]' : 'w-[70px] h-[70px] bottom-[20px]'
       }`}
     >
+      {buttonClass.map((div,i)=>(
+        <div 
+        key={i}
+        className= {defaultClass}
+        >
+      ))}
       {/* 버튼 1 */}
-      <div className={`absolute w-[70px] h-[70px] bg-gray-400 bottom-1/2 left-[20px] transition-all duration-500 ease-in-out cursor-pointer rounded-full flex items-center justify-center ${
-        open ? 'opacity-100' : 'opacity-0'
-      }`} onClick={()=>navigate('/Quiz')}>
+      <div className={defaultClass} onClick={()=>navigate('/Quiz')}>
         유머
       </div>
       
