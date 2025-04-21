@@ -2,34 +2,22 @@
   "name": "server",
   "version": "1.0.0",
   "main": "server.js",
-<<<<<<< HEAD
-=======
   "type": "module",
->>>>>>> 7e231b37f16403c4fbd8b5bbb23ffe1bdd93cb55
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-<<<<<<< HEAD
-=======
   "keywords": [],
->>>>>>> 7e231b37f16403c4fbd8b5bbb23ffe1bdd93cb55
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-<<<<<<< HEAD
-=======
     "bcryptjs": "^3.0.2",
->>>>>>> 7e231b37f16403c4fbd8b5bbb23ffe1bdd93cb55
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^5.1.0",
     "mysql2": "^3.14.0",
-<<<<<<< HEAD
-=======
     "pm2": "^6.0.5",
->>>>>>> 7e231b37f16403c4fbd8b5bbb23ffe1bdd93cb55
     "pool": "^0.4.1"
   }
 }
