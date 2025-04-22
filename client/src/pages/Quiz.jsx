@@ -6,6 +6,7 @@ import QuizButton from "../components/QuizButton";
 function Quiz() {
 
   const [quizData, setQuizData] = useState([]); // 퀴즈를 저장할 상태 변수
+  const [number, setNumber] = useState(0); // 퀴즈 번호를 저장할 상태 변수
 
   // API 가져오기
   useEffect(()=>{
@@ -30,10 +31,9 @@ function Quiz() {
 
   //quiz에 지정하기
 
-
   return (
     <div className="max-w-[450px] m-auto w-full flex flex-col gap-10">
-      <QuizCard quizData={quizData[0] || '문제'}/>
+      <QuizCard quizData={quizData[number] || '문제'}/>
       <QuizButton />
     </div>
   );
