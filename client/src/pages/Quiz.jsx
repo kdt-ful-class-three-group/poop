@@ -21,9 +21,11 @@ function Quiz() {
         setQuizData(data);
       }
       catch(err){
-
+        console.error('퀴즈를 가져오는 중 오류 발생:', err);
       }
     }
+
+    fetchQuiz();
   },[])
 
   //quiz에 지정하기
@@ -31,7 +33,7 @@ function Quiz() {
 
   return (
     <div className="max-w-[450px] m-auto w-full flex flex-col gap-10">
-      <QuizCard questTion={quizData[0]}/>
+      <QuizCard quizData={quizData[0]}/>
       <QuizButton />
     </div>
   );
