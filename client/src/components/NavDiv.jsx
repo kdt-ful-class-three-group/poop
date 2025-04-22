@@ -9,12 +9,12 @@ function NavDiv({navRef, btnClick, closeNav}){
     return(
       <div
         ref={navRef} // 이 안에 있는 요소는 이벤트 방지함
-        className={`bg-[#D9D9D9] absolute flex-col items-center bottom-0 justify-center p-4 w-full rounded-t-full h-[230px] ${
-          btnClick ? "flex" : "hidden"
+        className={`bg-[#D9D9D9] absolute flex-col items-center bottom-0 justify-center p-4 w-full rounded-t-full h-[230px] max-w-[450px] max-h-[450px] transition-all duration-300 ease-in-out ${
+          btnClick ? "flex opacity-100 pointer-events-auto" : "flex pointer-events-none opacity-0"
         }`}
       >
         <div className="flex">
-          <button
+          <button className="cursor-pointer"
             onClick={() => {
               navigate("/Community");
             }}
