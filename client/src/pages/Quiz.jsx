@@ -5,8 +5,8 @@ function Quiz() {
 
 
   return (
-    <div className="max-w-[450px] m-auto w-full">
-      <QuizCard />
+    <div className="max-w-[450px] m-auto w-full flex flex-col gap-10">
+      <QuizCard questTion={'문제보임'}/>
       <QuizButton />
     </div>
   );
