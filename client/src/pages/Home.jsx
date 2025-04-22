@@ -1,8 +1,11 @@
+import Menu from "../commonComponents/Menu";
+
 function Home() {
     return (
         <div>
-            <h1 className="text-red-400">Home</h1>
-            <p>This is the Home page.</p>
+          <Menu/>
+          <h1 className="text-cyan-400">Home</h1>
+          <p>This is the Home page.</p>
         </div>
     );
 }
