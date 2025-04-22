@@ -1,6 +1,5 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import Menu from "../commonComponents/Menu";
 
 function KnowledgeHorror() {
   const location = useLocation();
@@ -8,7 +7,6 @@ function KnowledgeHorror() {
 
   return (
     <div>
-      <Menu />
       <h1>선택된 카테고리: {category}</h1>
     </div>
   );
