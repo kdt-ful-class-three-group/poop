@@ -1,15 +1,17 @@
-import Menu from "../commonComponents/menu.jsx";
-import Nav from "../commonComponents/Nav.jsx";
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import Menu from '../commonComponents/Menu.jsx';
+import Nav from '../commonComponents/Nav.jsx';
 
-export default function Layout({ children }) {
+export default function Layout() {
     return (
         <>
             <Menu />
             <div className="container mx-auto bg-white min-h-screen flex justify-center items-center">
-                {children}
-            </div>
-            <Nav/>
 
+                <Outlet />
+            </div>
+            <Nav />
         </>
-    )
+    );
 }
