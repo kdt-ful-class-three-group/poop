@@ -33,7 +33,7 @@ function Quiz() {
 
   return (
     <div className="max-w-[450px] m-auto w-full flex flex-col gap-10">
-      <QuizCard quizData={quizData[0]}/>
+      <QuizCard quizData={quizData[0] || '문제'}/>
       <QuizButton />
     </div>
   );
