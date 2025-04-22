@@ -24,6 +24,7 @@ function Nav() {
       // navRef.current.contains(event.target) = 클릭한 곳이 navRef 영역 안에 포함되는지 체크함
       if (navRef.current && !navRef.current.contains(event.target)) {
         setBtnClick(false);
+				
       }
     };
 
