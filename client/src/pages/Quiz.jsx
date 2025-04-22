@@ -35,13 +35,18 @@ function Quiz() {
       setNumber(number + 1);
     }
   }
+  const prevBtn = ()=>{
+    if(number > 0){
+      setNumber(number - 1);
+    }
+  }
 
   //quiz에 지정하기
 
   return (
     <div className="max-w-[450px] m-auto w-full flex flex-col gap-10">
       <QuizCard quizData={quizData[number] || '문제'}/>
-      <QuizButton nextBtn={nextBtn}/>
+      <QuizButton nextBtn={nextBtn} prevBtn={prevBtn}/>
     </div>
   );
 }
