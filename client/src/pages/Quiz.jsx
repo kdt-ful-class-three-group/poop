@@ -5,7 +5,7 @@ function Quiz() {
 
 
   return (
-    <div>
+    <div className="max-w-[450px] m-auto w-full">
       <QuizCard />
       <QuizButton />
     </div>
