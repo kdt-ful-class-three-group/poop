@@ -6,7 +6,7 @@ const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: "poop123",
-  database: "poopdb",
+  database: "pooptimedb",
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
