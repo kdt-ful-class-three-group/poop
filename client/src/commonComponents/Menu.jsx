@@ -1,12 +1,16 @@
 import { useNavigate } from "react-router-dom";
-
+// import KnowledgeHorror from "../pages/KnowledgeHorror";
 function Menu() {
   const navigate = useNavigate();
+  const KnowledgeHorrorNav = (category) => {
+    navText(category);
+    navigate("/KnowledgeHorror");
+  };
   return (
     <div>
       <button onClick={() => navigate("/Quiz")}>퀴즈</button>
-      <button>상식</button>
-      <button>괴담</button>
+      <button onClick={() => KnowledgeHorrorNav("knowledge")}>상식</button>
+      <button onClick={() => KnowledgeHorrorNav("horror")}>괴담</button>
     </div>
   );
 }
