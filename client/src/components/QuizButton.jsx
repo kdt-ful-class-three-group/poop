@@ -1,4 +1,4 @@
-function QuizButton(){
+function QuizButton({nextBtn}){
   return(
     <div className="w-11/12 m-auto flex flex-col gap-5 text-center">
       {/* 정답 작성 및 확인 */}
@@ -15,7 +15,8 @@ function QuizButton(){
       </div>
       {/* 문제 넘어가기 */}
       <div className="w-full bg-gray-600">
-        <button>다음 문제로 넘어가기</button>
+        <button>이전 문제</button>
+        <button onClick={()=>nextBtn()}>다음 문제</button>
       </div>
     </div>
   )

@@ -29,12 +29,19 @@ function Quiz() {
     fetchQuiz();
   },[])
 
+  //버튼 설정
+  const nextBtn = ()=>{
+    if(number < quizData.length - 1){
+      setNumber(number + 1);
+    }
+  }
+
   //quiz에 지정하기
 
   return (
     <div className="max-w-[450px] m-auto w-full flex flex-col gap-10">
       <QuizCard quizData={quizData[number] || '문제'}/>
-      <QuizButton />
+      <QuizButton nextBtn={nextBtn}/>
     </div>
   );
 }
