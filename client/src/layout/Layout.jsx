@@ -7,7 +7,7 @@ export default function Layout() {
     return (
         <>
             <Menu />
-            <div className="container mx-auto bg-white min-h-screen flex justify-center items-center">
+            <div className="container mx-auto bg-white  flex justify-center items-center">
                 {/* 중첩된 Route 컴포넌트들이 이 자리에 렌더링 함 */}
                 {/* Outlet 컴포넌트는 중첩된 Route의 자식 컴포넌트를 렌더링하는 역할을 함 */}
                 <Outlet />
