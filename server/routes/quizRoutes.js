@@ -4,6 +4,7 @@ import quizData from "../../database/seed.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
+  console.log(quizData);
   res.json(quizData);
 });
 

@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Nav() {
+  // isMenuOpen: 메뉴의 열림/닫힘 상태를 관리하는 state, 초기값은 false (닫힌 상태)
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+    // isLoggedIn: 사용자의 로그인 상태를 관리하는 state, 초기값은 false (로그아웃 상태)
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [animationState, setAnimationState] = useState('closed');
   const navigate = useNavigate();
@@ -42,8 +44,8 @@ function Nav() {
   // 메뉴 아이템 정의 - 퀴즈 항목 제거
   const menuItems = [
     { id: 1, name: '유머', position: 'left-8 bottom-2', onClick: () => navigateTo('/Quiz'), icon: "🤣" },
-    { id: 2, name: '커뮤니티', position: 'left-44 bottom-25', onClick: () => navigateTo('/community'), icon: "💬" },
-    { id: 3, name: '메뉴 접기', position: 'right-43 bottom-2', onClick: closeMenu, icon: "🚪" },
+    { id: 2, name: '커뮤니티', position: 'left-43 bottom-25', onClick: () => navigateTo('/community'), icon: "💬" },
+    { id: 3, name: '메뉴 접기', position: 'right-42 bottom-2', onClick: closeMenu, icon: "🚪" },
     { id: 4, name: isLoggedIn ? '마이페이지' : '로그인', position: 'right-8 bottom-2', onClick: handleLoginClick, icon: "👤" },
   ];
 

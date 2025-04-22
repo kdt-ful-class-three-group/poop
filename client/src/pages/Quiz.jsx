@@ -7,7 +7,7 @@ const Quiz = () => {
   const [userAnswer, setUserAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
   const [showAnswer, setShowAnswer] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   // 문제 데이터 가져오기
   useEffect(() => {
@@ -15,6 +15,7 @@ const Quiz = () => {
       try {
         const response = await fetch("http://localhost:8080/api/questions");
         const data = await response.json();
+        console.log(data); 
         const shuffled = [...data].sort(() => Math.random() - 0.5);
         setQuestions(shuffled);
       } catch (error) {
@@ -82,47 +83,71 @@ const Quiz = () => {
 
   return (
     
-    <div className="relative min-h-screen mt-10" >
+    <div className="relative min-h-full mt-10" >
       <Menu className="fixed top-4 left-4 z-50" />
 
       {/* 문제 영역 */}
-      <div className="w-5/6 mx-auto p-4 bg-white rounded-lg shadow mt-10 ">
+      <div className="w-5/6 h-70 mx-auto p-4 bg-white rounded-lg shadow mt-20 flex justify-center ">
         {questions.length > 0 && (
-          <div className="text-center p-4">
-            <p className="mt-2">{questions[currentIndex].question}</p>
+          <div className="text-center p-4 flex justify-center items-center">
+            <p className="mt-2 flex justify-center items-center">{questions[currentIndex].question}</p>
           </div>
         )}
       </div>
 
       {/* 정답 입력 영역 */}
-      <div className="mb-6 flex justify-center items-center mt-4">
-        <div className="flex w-5/6 justify-center items-center">
-          <input
-            type="text"
-            value={userAnswer}
-            onChange={handleInputChange}
-            className="flex-grow p-2 border rounded-l"
-            placeholder="정답 작성하기"
-          />
-          <button
-            onClick={checkAnswer}
-            className="text-white px-4 py-2 rounded-r bg-yellow-700"
-          >
-            확인
-          </button>
-        </div>
-        {feedback && (
-          <p className={`mt-2 text-sm ${feedback === '정답입니다!' ? 'text-green-500' : 'text-red-500'}`}>
-            {feedback}
-          </p>
-        )}
+<div className="mb-6 flex justify-center items-center mt-4">
+  <div className="flex flex-col w-5/6 justify-center items-center">
+    <div className="flex w-full">
+      <input
+        type="text"
+        value={userAnswer}
+        onChange={handleInputChange}
+        className="flex-grow p-2 border rounded-l"
+        placeholder="정답 작성하기"
+      />
+      <button
+        onClick={checkAnswer}
+        className="text-white px-4 py-2 rounded-r bg-yellow-700"
+      >
+        확인
+      </button>
+    </div>
+
+    {/* ✅ 이 부분을 input 아래로 옮기기 */}
+    {feedback && (
+      <p className={`mt-2 text-m ${feedback === '정답입니다!' ? 'text-green-500' : 'text-red-500'}`}>
+        {feedback}
+      </p>
+    )}
+  </div>
+</div>
+
+
+      {/* 화살표 네비게이션 */}
+      <div className="flex justify-between">
+        <button
+          onClick={goToPrevQuestion}
+          disabled={currentIndex === 0}
+          className={`text-3xl ${currentIndex === 0 ? 'text-gray-300' : 'text-gray-700'}`}
+        >
+          &lt;
+        </button>
+        
+        <button
+          onClick={goToNextQuestion}
+          disabled={currentIndex === questions.length - 1}
+          className={`text-3xl ${currentIndex === questions.length - 1 ? 'text-gray-300' : 'text-gray-700'}`}
+        >
+          &gt;
+        </button>
       </div>
 
       {/* 정답 보기 버튼 */}
       <div className="relative mb-4 flex justify-center items-center">
         <button
           onClick={toggleShowAnswer}
-          className="w-5/6 bg-gray-200 text-gray-700 p-2 rounded flex items-center justify-center"
+          className="w-5/6 bg-gray-200 text-gray-700 p-2 rounded flex items-center justify-center mt-5"
         >
           <span className="mr-2 ">정답보기</span>
           {showAnswer && (
@@ -144,24 +169,7 @@ const Quiz = () => {
       </button>
       </div>
 
-      {/* 화살표 네비게이션 */}
-      <div className="flex justify-between">
-        <button
-          onClick={goToPrevQuestion}
-          disabled={currentIndex === 0}
-          className={`text-2xl ${currentIndex === 0 ? 'text-gray-300' : 'text-gray-700'}`}
-        >
-          &lt;
-        </button>
-        
-        <button
-          onClick={goToNextQuestion}
-          disabled={currentIndex === questions.length - 1}
-          className={`text-2xl ${currentIndex === questions.length - 1 ? 'text-gray-300' : 'text-gray-700'}`}
-        >
-          &gt;
-        </button>
-      </div>
+      
     </div>
   );
 };
