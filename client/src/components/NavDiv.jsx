@@ -23,15 +23,16 @@ function NavDiv({navRef, btnClick, closeNav}){
           </button>
         </div>
         <div className="flex justify-between items-center">
-          <button
+          <button className="cursor-pointer"
             onClick={() => {
               navigate("/Quiz");
             }}
           >
             유머
           </button>
-          <button onClick={closeNav}>닫기</button>
+          <button className="cursor-pointer" onClick={closeNav}>닫기</button>
           <button
+            className="cursor-pointer"
             onClick={() => {
               navigate("/Mypage");
             }}
