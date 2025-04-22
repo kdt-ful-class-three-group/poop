@@ -14,12 +14,12 @@ router.get("/", async (req, res) => {
 
 
 
-+router.post("/", async (req, res) => {
+router.post("/", async (req, res) => {
   const { question, answer } = req.body;
 
   try {
     const query = "INSERT INTO quiz(question, answer) VALUES (?, ?)";
-    const [result] = await pool.query(query, [ question, answer]);
+    const [result] = await pool.execute(query, [ question, answer]);
 
     res
         .status(201)
