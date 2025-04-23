@@ -8,9 +8,9 @@ function LoginInput(){
       <input type="text" placeholder="아이디"
         className="bg-gray-300 px-4 py-2 rounded-md"></input>
       <input type='password' placeholder="비밀번호"
-        className="bg-gray-300 px-4 py-2 roudned-md"></input>
+        className="bg-gray-300 px-4 py-2 rounded-md"></input>
       <button
-        className="bg-gray-300 px-4 py-2 rounded-md">
+        className="bg-gray-300 px-4 py-2 rounded-md cursor-pointer hover:bg-gray-500">
           로그인
       </button>
     </form>
