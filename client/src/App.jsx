@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Community from './pages/Community.jsx';
+import Write from './pages/Write.jsx';
 import Home from './pages/Home.jsx';
 import KnowledgeHorror from './pages/KnowledgeHorror.jsx';
 import Login from './pages/Login.jsx';
@@ -24,6 +25,7 @@ function App() {
             <Route path="/Mypage" element={<Mypage />} />
             <Route path="/Admin" element={<Admin />} />
             <Route path="/Register" element={<Register />} />
+            <Route path="/Community/write" element={<Write />} />
 
             {/* Layout 적용 구간: path 가 "/KnowledgeHorror" 또는 "/Quiz" 인 경우에만 */}
             <Route element={<Layout />}>
