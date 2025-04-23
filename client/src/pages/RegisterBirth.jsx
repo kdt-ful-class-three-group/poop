@@ -1,4 +1,4 @@
-// SignUpForm.jsx
+// RegisterBirth.jsx
 import React from 'react';
 
 const RegisterBirth = () => {
@@ -8,7 +8,7 @@ const RegisterBirth = () => {
 
       {/* 1. 성별 */}
       <div className="mb-4">
-        <label className="block font-bold mb-2">성별</label>
+        <label className="block font-bold mb-2 mt-3">성별</label>
         <div className="flex gap-4">
           <label className="flex items-center">
             <input type="radio" name="gender" value="male" className="mr-2" />
