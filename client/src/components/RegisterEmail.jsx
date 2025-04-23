@@ -13,7 +13,7 @@ function RegisterEmail(){
         colorClass={'bg-gray-300 w-[20%]'}
       />
       <Email/>
-      <Button text='다음' colorClass={'bg-gray-300 mt-20'}/>
+      <Button text='다음' colorClass={'bg-gray-300 mt-15'}/>
     </div>
   )
 }
