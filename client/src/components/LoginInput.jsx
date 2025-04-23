@@ -4,10 +4,11 @@ function LoginInput(){
   // 로그인 버튼
 
   return(
-    <div>
+    <form>
       <input type="text" placeholder="아이디"></input>
       <input type='password' placeholder="비밀번호"></input>
-    </div>
+      <button>로그인</button>
+    </form>
   )
 }
 
