@@ -7,7 +7,7 @@ function KnowledgeHorror() {
 
   return (
     <div className="w-full h-[calc(100vh-230px)] flex items-center">
-      <div>
+      <div className="absolute left-1">
         <button className="text-6xl">&#8249;</button>
       </div>
       <div className="w-full h-[100%] shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-[6px] flex items-center justify-center">
@@ -15,7 +15,7 @@ function KnowledgeHorror() {
           내용
         </p>
       </div>
-      <div>
+      <div className="absolute right-1">
         <button className="text-6xl">&#8250;</button>
       </div>
     </div>
