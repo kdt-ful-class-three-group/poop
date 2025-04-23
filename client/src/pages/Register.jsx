@@ -2,7 +2,7 @@ import RegisterEmail from '../components/RegisterEmail';
 
 function Register() {
     return (
-        <div className='flex flex-col justify-center h-full'>
+        <div className='w-full'>
             <RegisterEmail/>
         </div>
     );
