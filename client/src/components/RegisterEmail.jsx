@@ -8,12 +8,12 @@ function RegisterEmail(){
   // 다음
 
   return(
-    <div>
+    <div className="flex flex-col gap-10 mt-20">
       <Button text='이전'
-        colorClass={'bg-gray-300'}
+        colorClass={'bg-gray-300 w-[20%]'}
       />
       <Email/>
-      <Button text='다음' colorClass={'bg-gray-300'}/>
+      <Button text='다음' colorClass={'bg-gray-300 mt-20'}/>
     </div>
   )
 }
