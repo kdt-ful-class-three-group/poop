@@ -1,8 +1,9 @@
 // 계정 입력
-import 
+import LoginInput from "../components/LoginInput";
 // 계정 찾기
-
+import FindAccount from "../components/FindAccount";
 // 간편 로그인
+import EasyLogin from "../components/EasyLogin";
 
 function Login() {
 
@@ -16,8 +17,10 @@ function Login() {
 
   return (
     <div>
-      <h1>Login Page</h1>
-      {/* Add your login form here */}
+      <h1>로그인</h1>
+      <LoginInput/>
+      <FindAccount/>
+      <EasyLogin/>
     </div>
   );
 }
