@@ -4,10 +4,15 @@ function LoginInput(){
   // 로그인 버튼
 
   return(
-    <form>
-      <input type="text" placeholder="아이디"></input>
-      <input type='password' placeholder="비밀번호"></input>
-      <button>로그인</button>
+    <form className="flex flex-col gap-4">
+      <input type="text" placeholder="아이디"
+        className="bg-gray-300 px-4 py-2 rounded-md"></input>
+      <input type='password' placeholder="비밀번호"
+        className="bg-gray-300 px-4 py-2 roudned-md"></input>
+      <button
+        className="bg-gray-300 px-4 py-2 rounded-md">
+          로그인
+      </button>
     </form>
   )
 }
