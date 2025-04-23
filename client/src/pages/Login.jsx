@@ -19,12 +19,15 @@ function Login() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col justify-center h-full gap-3">
+    <div className="flex flex-col justify-center h-full w-full gap-3">
       <h1 className="text-2xl mb-[30px]">로그인</h1>
       <LoginInput/>
       <FindAccount/>
       <EasyLogin/>
-      <button onClick={()=> navigate("/Register")}>회원가입</button>
+      <button onClick={()=> navigate("/Register")}
+        className="px-4 py-2 rounded-md cursor-pointer hover:bg-gray-400">
+        회원가입
+      </button>
     </div>
   );
 }
