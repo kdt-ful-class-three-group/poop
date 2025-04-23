@@ -7,7 +7,7 @@ function Menu() {
     navigate("/KnowledgeHorror", { state: { category } });
   };
   return (
-    <div className="flex justify-between w-full mt-8">
+    <div className="flex justify-between w-full ">
       <button
         className="bg-gray-300 px-4 py-2 rounded-md hover:bg-gray-400"
         onClick={() => navigate("/Quiz")}
