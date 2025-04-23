@@ -19,8 +19,8 @@ function Login() {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <h1>로그인</h1>
+    <div className="flex flex-col justify-center h-full gap-3">
+      <h1 className="text-2xl mb-[30px]">로그인</h1>
       <LoginInput/>
       <FindAccount/>
       <EasyLogin/>
