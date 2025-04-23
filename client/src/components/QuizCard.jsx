@@ -1,9 +1,9 @@
-function QuizCard() {
-  return (
-    <div className="quiz-card">
-      <p> 퀴즈</p>
+function QuizCard({quizData}) {
+  return(
+    <div className="w-11/12 m-auto bg-gray-300 text-center pt-5 pb-5 rounded-2xl" key={quizData.quiz_id}>
+      <p>{quizData.question}</p>
     </div>
-  );
+  )
 }
 
 export default QuizCard;

@@ -24,12 +24,12 @@ function CommunityDetail() {
       <div>
         <p className="text-base">커뮤내용</p>
       </div>
-      <div className="flex items-center mt-3 mb-3">
-        <button className="text-sm">
+      <div className="flex items-center justify-center mt-3 mb-3">
+        <button className="text-sm mr-1">
           <img src="" alt="" />
           <p>추천</p>
         </button>
-        <button className="text-sm">
+        <button className="text-sm  ml-1">
           <img src="" alt="" />
           <p>즐찾</p>
         </button>
