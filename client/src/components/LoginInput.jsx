@@ -1,3 +1,5 @@
+import Button from "./Button";
+
 function LoginInput(){
   // 아이디 입력
   // 비밀번호 입력
@@ -9,10 +11,7 @@ function LoginInput(){
         className="bg-gray-300 px-4 py-2 rounded-md focus:bg-gray-100"></input>
       <input type='password' placeholder="비밀번호"
         className="bg-gray-300 px-4 py-2 rounded-md focus:bg-gray-100"></input>
-      <button
-        className="bg-gray-300 px-4 py-2 rounded-md cursor-pointer hover:bg-gray-500">
-          로그인
-      </button>
+      <Button text='로그인' colorClass = "bg-gray-300"/>
     </form>
   )
 }
