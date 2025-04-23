@@ -9,6 +9,7 @@ import Quiz from "./pages/Quiz.jsx";
 import Mypage from "./pages/Mypage.jsx";
 import Admin from "./pages/Admin.jsx";
 import Register from "./pages/Register.jsx";
+import Terms from "./pages/Terms.jsx";
 import Layout from "./layout/Layout.jsx";
 
 import Nav from "./commonComponents/Nav.jsx";
@@ -30,6 +31,7 @@ function App() {
             <Route path="/Mypage" element={<Mypage />} />
             <Route path="/Admin" element={<Admin />} />
             <Route path="/Register" element={<Register />} />
+            <Route path="/Terms" element={<Terms />} />
             {/* Layout 적용 구간: path 가 "/KnowledgeHorror" 또는 "/Quiz" 인 경우에만 */}
             <Route element={<Layout />}>
               <Route path="/KnowledgeHorror" element={<KnowledgeHorror />} />
