@@ -18,10 +18,10 @@ function Quiz() {
         <button>정답확인</button>
       </div>
       <div className="flex justify-between">
-        <button className="bg-gray-300 px-4 py-2 rounded-md hover:bg-gray-400">
+        <button className="bg-gray-300 w-[45%] px-4 py-2 rounded-md hover:bg-gray-400">
           이전 문제
         </button>
-        <button className="bg-gray-300 px-4 py-2 rounded-md hover:bg-gray-400">
+        <button className="bg-gray-300 w-[45%] px-4 py-2 rounded-md hover:bg-gray-400">
           다음 문제
         </button>
       </div>
