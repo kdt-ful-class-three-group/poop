@@ -4,8 +4,9 @@ function FindAccount(){
 
   return(
     <div className="flex justify-between">
-      <label className="cursor-pointer py-2">
-        <input type="checkbox"></input>
+      <label className="cursor-pointer py-2 text-gray-400">
+        <input type="checkbox"
+          className="mr-1"></input>
         자동 로그인
       </label>
       <ul className="flex gap-2 py-2">
