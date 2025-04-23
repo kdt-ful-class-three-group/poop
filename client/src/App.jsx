@@ -11,6 +11,7 @@ import Mypage from "./pages/Mypage.jsx";
 import Admin from "./pages/Admin.jsx";
 import Register from "./pages/Register.jsx";
 import Layout from "./layout/Layout.jsx";
+import Write from "./pages/Write.jsx";
 
 import Nav from "./commonComponents/Nav.jsx";
 
@@ -27,6 +28,7 @@ function App() {
               path="/Community/CommunityDetail"
               element={<CommunityDetail />}
             />
+            <Route path="/Community/write" element={<Write />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/Mypage" element={<Mypage />} />
             <Route path="/Admin" element={<Admin />} />
