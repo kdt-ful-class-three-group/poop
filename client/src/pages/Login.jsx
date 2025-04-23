@@ -5,6 +5,8 @@ import FindAccount from "../components/FindAccount";
 // 간편 로그인
 import EasyLogin from "../components/EasyLogin";
 
+import { useNavigate } from "react-router-dom";
+
 function Login() {
 
   // 아이디 작성
@@ -14,6 +16,7 @@ function Login() {
   // 아이디찾기 / 비밀번호 찾기
   // 간편로그인 3개
   // 회원가입 - 라우터
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -21,6 +24,7 @@ function Login() {
       <LoginInput/>
       <FindAccount/>
       <EasyLogin/>
+      <button onClick={()=> navigate("/Register")}>회원가입</button>
     </div>
   );
 }
