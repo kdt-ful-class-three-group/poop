@@ -3,7 +3,7 @@ function FindAccount(){
   // 아이디 / 비밀번호 찾기
 
   return(
-    <div className="flex justify-between">
+    <div className="flex justify-between text-xs">
       <label className="cursor-pointer py-2 text-gray-400">
         <input type="checkbox"
           className="mr-1"></input>
