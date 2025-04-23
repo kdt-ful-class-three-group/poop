@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
 export default function Community() {
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -104,9 +103,9 @@ export default function Community() {
     <div className="w-full max-w-md mx-auto bg-white min-h-screen">
       <div className="border-b border-gray-200">
         <div className="py-3 px-4">
-          <h1 className="text-lg font-medium">커뮤니티 메인 페이지</h1>
 
           <div className="mt-3 relative">
+          <h1 className="text-lg font-medium ">커뮤니티</h1>
 
               <div className='flex justify-end mb-2'>
               <button type="button" onClick={goToWritePage} className="px-3 py-2 bg-gray-200 rounded-md text-xs">
@@ -135,14 +134,14 @@ export default function Community() {
       </div>
 
       {/* 게시글 목록 */}
-      <div className="divide-y divide-gray-200 h-105 ">
+      <div className="divide-y divide-gray-200 h-90 ">
         {isLoading ? (
           <div className="flex justify-center py-6">
             <p className="text-sm">로딩 중...</p>
           </div>
         ) : visiblePosts.length > 0 ? (
           visiblePosts.map((post) => (
-            <Link to={`/Community/CommunityDetail/${post.id}`} key={post.id} className="block px-4 py-3 hover:bg-gray-50">
+            <Link to={`/Community/CommunityDetail/${post.id}`} key={post.id} className="block px-4 py-2 hover:bg-gray-50">
               <div className="flex flex-col">
                 <h2 className="text-base font-medium text-gray-900">{post.title}</h2>
                 <div className="flex items-center text-xs text-gray-500 mt-1">
