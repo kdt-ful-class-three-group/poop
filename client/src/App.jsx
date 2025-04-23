@@ -4,6 +4,7 @@ import Community from "./pages/Community.jsx";
 import CommunityDetail from "./pages/CommunityDetail.jsx";
 import Home from "./pages/Home.jsx";
 import KnowledgeHorror from "./pages/KnowledgeHorror.jsx";
+import KnowledgeHorrorForm2 from "./pages/KnowledgeHorrorForm2.jsx";
 import Login from "./pages/Login.jsx";
 import Quiz from "./pages/Quiz.jsx";
 import Mypage from "./pages/Mypage.jsx";
@@ -34,6 +35,7 @@ function App() {
             {/* Layout 적용 구간: path 가 "/KnowledgeHorror" 또는 "/Quiz" 인 경우에만 */}
             <Route element={<Layout />}>
               <Route path="/KnowledgeHorror" element={<KnowledgeHorror />} />
+              <Route path="/KnowledgeHorrorForm2" element={<KnowledgeHorrorForm2 />} />
               <Route path="/Quiz" element={<Quiz />} />
             </Route>
           </Routes>
