@@ -1,4 +1,12 @@
+import { useEffect, useState } from "react";
+
+import QuizCard from "../components/QuizCard";
+import QuizButton from "../components/QuizButton";
+
 function Quiz() {
+
+  //quiz에 지정하기
+
   return (
     <div className="w-full">
       <div className="shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-[6px]  mb-[30px] p-4">

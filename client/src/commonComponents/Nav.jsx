@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+
+import NavButton from "../components/NavButton";
+import NavDiv from "../components/NavDiv";
 
 function Nav() {
-  const navigate = useNavigate();
   const [btnClick, setBtnClick] = useState(false);
   // Ref로 dom 찾는 방법 처음은 null > 이후 랜더링 되면 ref={navRef}를 가진 요소를 찾아줌
   const navRef = useRef(null);
@@ -23,6 +24,7 @@ function Nav() {
       // navRef.current.contains(event.target) = 클릭한 곳이 navRef 영역 안에 포함되는지 체크함
       if (navRef.current && !navRef.current.contains(event.target)) {
         setBtnClick(false);
+				
       }
     };
 
@@ -35,43 +37,12 @@ function Nav() {
 
   return (
     <div className="absolute bottom-0 transform -translate-x-50% w-full rounded-t-2xl flex items-center justify-center">
-      <button
-        onClick={showNav}
-        className="flex items-center justify-center w-[70px] h-[70px] rounded-full bg-[#D9D9D9] p-2 mb-7 cursor-pointer"
-      ></button>
-      <div
-        ref={navRef} // 이 안에 있는 요소는 이벤트 방지함
-        className={`bg-[#D9D9D9] absolute flex-col items-center bottom-0 justify-center p-4 w-full rounded-t-full h-[230px] ${
-          btnClick ? "flex" : "hidden"
-        }`}
-      >
-        <div className="flex">
-          <button
-            onClick={() => {
-              navigate("/Community");
-            }}
-          >
-            커뮤니티
-          </button>
-        </div>
-        <div className="flex justify-between items-center">
-          <button
-            onClick={() => {
-              navigate("/Quiz");
-            }}
-          >
-            유머
-          </button>
-          <button onClick={closeNav}>닫기</button>
-          <button
-            onClick={() => {
-              navigate("/Mypage");
-            }}
-          >
-            마이페이지
-          </button>
-        </div>
-      </div>
+			<NavButton onClick={showNav}/>
+      <NavDiv
+				navRef={navRef}
+				btnClick={btnClick}
+				closeNav={closeNav}
+			></NavDiv>
     </div>
   );
 }
