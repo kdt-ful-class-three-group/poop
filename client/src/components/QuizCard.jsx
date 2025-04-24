@@ -1,6 +1,6 @@
 function QuizCard({quizData}) {
   return(
-    <div className="w-11/12 m-auto bg-gray-300 text-center pt-5 pb-5 rounded-2xl" key={quizData.quiz_id}>
+    <div className="shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-[6px]  mb-[30px] p-4" key={quizData.quiz_id}>
       <p>{quizData.question}</p>
     </div>
   )
