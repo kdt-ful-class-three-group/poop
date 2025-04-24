@@ -9,6 +9,13 @@ function Quiz() {
   const [num, setNum] = useState(0);
 
   //fetch 가져오기
+  useEffect(()=>{
+    fetch('http://localhost:8080/quiz')
+    .then((res)=>res.json())
+    .then((data)=>{
+      setData(data);
+    })
+  },[])
 
   //버튼 이벤트
   const prevBtn = ()=>{
@@ -27,8 +34,8 @@ function Quiz() {
 
   return (
     <div className="w-full">
-      <QuizCard quizData={{qui_id:0,question:'기본'}}/>
-      <QuizButton nextBtn={()=>console.log('다음문제')} prevBtn={()=>console.log('이전문제')}/>
+      <QuizCard quizData={data[num]}/>
+      <QuizButton nextBtn={()=>nextBtn()} prevBtn={()=>prevBtn()}/>
     </div>
   );
 }
