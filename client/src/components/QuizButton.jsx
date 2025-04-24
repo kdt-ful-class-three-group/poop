@@ -3,7 +3,8 @@ import Button from "./Button";
 
 function QuizButton({nextBtn, prevBtn, data}){
   //정답인지 아닌지
-  const [isCorrect, setIsCorrect] = useState(true);
+  // const [isCorrect, setIsCorrect] = useState(true);
+  const [pText, setPText] = useState({text:'',class:''});
   const [btnText, setBtnText] = useState('정답확인');
 
   // 정답 확인 버튼 클릭 시 정답 확인
@@ -11,11 +12,18 @@ function QuizButton({nextBtn, prevBtn, data}){
     e.preventDefault()
 
     const inputAnswer = e.target.previousElementSibling.value;
-    console.log(inputAnswer)
     console.log(data?.answer || '')
 
     if(inputAnswer !== data?.answer){
-      setIsCorrect(false);
+      // setIsCorrect(false);
+      setPText({text:'정답이 아닙니다.', class:'text-red-500'});
+    }
+    if(inputAnswer === data?.answer){
+      e.preventDefault()
+      nextBtn();
+      e.target.previousElementSibling.value = '';
+      setBtnText('정답확인');
+      setPText({text:'정답입니다.', class:'text-blue-500'});
     }
   }
   // 정답 확인 버튼
@@ -40,18 +48,15 @@ function QuizButton({nextBtn, prevBtn, data}){
             onClick={(e)=>checkAnswer(e)}>확인</button>
         </div>
         {/* 정답이 일치하지 않으면 발생 */}
-        {
-          isCorrect ? null :
-          <p className="text-left text-red-500 text-sm">다시 입력해주세요</p>
-        }
+          <p className={`text-left text-sm ${pText.class}`}>{pText.text}</p>
       </div>
       {/* 정답보기 */}
       {/* 정답 클릭하면 답 보여주기 */}
       <Button text={btnText} colorClass={"bg-gray-300 w-full"} clickEvent={checkAnswerBtn}/>
       {/* 문제 넘어가기 */}
       <div className="flex justify-between">
-        <Button text ='이전 문제' colorClass={"bg-gray-300 w-[45%]"} clickEvent={() => { prevBtn(); setBtnText('정답확인'); }}/>
-        <Button text ='다음 문제' colorClass={"bg-gray-300 w-[45%]"} clickEvent={() => { nextBtn(); setBtnText('정답확인'); }}/>
+        <Button text ='이전 문제' colorClass={"bg-gray-300 w-[45%]"} clickEvent={() => { prevBtn(); setBtnText('정답확인'); setPText({text:'',class:''})}}/>
+        <Button text ='다음 문제' colorClass={"bg-gray-300 w-[45%]"} clickEvent={() => { nextBtn(); setBtnText('정답확인'); setPText({text:'',class:''})}}/>
       </div>
     </div>
   )
