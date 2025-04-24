@@ -1,8 +1,15 @@
 import Button from "./Button";
 
-function QuizButton({nextBtn, prevBtn}){
+function QuizButton({nextBtn, prevBtn, data}){
 
   // 정답 확인 버튼 클릭 시 정답 확인
+  const checkAnswer = (e)=>{
+    e.preventDefault()
+
+    const inputAnswer = e.target.previousElementSibling.value;
+    console.log(inputAnswer)
+    console.log(data?.answer || '')
+  }
   // 정답이
 
   return(
@@ -16,7 +23,9 @@ function QuizButton({nextBtn, prevBtn}){
             placeholder="정답을 입력해주세요."
           />
           {/* 확인버튼 누르면 정답 일치하는지 확인 */}
-          <button className="bg-[#8E5E43] border-[#8E5E43] p-2 rounded-[0px_3px_3px_0px] text-white whitespace-nowrap">확인</button>
+          <button 
+            className="bg-[#8E5E43] border-[#8E5E43] p-2 rounded-[0px_3px_3px_0px] text-white whitespace-nowrap cursor-pointer"
+            onClick={(e)=>checkAnswer(e)}>확인</button>
         </div>
         {/* 정답이 일치하지 않으면 발생 */}
         <p className="text-left text-red-500 text-sm">다시 입력해주세요</p>
