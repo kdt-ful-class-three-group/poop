@@ -1,6 +1,10 @@
 import Button from "./Button";
 
 function QuizButton({nextBtn, prevBtn}){
+
+  // 정답 확인 버튼 클릭 시 정답 확인
+  // 정답이
+
   return(
     <div className="flex flex-col gap-5 text-center">
       {/* 정답 작성 및 확인 */}
@@ -11,6 +15,7 @@ function QuizButton({nextBtn, prevBtn}){
             type="text"
             placeholder="정답을 입력해주세요."
           />
+          {/* 확인버튼 누르면 정답 일치하는지 확인 */}
           <button className="bg-[#8E5E43] border-[#8E5E43] p-2 rounded-[0px_3px_3px_0px] text-white whitespace-nowrap">확인</button>
         </div>
         {/* 정답이 일치하지 않으면 발생 */}
