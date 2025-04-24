@@ -1,6 +1,9 @@
+import {useState} from "react";
 import Button from "./Button";
 
 function QuizButton({nextBtn, prevBtn, data}){
+  //정답인지 아닌지
+  const [isCorrect, setIsCorrect] = useState(true);
 
   // 정답 확인 버튼 클릭 시 정답 확인
   const checkAnswer = (e)=>{
@@ -9,6 +12,10 @@ function QuizButton({nextBtn, prevBtn, data}){
     const inputAnswer = e.target.previousElementSibling.value;
     console.log(inputAnswer)
     console.log(data?.answer || '')
+
+    if(inputAnswer !== data?.answer){
+      setIsCorrect(false);
+    }
   }
   // 정답이
 
@@ -28,7 +35,10 @@ function QuizButton({nextBtn, prevBtn, data}){
             onClick={(e)=>checkAnswer(e)}>확인</button>
         </div>
         {/* 정답이 일치하지 않으면 발생 */}
-        <p className="text-left text-red-500 text-sm">다시 입력해주세요</p>
+        {
+          isCorrect ? null :
+          <p className="text-left text-red-500 text-sm">다시 입력해주세요</p>
+        }
       </div>
       {/* 정답보기 */}
       {/* 정답 클릭하면 답 보여주기 */}
