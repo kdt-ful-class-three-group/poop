@@ -1,6 +1,8 @@
 
 import { useNavigate } from "react-router-dom";
 // import KnowledgeHorror from "../pages/KnowledgeHorror";
+
+import Button from "../components/Button";
 function Menu() {
   const navigate = useNavigate();
   const KnowledgeHorrorNav = (category) => {
