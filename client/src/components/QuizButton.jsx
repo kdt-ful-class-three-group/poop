@@ -13,9 +13,11 @@ function QuizButton({nextBtn, prevBtn}){
           />
           <button className="bg-[#8E5E43] border-[#8E5E43] p-2 rounded-[0px_3px_3px_0px] text-white whitespace-nowrap">확인</button>
         </div>
+        {/* 정답이 일치하지 않으면 발생 */}
         <p className="text-left text-red-500 text-sm">다시 입력해주세요</p>
       </div>
       {/* 정답보기 */}
+      {/* 정답 클릭하면 답 보여주기 */}
       <Button text="정답확인" colorClass={"bg-gray-300 w-full"}/>
       {/* 문제 넘어가기 */}
       <div className="flex justify-between">
