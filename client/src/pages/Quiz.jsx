@@ -5,8 +5,25 @@ import QuizButton from "../components/QuizButton";
 
 function Quiz() {
 
-  //quiz에 지정하기
-  
+  const [data ,setData] = useState([]);
+  const [num, setNum] = useState(0);
+
+  //fetch 가져오기
+
+  //버튼 이벤트
+  const prevBtn = ()=>{
+    if(num>0){
+      setNum(num-1);
+    }
+  }
+  const nextBtn = ()=>{
+    if(num<data.length-1){
+      setNum(num+1);
+    }
+  }
+
+  //정답확인
+
 
   return (
     <div className="w-full">
