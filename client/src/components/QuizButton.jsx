@@ -4,9 +4,21 @@ import QuizControl from "./QuizControl";
 
 function QuizButton({nextBtn, prevBtn, data}){
   //정답인지 아닌지
-  // const [isCorrect, setIsCorrect] = useState(true);
+  const [isAnswer, setIsAnswer] = useState(false);
   // const [pText, setPText] = useState({text:'',class:''});
-  // const [btnText, setBtnText] = useState('정답확인');
+  const [btnText, setBtnText] = useState('정답확인');
+
+  //정답확인 버튼 -> !answer 값 들어가게도록
+  const answerBtn =()=>{
+    setIsAnswer(!isAnswer)
+
+    //정답 확인
+    if(isAnswer){
+      setBtnText(data?.answer || '');
+    } else {
+      setBtnText('정답확인');
+    }
+  }
 
   // // 정답 확인 버튼 클릭 시 정답 확인
   // const checkAnswer = (e)=>{
@@ -36,8 +48,7 @@ function QuizButton({nextBtn, prevBtn, data}){
   return(
     <div className="flex flex-col gap-5 text-center">
       {/* 정답 작성 및 확인 */}
-      <div className="w-full">
-        <div className="flex border-[1px] border-[#D9D9D9]/70">
+        <div className="w-full flex border-[1px] border-[#D9D9D9]/70">
           <input
             className="w-full outline-none p-2"
             type="text"
@@ -48,14 +59,8 @@ function QuizButton({nextBtn, prevBtn, data}){
             className="bg-[#8E5E43] border-[#8E5E43] p-2 rounded-[0px_3px_3px_0px] text-white whitespace-nowrap cursor-pointer"
             onClick={(e)=>checkAnswer(e)}>확인</button>
         </div>
-        {/* 정답이 일치하지 않으면 발생 */}
-          <p className={`text-left text-sm ${pText.class}`}>{pText.text}</p>
-      </div>
       {/* 정답보기 */}
-      {/* 정답 클릭하면 답 보여주기 */}
-      <Button text={btnText} colorClass={"bg-gray-300 w-full"} clickEvent={checkAnswerBtn}/>
-      {/* 문제 넘어가기 */}
-      <QuizControl/>
+      <QuizControl btnText={btnText} answerBtn={answerBtn} prevBtn={} nextBtn={} />
     </div>
   )
 }
