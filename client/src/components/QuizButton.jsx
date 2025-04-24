@@ -1,4 +1,4 @@
-import {useState,useRef} from "react";
+import {useState,useRef,useEffect} from "react";
 import Button from "./Button";
 import QuizControl from "./QuizControl";
 
@@ -9,17 +9,16 @@ function QuizButton({nextBtn, prevBtn, data}){
   const inputRef = useRef(null);
 
   //정답확인 버튼 -> !answer 값 들어가게도록
-  const answerBtn =()=>{
-    
-    //정답 확인
+
+  useEffect(()=>{
     if(isAnswer){
       setBtnText(data?.answer || '');
+      return
     } else {
       setBtnText('정답확인');
     }
-    setIsAnswer(!isAnswer)
-  }
 
+  },[isAnswer])
   //정답 제출 버튼
   const checkAnswer = ()=>{
     const userAnswer = inputRef.current.value.trim()
@@ -27,7 +26,7 @@ function QuizButton({nextBtn, prevBtn, data}){
     if(userAnswer === data.answer){
       console.log('정답')
       inputRef.current.value = ''
-      answerBtn()
+      setIsAnswer(false)
       nextBtn()
     } else {
       console.log('오답')
@@ -50,16 +49,15 @@ function QuizButton({nextBtn, prevBtn, data}){
             onClick={()=>checkAnswer()}>확인</button>
         </div>
       {/* 정답보기 */}
-      <QuizControl btnText={btnText} answerBtn={answerBtn} 
+      <QuizControl btnText={btnText} answerBtn={()=>setIsAnswer(!isAnswer)} 
         prevBtn={()=>{
           inputRef.current.value = ''
-          answerBtn()
+          setIsAnswer(false)
           prevBtn()
         }} 
         nextBtn={()=>{
           inputRef.current.value = ''
           setIsAnswer(false)
-          answerBtn()
           nextBtn()
         }} />
     </div>
