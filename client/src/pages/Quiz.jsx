@@ -8,6 +8,15 @@ function Quiz() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [answer, setAnswer] = useState("");
     const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
+    const [showAnswer, setShowAnswer] = useState(false);
+
+
+    const toggleAnswer = () => {
+        setShowAnswer((prev) => !prev);
+    };
+
+
+
 
 
     const handleSubmit = () => {
@@ -18,6 +27,7 @@ function Quiz() {
             alert("정답입니다.");
             setCurrentIndex(prev => prev + 1);
             setAnswer("");
+            setShowAnswer(false);
         } else {
             setIsAnswerCorrect(false);
            alert("오답입니다.");
@@ -38,7 +48,7 @@ function Quiz() {
           setCurrentIndex={setCurrentIndex}
       />
       </div>
-      <div className="border-[1px] flex border-[#D9D9D9]/70  mb-[60px] ">
+      <div className="border-[1px] flex border-[#D9D9D9]/70  mb-[20px] ">
 
               <input
                   className="w-full outline-none p-2"
@@ -54,13 +64,30 @@ function Quiz() {
                   확인
               </button>
 
-
-
       </div>
-        <div className="flex justify-center bg-gray-300 px-4 py-2 rounded-md mb-[30px] hover:bg-gray-400">
-            <button>정답확인</button>
+        <div className="flex justify-center mb-[30px]">
+            <button
+                onClick={toggleAnswer}
+                className="bg-gray-300 px-4 py-2 rounded-md hover:bg-gray-400"
+            >
+                {showAnswer ? "닫기" : "정답 확인"}
+            </button>
         </div>
+
+
+        {showAnswer && (
+            <div className="flex justify-center mb-[30px]">
+                <div className="bg-gray-100 border border-gray-300 px-4 py-2 rounded-md text-center">
+                    {quizData[currentIndex]?.answer}
+                </div>
+            </div>
+        )}
         <PageButton
+            prevLabel="이전 문제"
+            nextLabel="다음 문제"
+            onNext={()=> setShowAnswer(false)}
+            onPrev={()=>setShowAnswer(false)}
+
 
             setCurrentIndex={setCurrentIndex}
             currentIndex={currentIndex}
