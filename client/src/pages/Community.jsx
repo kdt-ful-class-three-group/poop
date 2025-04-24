@@ -40,7 +40,7 @@ export default function Community() {
 
   // 글쓰기 페이지로 이동
   const goToWritePage = () => {
-    navigate('/CommunityWrite');
+    navigate('/Community/Write');
   };
 
   //현재 페이지에 맞는 게시글 잘라내기
