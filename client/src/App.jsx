@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Community from "./pages/Community.jsx";
 import CommunityDetail from "./pages/CommunityDetail.jsx";
 import Home from "./pages/Home.jsx";
-import KnowledgeHorror from "./pages/KnowledgeHorror.jsx";
+import Horror from "./pages/horror.jsx";
 import KnowledgeHorrorForm2 from "./pages/KnowledgeHorrorForm2.jsx";
 import Login from "./pages/Login.jsx";
 import Quiz from "./pages/Quiz.jsx";
@@ -38,7 +38,6 @@ function App() {
             <Route
               element={<Layout showDom={showDom} setShowDom={setShowDom} />} // Layout에 상태 전달
             >
-              <Route path="/KnowledgeHorror" element={<KnowledgeHorror />} />
               <Route
                 path="/KnowledgeHorrorForm2"
                 element={<KnowledgeHorrorForm2 />}
@@ -50,6 +49,10 @@ function App() {
               <Route
                 path="/Knowledge"
                 element={<Quiz showDom={showDom} setShowDom={setShowDom} />}
+              />
+              <Route
+                path="/horror"
+                element={<Horror showDom={showDom} setShowDom={setShowDom} />}
               />
             </Route>
           </Routes>

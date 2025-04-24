@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import quiz from "./routes/quiz.js";
 import knowledgeRoutes from "./routes/knowledgeRoutes.js";
+import horrorRoutes from "./routes/horrorRoutes.js";
 
 const app = express();
 app.use(express.json());
@@ -18,6 +19,7 @@ app.use(express.json());
 
 app.use("/quiz", quiz);
 app.use("/knowledge", knowledgeRoutes);
+app.use("/horror", horrorRoutes);
 
 const PORT = process.env.SERVERPORT;
 app.listen(PORT, () => {
