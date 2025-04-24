@@ -44,7 +44,7 @@ router.post("/", async (req, res) => {
     await pool.query(query, [question, answer]);
   }
   
-  res.status(201).json({ message: "Quizzes inserted successfully" });
+  res.status(201).json({ message: "commonsense inserted successfully" });
   }catch (error) {
   console.error("DB Insert Error:", error);
   res.status(500).json({ error: "Database error" });
