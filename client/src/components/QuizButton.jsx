@@ -50,8 +50,8 @@ function QuizButton({nextBtn, prevBtn, data}){
       <Button text={btnText} colorClass={"bg-gray-300 w-full"} clickEvent={checkAnswerBtn}/>
       {/* 문제 넘어가기 */}
       <div className="flex justify-between">
-        <Button text ='이전 문제' colorClass={"bg-gray-300 w-[45%]"} clickEvent={prevBtn}/>
-        <Button text ='다음 문제' colorClass={"bg-gray-300 w-[45%]"} clickEvent={nextBtn}/>
+        <Button text ='이전 문제' colorClass={"bg-gray-300 w-[45%]"} clickEvent={() => { prevBtn(); setBtnText('정답확인'); }}/>
+        <Button text ='다음 문제' colorClass={"bg-gray-300 w-[45%]"} clickEvent={() => { nextBtn(); setBtnText('정답확인'); }}/>
       </div>
     </div>
   )
