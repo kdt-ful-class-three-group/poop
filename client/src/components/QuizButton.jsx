@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState,useRef} from "react";
 import Button from "./Button";
 import QuizControl from "./QuizControl";
 
@@ -10,16 +10,29 @@ function QuizButton({nextBtn, prevBtn, data}){
 
   //정답확인 버튼 -> !answer 값 들어가게도록
   const answerBtn =()=>{
-    setIsAnswer(!isAnswer)
-
+    
     //정답 확인
     if(isAnswer){
       setBtnText(data?.answer || '');
     } else {
       setBtnText('정답확인');
     }
+    setIsAnswer(!isAnswer)
   }
 
+  //정답 제출 버튼
+  const checkAnswer = ()=>{
+    const userAnswer = inputRef.current.value.trim()
+
+    if(userAnswer === data.answer){
+      console.log('정답')
+      inputRef.current.value = ''
+      answerBtn()
+      nextBtn()
+    } else {
+      console.log('오답')
+    }
+  }
 
   return(
     <div className="flex flex-col gap-5 text-center">
@@ -34,10 +47,21 @@ function QuizButton({nextBtn, prevBtn, data}){
           {/* 확인버튼 누르면 정답 일치하는지 확인 */}
           <button 
             className="bg-[#8E5E43] border-[#8E5E43] p-2 rounded-[0px_3px_3px_0px] text-white whitespace-nowrap cursor-pointer"
-            onClick={(e)=>checkAnswer(e)}>확인</button>
+            onClick={()=>checkAnswer()}>확인</button>
         </div>
       {/* 정답보기 */}
-      <QuizControl btnText={btnText} answerBtn={answerBtn} prevBtn={} nextBtn={} />
+      <QuizControl btnText={btnText} answerBtn={answerBtn} 
+        prevBtn={()=>{
+          inputRef.current.value = ''
+          answerBtn()
+          prevBtn()
+        }} 
+        nextBtn={()=>{
+          inputRef.current.value = ''
+          setIsAnswer(false)
+          answerBtn()
+          nextBtn()
+        }} />
     </div>
   )
 }
