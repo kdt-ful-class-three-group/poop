@@ -3,16 +3,15 @@ import RegisterEmail from '../components/RegisterEmail';
 import { useState } from 'react'
 
 function Register() {
-  const [test, setTest] = useState(true);
+  const [showEmail, setShowEmail] = useState(true);
 
   const buttonClick = (e) => {
-    e.preventDefault();
-    setTest(false);
+    setShowEmail(false);
   }
 
   return (
     <div className=" w-full h-full">
-      {test
+      {showEmail
         ?
         (
           <div className="w-full h-full">
