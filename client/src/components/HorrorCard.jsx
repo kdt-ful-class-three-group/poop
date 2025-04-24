@@ -4,9 +4,8 @@ import PageButton from "./PageButton.jsx";
 // import ShowAnswer from "./ShowAnswer.jsx";
 
 
-function HorrorCard() {
-    const [horrorData, setHorrorData] = useState([]);
-    const [currentIndex, setCurrentIndex] = useState(0);
+function HorrorCard({horrorData, setHorrorData, currentIndex, setCurrentIndex}) {
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -29,15 +28,11 @@ function HorrorCard() {
             {horrorData.length > 0 && (
                 <>
 
-                    <div className="border-2 border-gray-300 rounded-lg p-3  mx-4 w-[320px] h-[240px] flex flex-col justify-center items-center overflow-auto">
+                    <div className="rounded-lg p-3  mx-4 w-[320px] h-[240px] flex flex-col justify-center items-center overflow-auto">
                         <div className="break-word">{horrorData[currentIndex]?.question}</div>
                     </div>
 
-                    <PageButton
-                    setCurrentIndex={setCurrentIndex}
-                    currentIndex={currentIndex}
-                    length={horrorData.length}
-                    />
+
 
 
                 </>

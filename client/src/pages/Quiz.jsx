@@ -17,8 +17,6 @@ function Quiz() {
 
 
 
-
-
     const handleSubmit = () => {
         if(answer === ""){
             alert("답 입력해주세요.");
@@ -87,7 +85,6 @@ function Quiz() {
             nextLabel="다음 문제"
             onNext={()=> setShowAnswer(false)}
             onPrev={()=>setShowAnswer(false)}
-
 
             setCurrentIndex={setCurrentIndex}
             currentIndex={currentIndex}
