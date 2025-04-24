@@ -4,6 +4,7 @@ import Button from "./Button";
 function QuizButton({nextBtn, prevBtn, data}){
   //정답인지 아닌지
   const [isCorrect, setIsCorrect] = useState(true);
+  const [btnText, setBtnText] = useState('정답확인');
 
   // 정답 확인 버튼 클릭 시 정답 확인
   const checkAnswer = (e)=>{
@@ -17,7 +18,11 @@ function QuizButton({nextBtn, prevBtn, data}){
       setIsCorrect(false);
     }
   }
-  // 정답이
+  // 정답 확인 버튼
+  const checkAnswerBtn = (e)=>{
+    e.preventDefault()
+    setBtnText(data?.answer || '');
+  }
 
   return(
     <div className="flex flex-col gap-5 text-center">
@@ -42,7 +47,7 @@ function QuizButton({nextBtn, prevBtn, data}){
       </div>
       {/* 정답보기 */}
       {/* 정답 클릭하면 답 보여주기 */}
-      <Button text="정답확인" colorClass={"bg-gray-300 w-full"}/>
+      <Button text={btnText} colorClass={"bg-gray-300 w-full"} clickEvent={checkAnswerBtn}/>
       {/* 문제 넘어가기 */}
       <div className="flex justify-between">
         <Button text ='이전 문제' colorClass={"bg-gray-300 w-[45%]"} clickEvent={prevBtn}/>
