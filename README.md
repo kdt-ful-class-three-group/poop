@@ -7,7 +7,3 @@
 백 
 ``` cd /server/ npm install npm run dev ```
 포트 8003번에서 열리는지 확인
-
-
-
-
