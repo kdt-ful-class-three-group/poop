@@ -14,8 +14,9 @@ import Layout from "./layout/Layout.jsx";
 import Write from "./pages/Write.jsx";
 
 import Nav from "./commonComponents/Nav.jsx";
-
+import { useState } from "react";
 function App() {
+  const [showDom, setShowDom] = useState(false);
   return (
     <div className="App">
       <Router>
@@ -34,10 +35,22 @@ function App() {
             <Route path="/Admin" element={<Admin />} />
             <Route path="/Register" element={<Register />} />
             {/* Layout 적용 구간: path 가 "/KnowledgeHorror" 또는 "/Quiz" 인 경우에만 */}
-            <Route element={<Layout />}>
+            <Route
+              element={<Layout showDom={showDom} setShowDom={setShowDom} />} // Layout에 상태 전달
+            >
               <Route path="/KnowledgeHorror" element={<KnowledgeHorror />} />
-              <Route path="/KnowledgeHorrorForm2" element={<KnowledgeHorrorForm2 />} />
-              <Route path="/Quiz" element={<Quiz />} />
+              <Route
+                path="/KnowledgeHorrorForm2"
+                element={<KnowledgeHorrorForm2 />}
+              />
+              <Route
+                path="/Quiz"
+                element={<Quiz showDom={showDom} setShowDom={setShowDom} />}
+              />
+              <Route
+                path="/Knowledge"
+                element={<Quiz showDom={showDom} setShowDom={setShowDom} />}
+              />
             </Route>
           </Routes>
         </Home>

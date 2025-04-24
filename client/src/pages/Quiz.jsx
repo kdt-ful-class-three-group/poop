@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import poopTimeQuizApi from "../services/pooptimequizapi";
 import { useLocation } from "react-router-dom";
-function Quiz() {
+function Quiz({ showDom, setShowDom }) {
   const location = useLocation();
   const category = location.state?.category || "없음";
   const [quizDataState, setQuizDataState] = useState([]);
   const [quizNextNum, setQuizNextNum] = useState(0);
   const [quizAnswerValue, setQuizAnswerValue] = useState("");
+  const [toast, setToast] = useState(false); // 토스트 상태
+  const [toastText, setToastText] = useState(""); // 토스트 문자 상태
+
+  // const [showDom, setShowDom] = useState(false); // 요소 보이기/숨기기 상태
   // 유머 데이터 받아오는 부분
   useEffect(() => {
     const apiQuizData = async () => {
@@ -20,12 +24,14 @@ function Quiz() {
     //* 퀴즈 다음 버튼 클릭 시 디비 데이터 길이 보다 많으면 멈춤
     if (quizDataState.length - 1 > quizNextNum) {
       setQuizNextNum(quizNextNum + 1);
+      setShowDom(false);
     }
   };
   //* 퀴즈 이전 버튼
   const quizPrev = () => {
     //* 퀴즈 다음 버튼 클릭 시 0 보다 적으면 멈춤
     if (quizNextNum > 0) {
+      setShowDom(false);
       setQuizNextNum(quizNextNum - 1);
     }
   };
@@ -33,15 +39,26 @@ function Quiz() {
     if (quizDataState.length > 0) {
       const currentQuiz = quizDataState[quizNextNum]; // 현재 퀴즈 데이터
       if (currentQuiz.answer === quizAnswerValue) {
-        alert("정답입니다.");
+        setToast(true);
+        setToastText("정답입니다.");
+        setTimeout(() => {
+          setToast(false);
+        }, 3000);
+
+        // alert("정답입니다.");
       } else {
-        alert("오답입니다.");
+        setToast(true);
+        setToastText("틀렸다.");
+
+        setTimeout(() => {
+          setToast(false);
+        }, 3000);
       }
     }
   };
   //quiz에 지정하기
   return (
-    <div className="w-full">
+    <div className="w-full relative">
       {quizDataState.length > 0 && (
         <div
           key={quizDataState[quizNextNum].quiz_id}
@@ -65,13 +82,28 @@ function Quiz() {
           확인
         </button>
       </div>
+      <div
+        className={`${toast ? "flex" : "hidden"} ${
+          toastText === "정답입니다." ? "bg-[#0000009b]" : "bg-[#ff00009f]"
+        } absolute top-1/5 w-full justify-center rounded-[5px] p-5`}
+      >
+        <p className="text-[#fff]">{toastText}</p>
+      </div>
       {quizDataState.length > 0 && (
-        <div
-          key={quizNextNum}
-          className="flex justify-center bg-gray-300 px-4 py-2 rounded-md mb-[30px] hover:bg-gray-400"
-        >
-          <button>정답확인</button>
-          <p>{quizDataState[quizNextNum].answer}</p>
+        <div key={quizNextNum} className="flex w-full flex-col">
+          <button
+            className="flex justify-center bg-gray-300 px-4 py-2 rounded-md mb-[30px] hover:bg-gray-400"
+            onClick={() => setShowDom(!showDom)}
+          >
+            정답확인
+          </button>
+          <div
+            className={`flex justify-center bg-gray-300 px-4 py-2 rounded-md mb-[30px] hover:bg-gray-400 ${
+              showDom ? "block" : "hidden"
+            }`}
+          >
+            <p>{quizDataState[quizNextNum].answer}</p>
+          </div>
         </div>
       )}
       <div className="flex justify-between">

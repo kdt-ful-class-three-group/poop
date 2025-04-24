@@ -1,8 +1,14 @@
 import { useNavigate } from "react-router-dom";
+
 // import KnowledgeHorror from "../pages/KnowledgeHorror";
-function Menu() {
+function Menu({ setShowDom }) {
   const navigate = useNavigate();
+
   const KnowledgeHorrorNav = (category) => {
+    // if (showDom === true) {
+    // showDom이 false일 때만 상태 변경
+    setShowDom(false);
+    // }
     // navText(category);
     navigate(`/${category}`, { state: { category } });
   };
