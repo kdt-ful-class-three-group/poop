@@ -10,6 +10,8 @@ function QuizButton({nextBtn, prevBtn, data}){
 
   //팝업 보여줄지
   const [isShow, setIsShow] = useState(false)
+  //팝업 메시지
+  const [toastText, setToastText] = useState('')
 
   useEffect(()=>{
 
@@ -41,13 +43,23 @@ function QuizButton({nextBtn, prevBtn, data}){
       inputRef.current.value = ''
       setIsAnswer(false)
       nextBtn()
+
+      //팝업-정답
+      setIsShow(true)
+      setToastText('정답입니다')
     } else {
       console.log('오답')
+
+      //팝업
+      setIsShow(false)
+      setToastText('오답입니다')
     }
   }
 
   return(
     <div className="flex flex-col gap-5 text-center">
+      {/* 팝업 */}
+      <ToastPopup text={toastText} isShow={isShow}/>
       {/* 정답 작성 및 확인 */}
         <div className="w-full flex border-[1px] border-[#D9D9D9]/70">
           <input
