@@ -8,7 +8,7 @@ function Quiz() {
   const [moveData, setMoveData] = useState(0);
 
   useEffect(() => {
-  fetch("http://localhost:8081/quiz").then((response) => response.json())
+    fetch("http://localhost:8081/quiz").then((response) => response.json())
       .then((data) => {
         setQuizData(data);
       })
@@ -16,19 +16,27 @@ function Quiz() {
   //quiz에 지정하기
 
   const nextEvent = () => {
-    setMoveData(moveData + 1);
+    if (moveData === quizData.length) {
+      console.log('문제 끝');
+    } else {
+      setMoveData(moveData + 1);
+    }
     console.log('next');
   }
 
   const prevEvent = () => {
-    setMoveData(moveData - 1)
+    if (moveData === 0) {
+      console.log('문제 끝');
+    } else {
+      setMoveData(moveData - 1)
+    }
     console.log('prev');
   }
 
   return (
     <div className="w-full">
       <div className="shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-[6px]  mb-[30px] p-4">
-      {quizData ? <p>{quizData[moveData].question}</p> : <p>데이터 없음</p>}
+        {quizData ? <p>{quizData[moveData].question}</p> : <p>데이터 없음</p>}
       </div>
       <div className="border-[1px] flex border-[#D9D9D9]/70  mb-[60px] ">
         <input
