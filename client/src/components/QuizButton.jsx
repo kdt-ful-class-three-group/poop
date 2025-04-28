@@ -12,6 +12,8 @@ function QuizButton({nextBtn, prevBtn, data}){
   const [isShow, setIsShow] = useState(false)
   //팝업 메시지
   const [toastText, setToastText] = useState('')
+  //팝업 텍스트 색상
+  const [textColor, setTextColor] = useState(null)
 
   useEffect(()=>{
 
@@ -50,19 +52,21 @@ function QuizButton({nextBtn, prevBtn, data}){
       //팝업-정답
       setIsShow(true)
       setToastText('정답입니다')
+      setTextColor('text-blue-500')
     } else {
       console.log('오답')
 
       //팝업
       setIsShow(true)
       setToastText('오답입니다')
+      setTextColor('text-red-500')
     }
   }
 
   return(
     <div className="flex flex-col gap-5 text-center">
       {/* 팝업 */}
-      <ToastPopup text={toastText} isShow={isShow}/>
+      <ToastPopup text={toastText} isShow={isShow} textColor={textColor}/>
       {/* 정답 작성 및 확인 */}
         <div className="w-full flex border-[1px] border-[#D9D9D9]/70">
           <input
