@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import quiz from "./routes/quiz.js";
+import community from './routes/community.js'
 
 const app = express();
 app.use(express.json());
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
 app.use(express.json());
 
 app.use("/quiz", quiz);
+app.use('/board',community)
 
 const PORT = process.env.SERVERPORT;
 app.listen(PORT, () => {
