@@ -15,12 +15,15 @@ function QuizButton({nextBtn, prevBtn, data}){
 
   useEffect(()=>{
 
-    const show = setTimeout(()=>{
-      setIsShow(false)
-    },1500)
+    if(isShow){
+      const show = setTimeout(()=>{
+        setIsShow(false)
+      },1500)
+    
+      return ()=> clearTimeout(show)
 
-    return ()=> clearTimeout(show)
-
+    }
+    
   },[isShow])
 
   //정답확인 버튼 -> !answer 값 들어가게도록
@@ -51,7 +54,7 @@ function QuizButton({nextBtn, prevBtn, data}){
       console.log('오답')
 
       //팝업
-      setIsShow(false)
+      setIsShow(true)
       setToastText('오답입니다')
     }
   }
