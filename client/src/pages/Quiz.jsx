@@ -6,7 +6,7 @@ import QuizButton from "../components/QuizButton";
 function Quiz() {
 
   const [data ,setData] = useState([]);
-  const [num, setNum] = useState(0);
+  const [num, setNum] = useState(Number(localStorage.getItem('Quiznum'))||0);
 
   //로컬스토리지 - num이 변할 때마다 데이터 저장
   useEffect(()=>{
@@ -20,6 +20,7 @@ function Quiz() {
     .then((data)=>{
       setData(data);
     })
+
   },[])
 
   //버튼 이벤트
