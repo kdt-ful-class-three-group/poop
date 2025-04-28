@@ -1,11 +1,15 @@
 import {useState,useRef,useEffect} from "react";
 import QuizControl from "./QuizControl";
+import ToastPopup from "./ToastPopup";
 
 function QuizButton({nextBtn, prevBtn, data}){
   //정답인지 아닌지
   const [isAnswer, setIsAnswer] = useState(false);
   const [btnText, setBtnText] = useState('정답확인');
   const inputRef = useRef(null);
+
+  //팝업 보여줄지
+  const [isShow, setIsShow] = useState(false)
 
   //정답확인 버튼 -> !answer 값 들어가게도록
 
