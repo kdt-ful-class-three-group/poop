@@ -14,7 +14,9 @@ router.get("/", async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    console.log(req.body);
+    const {question, answer} = req.body;
+    console.log(question, answer);
+    pool.query('INSERT INTO horror (question, answer) VALUES (?, ?)', question, answer);
   } catch (error) {
     console.error(error);
   }
