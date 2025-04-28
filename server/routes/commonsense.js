@@ -17,6 +17,12 @@ router.get('/',async(req,res)=>{
 //post로 데이터 추가
 router.post('/',async(req,res)=>{
   const {question, answer} = req.body
+
+  //값이 없을 때
+  if(!question || !answer){
+    return res.status(400).json({error:'값이 없음'})
+  }
+
   try{
     const [rows] = await pool.query('INSERT INTO COMMON_SENSE VALUES (?,?)',[question,answer])
     // 성공시 응답
