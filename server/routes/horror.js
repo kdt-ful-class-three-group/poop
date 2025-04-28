@@ -15,8 +15,12 @@ router.get("/", async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const {question, answer} = req.body;
-    console.log(question, answer);
-    pool.query('INSERT INTO horror (question, answer) VALUES (?, ?)', question, answer);
+    if (!question || !answer) {
+      return res.status(400).json('질문 혹은 답변이 잘못되어 있습니다.');
+    }
+    await pool.query('insert into horror (question, answer) values (?, ?)', [question, answer]);
+    res.status(200);
+    res.json('전송 성공');
   } catch (error) {
     console.error(error);
   }
