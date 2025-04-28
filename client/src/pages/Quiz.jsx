@@ -39,6 +39,16 @@ function Quiz() {
     console.log(quizData[moveData].answer);
   }
 
+  const checkAnswer = () => {
+    const input = document.querySelector('input');
+    const userAnswer = input.value;
+    if(quizData[moveData].answer === userAnswer) {
+      console.log('정답');
+    } else {
+      console.log('오답');
+    }
+  }
+
   return (
     <div className="w-full">
       <div className="shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-[6px]  mb-[30px] p-4">
@@ -50,7 +60,7 @@ function Quiz() {
           type="text"
           placeholder="정답을 입력해주세요."
         />
-        <button className="bg-[#8E5E43] border-[#8E5E43] p-2 rounded-[0px_3px_3px_0px] text-white whitespace-nowrap">
+        <button className="bg-[#8E5E43] border-[#8E5E43] p-2 rounded-[0px_3px_3px_0px] text-white whitespace-nowrap" onClick={checkAnswer}>
           확인
         </button>
       </div>
