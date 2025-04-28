@@ -4,13 +4,20 @@ import QuizCard from "../components/QuizCard";
 import QuizButton from "../components/QuizButton";
 
 function Quiz() {
+  const [quizData, setQuizData] = useState(null);
 
+  useEffect(() => {
+  fetch("http://localhost:8081/quiz").then((response) => response.json())
+      .then((data) => {
+        setQuizData(data);
+      })
+  }, []);
   //quiz에 지정하기
 
   return (
     <div className="w-full">
       <div className="shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-[6px]  mb-[30px] p-4">
-        <p>전투기 조종사들이 제일 무서워하는 것은?</p>
+      {quizData ? <p>{quizData[0].question}</p> : <p>데이터 없음</p>}
       </div>
       <div className="border-[1px] flex border-[#D9D9D9]/70  mb-[60px] ">
         <input
