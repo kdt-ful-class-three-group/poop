@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
     res.status(200);
     res.json('전송 성공');
   } catch (error) {
-    console.error(error);
+    res.status(500).json('전송 실패');
   }
 })
 
