@@ -4,6 +4,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import quiz from "./routes/quiz.js";
 import register from "./routes/register.js";
+import commonsense from './routes/commonsense.js'
+
 
 const app = express();
 app.use(express.json());
@@ -18,6 +20,7 @@ app.use(express.json());
 
 app.use("/quiz", quiz);
 app.use("/register", register);
+app.use('/sense',commonsense)
 
 const PORT = process.env.SERVERPORT;
 app.listen(PORT, () => {
