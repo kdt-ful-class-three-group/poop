@@ -6,6 +6,7 @@ import quiz from "./routes/quiz.js";
 import register from "./routes/register.js";
 import commonsense from './routes/commonsense.js'
 import horror from "./routes/horror.js"
+import community from "./routes/community.js";
 
 const app = express();
 app.use(express.json());
@@ -22,6 +23,7 @@ app.use("/quiz", quiz);
 app.use("/register", register);
 app.use('/sense',commonsense)
 app.use("/horror", horror);
+app.use("/community", community);
 
 const PORT = process.env.SERVERPORT;
 app.listen(PORT, () => {
