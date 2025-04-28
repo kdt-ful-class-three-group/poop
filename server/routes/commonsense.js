@@ -19,7 +19,7 @@ router.post('/',async(req,res)=>{
   const {question, answer} = req.body
 
   //값이 없을 때
-  if(!question || !answer){
+  if(!question){
     return res.status(400).json({error:'값이 없음'})
   }
 
