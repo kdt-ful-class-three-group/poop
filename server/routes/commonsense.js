@@ -24,7 +24,7 @@ router.post('/',async(req,res)=>{
   }
 
   try{
-    const [rows] = await pool.query('INSERT INTO COMMON_SENSE VALUES (?,?)',[question,answer])
+    const [rows] = await pool.query('INSERT INTO COMMON_SENSE (question, answer) VALUES (?,?)',[question,answer])
     // 성공시 응답
     res.status(201).json({message:'데이터 추가 완료'})
   }
