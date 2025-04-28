@@ -17,11 +17,11 @@ router.post('/', async (req, res) => {
 
   //값이 없을 때
   if (!question || !answer) {
-    return res.status(400).json('데이터가 존재하지 않습니다.')
+    return res.status(400).json('데이터의 구조가 잘못 되었습니다.');
   }
 
   try {
-    await pool.execute('INSERT INTO quiz (question, answer) VALUES (?,?)', [question, answer])
+    await pool.execute('INSERT INTO quiz (question, answer) VALUES (?,?)', [question, answer]);
     // 성공시 응답
     res.status(201).json('전송 성공');
   }
