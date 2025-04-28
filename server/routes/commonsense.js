@@ -5,11 +5,12 @@ const router = express.Router()
 // get으로 조회
 router.get('/',async(req,res)=>{
   try{
-    const [rows] = await pool.query("SELECT * FROM COMMONSENSE")
+    const [rows] = await pool.query("SELECT * FROM COMMON_SENSE")
     res.json(rows)
   }
   catch(err){
-    console.error(error)
+    console.error(err)
+    res.status(500).json({error:'server error'})
   }
 })
 
@@ -22,3 +23,5 @@ router.post('/',async(req,res)=>{
 
   }
 })
+
+export default router
