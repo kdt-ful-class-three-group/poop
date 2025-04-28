@@ -5,7 +5,7 @@ const router = express.Router()
 // get으로 조회
 router.get('/',async(req,res)=>{
   try{
-    const [rows] = await pool.query("SELECT * FROM COMMON_SENSE")
+    const [rows] = await pool.execute("SELECT * FROM COMMON_SENSE")
     res.json(rows)
   }
   catch(err){
@@ -24,7 +24,7 @@ router.post('/',async(req,res)=>{
   }
 
   try{
-    const [rows] = await pool.query('INSERT INTO COMMON_SENSE (question, answer) VALUES (?,?)',[question,answer])
+    const [rows] = await pool.execute('INSERT INTO COMMON_SENSE (question, answer) VALUES (?,?)',[question,answer])
     // 성공시 응답
     res.status(201).json({message:'데이터 추가 완료'})
   }
