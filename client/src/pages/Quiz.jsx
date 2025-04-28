@@ -8,6 +8,11 @@ function Quiz() {
   const [data ,setData] = useState([]);
   const [num, setNum] = useState(0);
 
+  //로컬스토리지 - num이 변할 때마다 데이터 저장
+  useEffect(()=>{
+    localStorage.setItem('Quiznum',num.toString())
+  },[num])
+
   //fetch 가져오기
   useEffect(()=>{
     fetch('http://localhost:8080/quiz')
