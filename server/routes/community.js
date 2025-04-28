@@ -17,7 +17,7 @@ router.post('/',async(req,res)=>{
 
   const {title,content} = req.body
   try{
-    const [rows] = await pool.execute('INSERT INTO BOARD (usder_id,title,content) VALUES (?,?,?)',[2,title,content])
+    const [rows] = await pool.execute('INSERT INTO BOARD (user_id,title,content) VALUES (?,?,?)',[2,title,content])
     res.status(201).json({message:'데이터 추가 완료'})
   }
   catch(err){
