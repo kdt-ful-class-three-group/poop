@@ -1,7 +1,7 @@
-function ToastPopup({text, isShow}){
+function ToastPopup({text, isShow, textColor}){
   return(
-    <div className={`${isShow ? 'block' : 'hidden'}`}>
-      {text}
+    <div className={`${isShow ? 'block' : 'hidden'}` }>
+      <p className={textColor}>{text}</p>
     </div>
   )
 }
