@@ -6,13 +6,14 @@ import QuizButton from "../components/QuizButton";
 function Quiz() {
   const [quizData, setQuizData] = useState(null);
   const [moveData, setMoveData] = useState(0);
+  const [isShow, setIsShow] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:8081/quiz").then((response) => response.json())
       .then((data) => {
         setQuizData(data);
       })
-  }, [moveData]);
+  }, []);
   //quiz에 지정하기
 
   const nextEvent = () => {
@@ -33,6 +34,11 @@ function Quiz() {
     console.log('prev');
   }
 
+  const showAnswer = () => {
+    setIsShow(!isShow);
+    console.log(quizData[moveData].answer);
+  }
+
   return (
     <div className="w-full">
       <div className="shadow-[0px_0px_4px_rgba(0,0,0,0.25)] rounded-[6px]  mb-[30px] p-4">
@@ -49,7 +55,7 @@ function Quiz() {
         </button>
       </div>
       <div className="flex justify-center bg-gray-300 px-4 py-2 rounded-md mb-[30px] hover:bg-gray-400">
-        <button>정답확인</button>
+        {isShow ? <button onClick={showAnswer}>{quizData[moveData].answer}</button> : <button onClick={showAnswer}>정답확인</button>}
       </div>
       <div className="flex justify-between">
         <button className="bg-gray-300 w-[45%] px-4 py-2 rounded-md hover:bg-gray-400" onClick={prevEvent}>
