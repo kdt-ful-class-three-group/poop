@@ -1,23 +1,64 @@
-function QuizButton({nextBtn, prevBtn}){
+import {useState,useRef,useEffect} from "react";
+import QuizControl from "./QuizControl";
+
+function QuizButton({nextBtn, prevBtn, data}){
+  //정답인지 아닌지
+  const [isAnswer, setIsAnswer] = useState(false);
+  const [btnText, setBtnText] = useState('정답확인');
+  const inputRef = useRef(null);
+
+  //정답확인 버튼 -> !answer 값 들어가게도록
+
+  useEffect(()=>{
+    if(isAnswer){
+      setBtnText(data?.answer || '');
+      return
+    } else {
+      setBtnText('정답확인');
+    }
+
+  },[isAnswer])
+  //정답 제출 버튼
+  const checkAnswer = ()=>{
+    const userAnswer = inputRef.current.value.trim()
+
+    if(userAnswer === data.answer){
+      console.log('정답')
+      inputRef.current.value = ''
+      setIsAnswer(false)
+      nextBtn()
+    } else {
+      console.log('오답')
+    }
+  }
+
   return(
-    <div className="w-11/12 m-auto flex flex-col gap-5 text-center">
+    <div className="flex flex-col gap-5 text-center">
       {/* 정답 작성 및 확인 */}
-      <div className="w-full border-1">
-        <div>
-          <input placeholder="정답 작성하기"></input>
-          <button>확인</button>
+        <div className="w-full flex border-[1px] border-[#D9D9D9]/70">
+          <input
+            className="w-full outline-none p-2"
+            type="text"
+            placeholder="정답을 입력해주세요."
+            ref={inputRef}
+          />
+          {/* 확인버튼 누르면 정답 일치하는지 확인 */}
+          <button 
+            className="bg-[#8E5E43] border-[#8E5E43] p-2 rounded-[0px_3px_3px_0px] text-white whitespace-nowrap cursor-pointer"
+            onClick={()=>checkAnswer()}>확인</button>
         </div>
-        <p>다시 입력해주세요</p>
-      </div>
       {/* 정답보기 */}
-      <div className="w-full bg-gray-600">
-        <button>정답보기</button>
-      </div>
-      {/* 문제 넘어가기 */}
-      <div className="w-full bg-gray-600">
-        <button onClick={()=>prevBtn()}>이전 문제</button>
-        <button onClick={()=>nextBtn()}>다음 문제</button>
-      </div>
+      <QuizControl btnText={btnText} answerBtn={()=>setIsAnswer(!isAnswer)} 
+        prevBtn={()=>{
+          inputRef.current.value = ''
+          setIsAnswer(false)
+          prevBtn()
+        }} 
+        nextBtn={()=>{
+          inputRef.current.value = ''
+          setIsAnswer(false)
+          nextBtn()
+        }} />
     </div>
   )
 }
