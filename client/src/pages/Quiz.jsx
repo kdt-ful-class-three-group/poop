@@ -7,6 +7,7 @@ function Quiz() {
   const [quizData, setQuizData] = useState(null);
   const [moveData, setMoveData] = useState(0);
   const [isShow, setIsShow] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(0);
 
   useEffect(() => {
     fetch("http://localhost:8081/quiz").then((response) => response.json())
@@ -42,9 +43,11 @@ function Quiz() {
   const checkAnswer = () => {
     const input = document.querySelector('input');
     const userAnswer = input.value;
-    if(quizData[moveData].answer === userAnswer) {
+    if (quizData[moveData].answer === userAnswer) {
+      setIsCorrect(1);
       console.log('정답');
     } else {
+      setIsCorrect(-1);
       console.log('오답');
     }
   }
@@ -63,6 +66,10 @@ function Quiz() {
         <button className="bg-[#8E5E43] border-[#8E5E43] p-2 rounded-[0px_3px_3px_0px] text-white whitespace-nowrap" onClick={checkAnswer}>
           확인
         </button>
+      </div>
+      <div className="text-center">
+        {isCorrect === -1 && <p className="text-red-500">다시 입력해 주세요</p>}
+        {isCorrect === 1 && <p className="text-green-500">정답 입니다.</p>}
       </div>
       <div className="flex justify-center bg-gray-300 px-4 py-2 rounded-md mb-[30px] hover:bg-gray-400">
         {isShow ? <button onClick={showAnswer}>{quizData[moveData].answer}</button> : <button onClick={showAnswer}>정답확인</button>}
