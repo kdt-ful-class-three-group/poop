@@ -11,6 +11,16 @@ function QuizButton({nextBtn, prevBtn, data}){
   //팝업 보여줄지
   const [isShow, setIsShow] = useState(false)
 
+  useEffect(()=>{
+
+    const show = setTimeout(()=>{
+      setIsShow(false)
+    },1500)
+
+    return ()=> clearTimeout(show)
+
+  },[isShow])
+
   //정답확인 버튼 -> !answer 값 들어가게도록
 
   useEffect(()=>{
