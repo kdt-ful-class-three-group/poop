@@ -49,7 +49,6 @@ function Quiz({ showDom, setShowDom }) {
       } else {
         setToast(true);
         setToastText("틀렸다.");
-
         setTimeout(() => {
           setToast(false);
         }, 3000);
