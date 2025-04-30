@@ -43,13 +43,21 @@ router.post('/login',async(req,res)=>{
     const [rows] =await pool.execute('SELECT user_id FROM USER WHERE user_id=? AND password = ?',[user_id,password])
 
     //값이 없을 때
+    if(rows.length===0){
+      return res.status(401).json({success:false, message:'사용자가 존재하지 않습니다'})
+    }
 
     //응답 - 세션에 저장
+    req.session.user={
+      user_id:rows[0].user_id
+    }
 
     //성공 - 반환
+    return res.json({success:true, message:'로그인 성공',user:req.session.user})
   }
   catch(err){
-
+    console.error('로그인 처리 중 오류',err)
+    return res.status(500).json({success:false,message:'서버오류'})
   }
 })
 
