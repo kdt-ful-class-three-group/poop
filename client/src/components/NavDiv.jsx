@@ -39,10 +39,10 @@ function NavDiv({navRef, btnClick, closeNav}){
               <button
               className="flex-1 text-center cursor-pointer  hover:font-bold"
               onClick={() => {
-              navigate("/Mypage");
+              navigate("/Login");
             }}
           >
-            마이페이지
+            로그인
           </button>
         </div>
       </div>
