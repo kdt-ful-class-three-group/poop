@@ -20,20 +20,13 @@ router.get('/:user_id',async(req,res)=>{
   const userId = req.params.user_id
   try{
     const [rows] = await pool.execute('SELECT user_id, password FROM USER WHERE user_id = ? ',[userId])
+    
+    res.json(rows)
   }
   catch(err){
-
+    console.error(err)
   }
 })
 
-//데이터 추가
-router.post('/',async(req,res)=>{
-  try{
-
-  }
-  catch(err){
-
-  }
-})
 
 export default router
