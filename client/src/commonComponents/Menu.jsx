@@ -14,15 +14,15 @@ function Menu() {
     const isShowAnswer = false;
     if (category === 'quiz') {
       navigate('/Quiz', {
-        state: { category, isShowAnswer }
+        state: { category }
       })
     } else if (category === 'knowledge') {
       navigate('/Quiz', {
-        state: { category, isShowAnswer }
+        state: { category }
       })
     } else if (category === 'horror') {
       navigate('/Quiz', {
-        state: { category, isShowAnswer }
+        state: { category }
       })
     }
   }
