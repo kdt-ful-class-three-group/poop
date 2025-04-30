@@ -20,7 +20,6 @@ import AllCategory from "./pages/AllCategory.jsx";
 import Nav from "./commonComponents/Nav.jsx";
 
 function App() {
-  const [isShowAnswer, setIsShowAnswer] = useState(false);
   return (
     <div className="App">
       <Router>
@@ -49,7 +48,7 @@ function App() {
                 path="/KnowledgeHorrorForm2"
                 element={<KnowledgeHorrorForm2 />}
               />
-              <Route path="/Quiz" element={<AllCategory />} isShowAnswer={isShowAnswer} setIsShowAnswer={setIsShowAnswer} />
+              <Route path="/Quiz" element={<AllCategory />}/>
             </Route>
           </Routes>
         </Home>

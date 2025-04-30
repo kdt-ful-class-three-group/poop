@@ -11,17 +11,18 @@ function Menu() {
   };
 
   const navHandle = (category) => {
+    const isShowAnswer = false;
     if (category === 'quiz') {
-      navigate('/Quiz2', {
-        state: { category }
+      navigate('/Quiz', {
+        state: { category, isShowAnswer }
       })
     } else if (category === 'knowledge') {
-      navigate('/Quiz2', {
-        state: { category }
+      navigate('/Quiz', {
+        state: { category, isShowAnswer }
       })
     } else if (category === 'horror') {
-      navigate('/Quiz2', {
-        state: { category }
+      navigate('/Quiz', {
+        state: { category, isShowAnswer }
       })
     }
   }
