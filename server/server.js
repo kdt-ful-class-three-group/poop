@@ -13,7 +13,10 @@ import session from 'express-session'
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin:'http://localhost:3030', //클라이언트 도메인
+  credentials:true // 쿠키를 허용
+}));
 dotenv.config();
 
 //세션 미들웨어
