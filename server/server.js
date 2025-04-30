@@ -3,14 +3,9 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import quiz from "./routes/quiz.js";
-import register from "./routes/register.js";
-import loginRoutes from "./routes/loginRoutes.js"; //* 로그인
-import loginCheckRoutes from "./routes/loginCheckRoutes.js"; //* 세션 확인;
-import logoutRoutes from "./routes/logoutRoutes.js"; //* 로그아웃
-import commonsense from "./routes/commonsense.js";
-import horror from "./routes/horror.js";
-import community from "./routes/community.js";
-import session from "express-session";
+import knowledgeRoutes from "./routes/knowledgeRoutes.js";
+import horrorRoutes from "./routes/horrorRoutes.js";
+
 const app = express();
 app.use(express.json());
 app.use(
@@ -40,13 +35,8 @@ app.get("/", (req, res) => {
 app.use(express.json());
 
 app.use("/quiz", quiz);
-app.use("/register", register);
-app.use("/sense", commonsense);
-app.use("/horror", horror);
-app.use("/community", community);
-app.use("/login", loginRoutes);
-app.use("/loginCheck", loginCheckRoutes);
-app.use("/logout", logoutRoutes);
+app.use("/knowledge", knowledgeRoutes);
+app.use("/horror", horrorRoutes);
 
 const PORT = process.env.SERVERPORT;
 app.listen(PORT, () => {

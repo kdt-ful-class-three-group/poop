@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Community from "./pages/Community.jsx";
 import CommunityDetail from "./pages/CommunityDetail.jsx";
 import Home from "./pages/Home.jsx";
-import KnowledgeHorror from "./pages/KnowledgeHorror.jsx";
-import KnowledgeHorrorForm2 from "./pages/KnowledgeHorrorForm2.jsx";
+// import Horror from "./pages/horror.jsx";
+// import KnowledgeHorrorForm2 from "./pages/KnowledgeHorrorForm2.jsx";
 import Login from "./pages/Login.jsx";
 import Quiz from "./pages/Quiz.jsx";
 import Mypage from "./pages/Mypage.jsx";
@@ -17,8 +17,9 @@ import RegisterBirth from "./pages/RegisterBirth.jsx";
 import RegisterNickname from "./pages/RegisterNickname.jsx";
 
 import Nav from "./commonComponents/Nav.jsx";
-
+import { useState } from "react";
 function App() {
+  const [showDom, setShowDom] = useState(false);
   return (
     <div className="App">
       <Router>
@@ -40,13 +41,25 @@ function App() {
             <Route path="/RegisterBirth" element={<RegisterBirth />} />
             <Route path="/RegisterNickname" element={<RegisterNickname />} />
             {/* Layout 적용 구간: path 가 "/KnowledgeHorror" 또는 "/Quiz" 인 경우에만 */}
-            <Route element={<Layout />}>
-              <Route path="/KnowledgeHorror" element={<KnowledgeHorror />} />
+            <Route
+              element={<Layout showDom={showDom} setShowDom={setShowDom} />} // Layout에 상태 전달
+            >
               <Route
                 path="/KnowledgeHorrorForm2"
                 element={<KnowledgeHorrorForm2 />}
               />
-              <Route path="/Quiz" element={<Quiz />} />
+              <Route
+                path="/Quiz"
+                element={<Quiz showDom={showDom} setShowDom={setShowDom} />}
+              />
+              <Route
+                path="/Knowledge"
+                element={<Quiz showDom={showDom} setShowDom={setShowDom} />}
+              />
+              <Route
+                path="/horror"
+                element={<Horror showDom={showDom} setShowDom={setShowDom} />}
+              />
             </Route>
           </Routes>
         </Home>
