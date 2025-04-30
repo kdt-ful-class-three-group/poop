@@ -3,8 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Community from "./pages/Community.jsx";
 import CommunityDetail from "./pages/CommunityDetail.jsx";
 import Home from "./pages/Home.jsx";
-import KnowledgeHorror from "./pages/KnowledgeHorror.jsx";
-import KnowledgeHorrorForm2 from "./pages/KnowledgeHorrorForm2.jsx";
 import Login from "./pages/Login.jsx";
 import Quiz from "./pages/Quiz.jsx";
 import Mypage from "./pages/Mypage.jsx";
@@ -15,7 +13,6 @@ import Layout from "./layout/Layout.jsx";
 import Write from "./pages/Write.jsx";
 import RegisterBirth from "./pages/RegisterBirth.jsx";
 import RegisterNickname from "./pages/RegisterNickname.jsx";
-import AllCategory from "./pages/AllCategory.jsx";
 
 import Nav from "./commonComponents/Nav.jsx";
 
@@ -42,13 +39,7 @@ function App() {
             <Route path="/RegisterNickname" element={<RegisterNickname />} />
             {/* Layout 적용 구간: path 가 "/KnowledgeHorror" 또는 "/Quiz" 인 경우에만 */}
             <Route element={<Layout />}>
-              <Route path="/Quiz2" element={<AllCategory />} />
-              <Route path="/KnowledgeHorror" element={<KnowledgeHorror />} />
-              <Route
-                path="/KnowledgeHorrorForm2"
-                element={<KnowledgeHorrorForm2 />}
-              />
-              <Route path="/Quiz" element={<AllCategory />}/>
+              <Route path="/Quiz" element={<Quiz />}/>
             </Route>
           </Routes>
         </Home>
