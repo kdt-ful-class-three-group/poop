@@ -25,8 +25,8 @@ function Login() {
   return (
     <div className="flex flex-col justify-center h-full w-full gap-3">
       <h1 className="text-2xl mb-[30px]">로그인</h1>
-      <LoginInput/>
-      <FindAccount/>
+      <LoginInput autoLogin={autoLogin}/>
+      <FindAccount autoLogin={autoLogin}/>
       <EasyLogin/>
       <Button text='회원가입' colorClass={''} clickEvent={()=>navigate('/Terms')}/>
     </div>
