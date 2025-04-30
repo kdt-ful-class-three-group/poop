@@ -2,7 +2,7 @@ import {useState,useRef,useEffect} from "react";
 import QuizControl from "./QuizControl";
 import ToastPopup from "./ToastPopup";
 
-function QuizButton({nextBtn, prevBtn, data}){
+function QuizButton({nextBtn, prevBtn, data,category}){
   //정답인지 아닌지
   const [isAnswer, setIsAnswer] = useState(false);
   const [btnText, setBtnText] = useState('정답확인');
@@ -39,6 +39,12 @@ function QuizButton({nextBtn, prevBtn, data}){
     }
 
   },[isAnswer])
+
+  //cateogry 변경되면 정답확인
+  useEffect(()=>{
+    setIsAnswer(false)
+  },[category])
+
   //정답 제출 버튼
   const checkAnswer = ()=>{
     const userAnswer = inputRef.current.value.trim()
