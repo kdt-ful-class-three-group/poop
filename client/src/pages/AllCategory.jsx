@@ -4,9 +4,9 @@ import QuizCard from "../components/QuizCard";
 import QuizButton from "../components/QuizButton";
 import { useLocation } from "react-router-dom";
 
-function AllCategory() {
+function AllCategory(isShowAnswer, setIsAnswer) {
   const location = useLocation();
-  const category = location.state?.category || "없음"; // 기본값 설정
+  const category = location.state?.category || "quiz"; // 기본값 설정
   const [data, setData] = useState([]);
   const [num, setNum] = useState(Number(localStorage.getItem(`${category}Num`)) || 0);
 
@@ -43,7 +43,7 @@ function AllCategory() {
   return (
     <div className="w-full">
       <QuizCard quizData={data[num]} />
-      <QuizButton nextBtn={() => nextBtn()} prevBtn={() => prevBtn()} data={data[num]} />
+      <QuizButton nextBtn={() => nextBtn()} prevBtn={() => prevBtn()} data={data[num]} category={category}/>
     </div>
   );
 }

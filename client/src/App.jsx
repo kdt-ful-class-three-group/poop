@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Community from "./pages/Community.jsx";
 import CommunityDetail from "./pages/CommunityDetail.jsx";
@@ -20,6 +20,7 @@ import AllCategory from "./pages/AllCategory.jsx";
 import Nav from "./commonComponents/Nav.jsx";
 
 function App() {
+  const [isShowAnswer, setIsShowAnswer] = useState(false);
   return (
     <div className="App">
       <Router>
@@ -48,7 +49,7 @@ function App() {
                 path="/KnowledgeHorrorForm2"
                 element={<KnowledgeHorrorForm2 />}
               />
-              <Route path="/Quiz" element={<Quiz />} />
+              <Route path="/Quiz" element={<AllCategory />} isShowAnswer={isShowAnswer} setIsShowAnswer={setIsShowAnswer} />
             </Route>
           </Routes>
         </Home>
