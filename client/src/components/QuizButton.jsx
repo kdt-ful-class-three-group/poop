@@ -2,7 +2,7 @@ import {useState,useRef,useEffect} from "react";
 import QuizControl from "./QuizControl";
 import ToastPopup from "./ToastPopup";
 
-function QuizButton({nextBtn, prevBtn, data}){
+function QuizButton({nextBtn, prevBtn, data, category='quiz'}){
   //정답인지 아닌지
   const [isAnswer, setIsAnswer] = useState(false);
   const [btnText, setBtnText] = useState('정답확인');
@@ -65,21 +65,27 @@ function QuizButton({nextBtn, prevBtn, data}){
 
   return(
     <div className="flex flex-col gap-5 text-center">
-      {/* 팝업 */}
-      <ToastPopup text={toastText} isShow={isShow} textColor={textColor}/>
-      {/* 정답 작성 및 확인 */}
-        <div className="w-full flex border-[1px] border-[#D9D9D9]/70">
-          <input
-            className="w-full outline-none p-2"
-            type="text"
-            placeholder="정답을 입력해주세요."
-            ref={inputRef}
-          />
-          {/* 확인버튼 누르면 정답 일치하는지 확인 */}
-          <button 
-            className="bg-[#8E5E43] border-[#8E5E43] p-2 rounded-[0px_3px_3px_0px] text-white whitespace-nowrap cursor-pointer"
-            onClick={()=>checkAnswer()}>확인</button>
+      {(category === 'knowledge') || (category === 'quiz') ? 
+        <div>
+          {/* 팝업 */}
+          <ToastPopup text={toastText} isShow={isShow} textColor={textColor}/>
+          {/* 정답 작성 및 확인 */}
+          <div className="w-full flex border-[1px] border-[#D9D9D9]/70">
+            <input
+              className="w-full outline-none p-2"
+              type="text"
+              placeholder="정답을 입력해주세요."
+              ref={inputRef}
+              />
+            {/* 확인버튼 누르면 정답 일치하는지 확인 */}
+            <button 
+              className="bg-[#8E5E43] border-[#8E5E43] p-2 rounded-[0px_3px_3px_0px] text-white whitespace-nowrap cursor-pointer"
+              onClick={()=>checkAnswer()}>확인</button>
+          </div>
         </div>
+        :
+        <div></div>
+      } 
       {/* 정답보기 */}
       <QuizControl btnText={btnText} answerBtn={()=>setIsAnswer(!isAnswer)} 
         prevBtn={()=>{

@@ -38,13 +38,10 @@ function KnowledgeHorror() {
     }
   }
 
-  //정답확인
-
-
   return (
     <div className="w-full">
       <QuizCard quizData={data[num]} />
-      <QuizButton nextBtn={() => nextBtn()} prevBtn={() => prevBtn()} data={data[num]} />
+      <QuizButton nextBtn={() => nextBtn()} prevBtn={() => prevBtn()} data={data[num]} category={category} />
     </div>
   );
 }
