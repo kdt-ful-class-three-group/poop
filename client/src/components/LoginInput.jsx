@@ -1,7 +1,10 @@
 import Button from "./Button";
 import {useRef, useState} from 'react'
+import { useNavigate } from "react-router";
 
 function LoginInput(){
+
+  const navigate = useNavigate()
   // 아이디 입력
   // 비밀번호 입력
   // 로그인 버튼
@@ -9,17 +12,31 @@ function LoginInput(){
   const [pw,setPw] = useState('')
 
   const [isMatch, setIsMatch] = useState('')
-  const login = ()=>{
 
+  const login = async()=>{
+
+    const response = await fetch('http://localhost:8080/login',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'Accept':'application/json'
+      },
+      credentials:'include',
+      body:JSON.stringify({user_id:userId,password:pw})
+    })
+
+    const result = await response.json()
+    
+    console.log(result)
   }
 
   return(
-    <form className="flex flex-col gap-2">
+    <form className="flex flex-col gap-2" onSubmit={(e)=>e.preventDefault()}>
       <input type="text" placeholder="아이디를 입력해주세요"
         className="bg-gray-300 px-4 py-2 rounded-md focus:bg-gray-100" maxLength={30} required value={userId} onChange={(e)=>setUserId(e.target.value)}></input>
       <input type='password' placeholder="비밀번호를 입력해주세요"
         className="bg-gray-300 px-4 py-2 rounded-md focus:bg-gray-100" required value={pw} onChange={(e)=>setPw(e.target.value)}></input>
-      <Button text='로그인' colorClass = "bg-gray-300" clickEvent={login}/>
+      <Button text='로그인' colorClass = "bg-gray-300" clickEvent={()=>login()}/>
     </form>
   )
 }
