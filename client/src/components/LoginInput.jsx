@@ -31,6 +31,8 @@ function LoginInput(){
     if(result.success){
       setIsMatch(true)
       console.log(result.success)
+      //성공하면 sessionStorage에 저장
+      sessionStorage.setItem('userId',result.user.user_id)
       // 성공하면 퀴즈로 이동
       navigate('/quiz')
     } else{
