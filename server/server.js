@@ -21,7 +21,7 @@ app.use(express.json());
 
 app.use("/quiz", quiz);
 app.use("/register", register);
-app.use('/sense',commonsense)
+app.use('/knowledge',commonsense)
 app.use("/horror", horror);
 app.use("/community", community);
 
