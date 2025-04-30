@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "./Button";
+import { useAuth } from "../layout/AuthContext.jsx";
 
 function LoginInput({ loginData }) {
   // 아이디 입력
@@ -7,13 +8,15 @@ function LoginInput({ loginData }) {
   // 로그인 버튼
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const { login } = useAuth();
   const loginBtnClick = (e) => {
     e.preventDefault();
     loginData(username, password).then((res) => {
       if (res.success) {
         sessionStorage.setItem("userId", username);
         sessionStorage.setItem("nickname", res.user_nick);
+
+        login({ userId: username });
       } else {
         console.log("로그인 실패");
       }
