@@ -37,7 +37,7 @@ router.get('/:user_id',async(req,res)=>{
 
 //로그인 요청 처리
 router.post('/',async(req,res)=>{
-  const {user_id, password} = req.body
+  const {user_id, password,autoLogin} = req.body
   try{
     //조회
     const [rows] =await pool.execute('SELECT user_id FROM USER WHERE user_id=? AND password = ?',[user_id,password])
@@ -52,6 +52,17 @@ router.post('/',async(req,res)=>{
       user_id:rows[0].user_id
     }
     // console.log('세션 저장 확인',req.session.user)
+
+    //자동로그인 체크에 따른 만료시간 연장
+    if(autoLogin){
+      //3일
+      req.session.cookie.maxAge = 1000*60*60*24*3
+    } else {
+      //1시간
+      req.session.cookie.maxAge = 1000*60*60
+    }
+
+    console.log('기간확인',req.session.cookie.maxAge)
 
     //성공 - 반환
     return res.json({success:true, message:'로그인 성공',user:req.session.user})
