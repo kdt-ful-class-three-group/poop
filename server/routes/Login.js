@@ -35,5 +35,22 @@ router.get('/:user_id',async(req,res)=>{
   }
 })
 
+//로그인 요청 처리
+router.post('/login',async(req,res)=>{
+  const {user_id, password} = req.body
+  try{
+    //조회
+    const [rows] =await pool.execute('SELECT user_id FROM USER WHERE user_id=? AND password = ?',[user_id,password])
+
+    //값이 없을 때
+
+    //응답 - 세션에 저장
+
+    //성공 - 반환
+  }
+  catch(err){
+
+  }
+})
 
 export default router
