@@ -25,7 +25,12 @@ function LoginInput({ loginData }) {
         type="text"
         placeholder="아이디"
         value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        onChange={(e) => {
+          const value = e.target.value;
+          // 특수문자를 제외한 값만 허용
+          const filteredValue = value.replace(/[^a-zA-Z0-9]/g, ""); // 영문자와 숫자만 허용
+          setUsername(filteredValue);
+        }}
         className="bg-gray-300 px-4 py-2 rounded-md focus:bg-gray-100"
         required
       ></input>
@@ -33,7 +38,12 @@ function LoginInput({ loginData }) {
         type="password"
         placeholder="비밀번호"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={(e) => {
+          const value = e.target.value;
+          // 특수문자를 제외한 값만 허용
+          const filteredValue = value.replace(/[^a-zA-Z0-9]/g, ""); // 영문자와 숫자만 허용
+          setPassword(filteredValue);
+        }}
         className="bg-gray-300 px-4 py-2 rounded-md focus:bg-gray-100"
         required
       ></input>
