@@ -8,33 +8,33 @@ function KnowledgeHorror() {
   const location = useLocation();
   const category = location.state?.category || "없음"; // 기본값 설정
 
-  const [data ,setData] = useState([]);
-  const [num, setNum] = useState(Number(localStorage.getItem('senseNum'))||0);
+  const [data, setData] = useState([]);
+  const [num, setNum] = useState(Number(localStorage.getItem(`${category}Num`)) || 0);
 
   //로컬스토리지 - num이 변할 때마다 데이터 저장
-  useEffect(()=>{
-    localStorage.setItem('senseNum',num.toString())
-  },[num])
+  useEffect(() => {
+    localStorage.setItem(`${category}Num`, num.toString())
+  }, [num])
 
   //fetch 가져오기
-  useEffect(()=>{
+  useEffect(() => {
     fetch(`http://localhost:8081/${category}`)
-    .then((res)=>res.json())
-    .then((data)=>{
-      setData(data);
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+      })
 
-  },[])
+  }, [])
 
   //버튼 이벤트
-  const prevBtn = ()=>{
-    if(num>0){
-      setNum(num-1);
+  const prevBtn = () => {
+    if (num > 0) {
+      setNum(num - 1);
     }
   }
-  const nextBtn = ()=>{
-    if(num<data.length-1){
-      setNum(num+1);
+  const nextBtn = () => {
+    if (num < data.length - 1) {
+      setNum(num + 1);
     }
   }
 
@@ -43,8 +43,8 @@ function KnowledgeHorror() {
 
   return (
     <div className="w-full">
-      <QuizCard quizData={data[num]}/>
-      <QuizButton nextBtn={()=>nextBtn()} prevBtn={()=>prevBtn()} data={data[num]}/>
+      <QuizCard quizData={data[num]} />
+      <QuizButton nextBtn={() => nextBtn()} prevBtn={() => prevBtn()} data={data[num]} />
     </div>
   );
 }
