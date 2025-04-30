@@ -15,6 +15,7 @@ import Layout from "./layout/Layout.jsx";
 import Write from "./pages/Write.jsx";
 import RegisterBirth from "./pages/RegisterBirth.jsx";
 import RegisterNickname from "./pages/RegisterNickname.jsx";
+import AllCategory from "./pages/AllCategory.jsx";
 
 import Nav from "./commonComponents/Nav.jsx";
 
@@ -41,6 +42,7 @@ function App() {
             <Route path="/RegisterNickname" element={<RegisterNickname />} />
             {/* Layout 적용 구간: path 가 "/KnowledgeHorror" 또는 "/Quiz" 인 경우에만 */}
             <Route element={<Layout />}>
+              <Route path="/Quiz2" element={<AllCategory />} />
               <Route path="/KnowledgeHorror" element={<KnowledgeHorror />} />
               <Route
                 path="/KnowledgeHorrorForm2"
