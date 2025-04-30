@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router";
+import { useLocation } from "react-router-dom";
 
 import QuizCard from "../components/QuizCard";
 import QuizButton from "../components/QuizButton";
