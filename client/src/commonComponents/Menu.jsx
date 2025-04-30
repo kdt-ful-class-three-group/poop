@@ -4,13 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 function Menu() {
   const navigate = useNavigate();
-  const KnowledgeHorrorNav = (category) => {
-    // navText(category);
-    navigate("/KnowledgeHorror", { state: { category } });
-  };
-
   const navHandle = (category) => {
-    const isShowAnswer = false;
     if (category === 'quiz') {
       navigate('/Quiz', {
         state: { category }
