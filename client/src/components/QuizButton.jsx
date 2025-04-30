@@ -1,8 +1,8 @@
-import {useState,useRef,useEffect} from "react";
+import { useState, useRef, useEffect } from "react";
 import QuizControl from "./QuizControl";
 import ToastPopup from "./ToastPopup";
 
-function QuizButton({nextBtn, prevBtn, data, category='quiz'}){
+function QuizButton({ nextBtn, prevBtn, data, category = 'quiz' }) {
   //정답인지 아닌지
   const [isAnswer, setIsAnswer] = useState(false);
   const [btnText, setBtnText] = useState('정답확인');
@@ -15,35 +15,35 @@ function QuizButton({nextBtn, prevBtn, data, category='quiz'}){
   //팝업 텍스트 색상
   const [textColor, setTextColor] = useState(null)
 
-  useEffect(()=>{
+  useEffect(() => {
 
-    if(isShow){
-      const show = setTimeout(()=>{
+    if (isShow) {
+      const show = setTimeout(() => {
         setIsShow(false)
-      },1500)
-    
-      return ()=> clearTimeout(show)
+      }, 1500)
+
+      return () => clearTimeout(show)
 
     }
-    
-  },[isShow])
+
+  }, [isShow])
 
   //정답확인 버튼 -> !answer 값 들어가게도록
 
-  useEffect(()=>{
-    if(isAnswer){
+  useEffect(() => {
+    if (isAnswer) {
       setBtnText(data?.answer || '');
       return
     } else {
       setBtnText('정답확인');
     }
 
-  },[isAnswer])
+  }, [isAnswer])
   //정답 제출 버튼
-  const checkAnswer = ()=>{
+  const checkAnswer = () => {
     const userAnswer = inputRef.current.value.trim()
 
-    if(userAnswer === data.answer){
+    if (userAnswer === data.answer) {
       console.log('정답')
       inputRef.current.value = ''
       setIsAnswer(false)
@@ -63,37 +63,33 @@ function QuizButton({nextBtn, prevBtn, data, category='quiz'}){
     }
   }
 
-  return(
+  return (
     <div className="flex flex-col gap-5 text-center">
-      {(category === 'knowledge') || (category === 'quiz') ? 
-        <div>
-          {/* 팝업 */}
-          <ToastPopup text={toastText} isShow={isShow} textColor={textColor}/>
-          {/* 정답 작성 및 확인 */}
-          <div className="w-full flex border-[1px] border-[#D9D9D9]/70">
-            <input
-              className="w-full outline-none p-2"
-              type="text"
-              placeholder="정답을 입력해주세요."
-              ref={inputRef}
-              />
-            {/* 확인버튼 누르면 정답 일치하는지 확인 */}
-            <button 
-              className="bg-[#8E5E43] border-[#8E5E43] p-2 rounded-[0px_3px_3px_0px] text-white whitespace-nowrap cursor-pointer"
-              onClick={()=>checkAnswer()}>확인</button>
-          </div>
+      <div className={(category === "knowledge") || (category === "quiz") ? "" : "hidden"}>
+        {/* 팝업 */}
+        <ToastPopup text={toastText} isShow={isShow} textColor={textColor} />
+        {/* 정답 작성 및 확인 */}
+        <div className="w-full flex border-[1px] border-[#D9D9D9]/70">
+          <input
+            className="w-full outline-none p-2"
+            type="text"
+            placeholder="정답을 입력해주세요."
+            ref={inputRef}
+          />
+          {/* 확인버튼 누르면 정답 일치하는지 확인 */}
+          <button
+            className="bg-[#8E5E43] border-[#8E5E43] p-2 rounded-[0px_3px_3px_0px] text-white whitespace-nowrap cursor-pointer"
+            onClick={() => checkAnswer()}>확인</button>
         </div>
-        :
-        <div></div>
-      } 
+      </div>
       {/* 정답보기 */}
-      <QuizControl btnText={btnText} answerBtn={()=>setIsAnswer(!isAnswer)} 
-        prevBtn={()=>{
+      <QuizControl btnText={btnText} answerBtn={() => setIsAnswer(!isAnswer)}
+        prevBtn={() => {
           inputRef.current.value = ''
           setIsAnswer(false)
           prevBtn()
-        }} 
-        nextBtn={()=>{
+        }}
+        nextBtn={() => {
           inputRef.current.value = ''
           setIsAnswer(false)
           nextBtn()
