@@ -23,7 +23,7 @@ function LoginInput({autoLogin}){
         'Accept':'application/json'
       },
       credentials:'include',
-      body:JSON.stringify({user_id:userId,password:pw})
+      body:JSON.stringify({user_id:userId,password:pw,autoLogin:autoLogin})
     })
 
     const result = await response.json()
