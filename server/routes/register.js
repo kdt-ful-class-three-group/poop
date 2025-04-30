@@ -1,6 +1,7 @@
 import express from "express";
 import pool from "../config/database.js";
 const router = express.Router();
+import bcrypt from "bcryptjs";
 
 
 
@@ -11,10 +12,17 @@ router.post("/", async (req,res) => {
         console.log("Register attempt:", {user_id, password, email, user_nick, gender, birth_date}); // 디버깅용 로그
 
 
+
+
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+
 // userInsert
         await pool.execute(
             "INSERT INTO user (user_id, password, email, user_nick, gender, birth_date) VALUES (?, ?, ?, ?, ?, ?)",
-            [user_id, password, email, user_nick, gender, birth_date]
+            [user_id, hashedPassword, email, user_nick, gender, birth_date]
         )
 
         return res.status(200).json({msg:"유저 추가성공"});
