@@ -6,6 +6,8 @@ export const fetchLogin = async (user_id, password) => {
     },
     credentials: "include",
     body: JSON.stringify({ user_id, password }),
+
+
   });
   if (!response.ok) throw new Error("로그인 실패");
   return await response.json();
