@@ -7,7 +7,7 @@ const router = express.Router()
 //모든 데이터조회
 router.get('/',async (req,res)=>{
   try{
-    const [rows] = await pool.execute('SELECT * FROM USER')
+    const [rows] = await pool.execute('SELECT user_id,password FROM USER')
     res.json(rows)
   }
   catch(err){
