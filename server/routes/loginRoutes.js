@@ -12,9 +12,19 @@ router.post("/", async (req, res) => {
       [user_id, password]
     );
     if (rows.length > 0) {
-      return res.status(200).json({ msg: "로그인 성공" });
+      req.session.user = {
+        id: rows[0].id,
+        user_id: rows[0].user_id,
+        user_nick: rows[0].user_nick,
+      };
+      console.log("세션", req.session.user);
+      return res.status(200).json({
+        success: true,
+        msg: "로그인 성공",
+        user_nick: rows[0].user_nick,
+      });
     } else {
-      return res.status(401).json({ msg: "로그인 실패" });
+      return res.status(401).json({ success: false, msg: "로그인 실패" });
     }
   } catch (err) {
     console.error("로그인 error", err);

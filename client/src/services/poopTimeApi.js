@@ -9,6 +9,9 @@ async function poopTimeApi(url, method = "get", data = null) {
   };
   if (data) {
     poopTimeApiOption.body = JSON.stringify(data);
+    if (["login", "logout"].includes(url)) {
+      poopTimeApiOption.credentials = "include";
+    }
   }
   const response = await fetch(
     `http://localhost:8080/${url}`,

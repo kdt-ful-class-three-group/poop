@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import poopTimeApi from "../services/poopTimeApi";
 // import { useState } from "react";
 function Login() {
+  const navigate = useNavigate();
   // const [loginData, setLoginData] = useState("");
   // 아이디 작성
   // 비밀번호 작성
@@ -19,6 +20,14 @@ function Login() {
   // 아이디찾기 / 비밀번호 찾기
   // 간편로그인 3개
   // 회원가입 - 라우터
+  // const checkSession = async () => {
+  //   const response = await fetch("http://localhost:8080/loginCheck", {
+  //     method: "GET",
+  //     credentials: "include", // 세션 쿠키 포함
+  //   });
+  //   const data = await response.json();
+  //   console.log("세션 상태:", data);
+  // };
 
   const poopLoginFunApi = async (username, password) => {
     try {
@@ -26,18 +35,18 @@ function Login() {
         user_id: username,
         password: password,
       });
-      // console.log("서버 응답:", poopLoginApi);
+      console.log("서버 응답:", poopLoginApi);
       if (poopLoginApi.success) {
         console.log("로그인 성공");
+        navigate("/quiz"); // 로그인 성공 시 /quiz로 이동
       } else {
-        console.log("로그인 실패");
+        console.log("로그인 실패:", poopLoginApi.msg);
       }
+      return poopLoginApi;
     } catch (error) {
       console.error("로그인 데이터 요청 실패", error);
     }
   };
-
-  const navigate = useNavigate();
 
   return (
     <div className="flex flex-col justify-center h-full w-full gap-3">
