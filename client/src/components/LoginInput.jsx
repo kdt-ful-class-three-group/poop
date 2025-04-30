@@ -34,12 +34,7 @@ function LoginInput(){
       setError("서버 연결에 실패했습니다.");
     }
   }
-  useEffect(() => {
-   if(sessionStorage.getItem("user_id")){
-      alert(`${sessionStorage.getItem("user_id")}님 이미 로그인 되어 있습니다.`);
-      navigate("/quiz")
-    }
-  }, []);
+
 
 
 

@@ -8,8 +8,16 @@ import EasyLogin from "../components/EasyLogin";
 import Button from "../components/Button";
 
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Login() {
+
+  useEffect(() => {
+    if(sessionStorage.getItem("user_id")){
+      alert(`${sessionStorage.getItem("user_id")}님 이미 로그인 되어 있습니다.`);
+      navigate("/quiz")
+    }
+  }, []);
 
   // 아이디 작성
   // 비밀번호 작성
