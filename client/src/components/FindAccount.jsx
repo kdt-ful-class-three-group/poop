@@ -1,4 +1,4 @@
-function FindAccount(){
+function FindAccount({autoLogin}){
   // 자동 로그인
   // 아이디 / 비밀번호 찾기
 

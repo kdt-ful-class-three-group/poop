@@ -2,7 +2,7 @@ import Button from "./Button";
 import { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 
-function LoginInput(){
+function LoginInput({autoLogin}){
 
   const navigate = useNavigate()
   // 아이디 입력

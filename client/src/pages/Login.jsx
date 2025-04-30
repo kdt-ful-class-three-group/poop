@@ -8,6 +8,7 @@ import EasyLogin from "../components/EasyLogin";
 import Button from "../components/Button";
 
 import { useNavigate } from "react-router-dom";
+import { useState } from 'react'
 
 function Login() {
 
@@ -15,6 +16,7 @@ function Login() {
   // 비밀번호 작성
   // 로그인 버튼
   // 자동로그인 선택
+  const [autoLogin, setAutoLogin] = useState(false)
   // 아이디찾기 / 비밀번호 찾기
   // 간편로그인 3개
   // 회원가입 - 라우터
