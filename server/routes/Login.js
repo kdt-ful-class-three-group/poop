@@ -36,7 +36,7 @@ router.get('/:user_id',async(req,res)=>{
 })
 
 //로그인 요청 처리
-router.post('/login',async(req,res)=>{
+router.post('/',async(req,res)=>{
   const {user_id, password} = req.body
   try{
     //조회

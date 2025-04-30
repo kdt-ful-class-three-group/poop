@@ -11,7 +11,7 @@ function LoginInput(){
   const [userId, setUserId] = useState('')
   const [pw,setPw] = useState('')
 
-  const [isMatch, setIsMatch] = useState('')
+  const [isMatch, setIsMatch] = useState(false)
 
   const login = async()=>{
 
@@ -28,6 +28,15 @@ function LoginInput(){
     const result = await response.json()
     
     console.log(result)
+    if(result.success){
+      setIsMatch(true)
+      console.log(result.success)
+      // 성공하면 퀴즈로 이동
+      navigate('/quiz')
+    } else{
+      setIsMatch(false)
+      console.log(result.success)
+    }
   }
 
   return(
