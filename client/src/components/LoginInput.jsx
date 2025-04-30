@@ -1,6 +1,6 @@
 import Button from "./Button";
-import {useRef, useState} from 'react'
-import { useNavigate } from "react-router";
+import { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom";
 
 function LoginInput(){
 
@@ -11,7 +11,8 @@ function LoginInput(){
   const [userId, setUserId] = useState('')
   const [pw,setPw] = useState('')
 
-  const [isMatch, setIsMatch] = useState(false)
+  const [text,setText]= useState('')
+
 
   const login = async()=>{
 
@@ -29,14 +30,14 @@ function LoginInput(){
     
     console.log(result)
     if(result.success){
-      setIsMatch(true)
+      setText('')
       console.log(result.success)
       //성공하면 sessionStorage에 저장
-      sessionStorage.setItem('userId',result.user.user_id)
+      sessionStorage.setItem('user',result.user.user_id)
       // 성공하면 퀴즈로 이동
       navigate('/quiz')
     } else{
-      setIsMatch(false)
+      setText(result.message)
       console.log(result.success)
     }
   }
@@ -47,6 +48,7 @@ function LoginInput(){
         className="bg-gray-300 px-4 py-2 rounded-md focus:bg-gray-100" maxLength={30} required value={userId} onChange={(e)=>setUserId(e.target.value)}></input>
       <input type='password' placeholder="비밀번호를 입력해주세요"
         className="bg-gray-300 px-4 py-2 rounded-md focus:bg-gray-100" required value={pw} onChange={(e)=>setPw(e.target.value)}></input>
+      <p className="text-red-500">{text}</p>
       <Button text='로그인' colorClass = "bg-gray-300" clickEvent={()=>login()}/>
     </form>
   )
