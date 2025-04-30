@@ -7,8 +7,6 @@ import { useLocation } from "react-router-dom";
 function AllCategory() {
   const location = useLocation();
   const category = location.state?.category || "quiz"; // 기본값 설정
-  const isShowAnswer = location.state.isShowAnswer;
-  console.log(isShowAnswer);
   const [data, setData] = useState([]);
   const [num, setNum] = useState(Number(localStorage.getItem(`${category}Num`)) || 0);
 

@@ -39,6 +39,12 @@ function QuizButton({ nextBtn, prevBtn, data, category = 'quiz' }) {
     }
 
   }, [isAnswer])
+
+  // 카테고리가 변경될 때 정답 초기화
+  useEffect(() => {
+    setIsAnswer(false);
+  }, [category]);
+
   //정답 제출 버튼
   const checkAnswer = () => {
     const userAnswer = inputRef.current.value.trim()
