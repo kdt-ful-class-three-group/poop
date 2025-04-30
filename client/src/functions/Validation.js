@@ -1,12 +1,29 @@
-export function validateId(Id) {
-  const regex = /[ \{\}\[\]\/?.,;:|\)*~`!^\_+┼<>@\#$%&\'\"\\\(\=]/gi;
-  return regex.test(Id);
-}
+export function validation (user_id, password, passwordCheck, email) {
+  const idRegex = /[ \{\}\[\]\/?.,;:|\)*~`!^\_+┼<>@\#$%&\'\"\\\(\=]/gi;
+  const passwordRegex = /[ \{\}\[\]\/?.,;:|\)*~!^\_+┼<>@\#$%&\'\"\\\(\=]/gi;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!user_id || !password) {
+    return { valid: false, message: "모든 필드를 입력해주세요." };
+  }
+  if (user_id.length < 4 ||user_id.length > 20) {
+    return { valid: false, message: "아이디는 4자 이상 20자 이하로 입력해주세요." };
+  }
+  if (password.length < 8 || password.length > 20) {
+    return { valid: false, message: "비밀번호는 8자 이상 20자 이하로 입력해주세요." };
+  }
+  if (idRegex.test(user_id)) {
+    return { valid: false, message: "아이디에 특수문자는 사용할 수 없습니다." };
+  }
+  if (!passwordRegex.test(password)) {
+    return { valid: false, message: "비밀번호에 특수문자를 사용해주세요." };
+  }
+  if (!emailRegex.test(email)) {
+    return { valid: false, message: "유효한 이메일 주소를 입력해주세요." };
+  }
+
+  return { valid: true };
 
 
-
-export function validatePassword(password) {
-  const regex = /^(?=.*[!@#$%^&*])(?=.*[A-Za-z]).{8,}$/;
-  return regex.test(password);
 }
 

@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
     const{user_id, password} = req.body;
 
     const[user]= await pool.execute(
-      "SELECT * FROM user WHERE user_id = ?",
+      "SELECT user_id, password, user_nick FROM user WHERE user_id = ?",
       [user_id]
 
     );
@@ -27,6 +27,7 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ msg: "사용자를 찾을 수 없습니다." });
 
     }
+
 
     const users= user[0];
 
@@ -43,15 +44,20 @@ router.post("/", async (req, res) => {
 
 
     req.session.users={
-      id:user_id
+      id:user_id,
+      nickname: users.user_nick,
     }
     console.log("Login attempt:", { user_id, password }); // 디버깅용 로그
 
 
     console.log("로그인 성공", req.session.users);
+
+    // 세션에 사용자 정보 저장
+
     return res.status(200).json({
       msg: "로그인 성공",
       user_id: user_id,
+      nickname: users.user_nick,
     });
 
 

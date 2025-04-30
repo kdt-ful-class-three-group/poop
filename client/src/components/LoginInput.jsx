@@ -2,7 +2,8 @@ import Button from "./Button";
 import {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import {fetchLogin} from "../Api/api.js";
-import nav from "../commonComponents/Nav.jsx";
+import {validation} from "../functions/Validation.js";
+
 
 function LoginInput(){
 
@@ -15,19 +16,40 @@ function LoginInput(){
 
 
   const handleSubmit = async (e)=>{
+
+    const { user_id, password } = formData;
+    const { valid, message } = validation(user_id, password);
+
+    if (!valid) {
+      alert(message);
+      return;
+    }
+
     e.preventDefault()
+    if (!valid) {
+      alert(message);
+      return;
+    }
+
     setError("");
     if(!formData.user_id || !formData.password){
       alert("올바른 값을 입력해주세요")
       return;
     }
+
     try{
-      const response = await fetchLogin(formData.user_id, formData.password);
+      const data = await fetchLogin(formData);
+
       console.log("로그인 응답", formData);
 
-      sessionStorage.setItem("user_id", formData.user_id);
-      alert(`로그인 성공 ${formData.user_id}님 안녕하세요`);
+        sessionStorage.setItem("user_id", data.user_id);
+        sessionStorage.setItem("nickname", data.nickname);
+
+
+      alert(`${data.nickname}님 환영합니다.`);
+
       navigate("/quiz")
+
 
     } catch(err){
       console.error("Login error:", err);
