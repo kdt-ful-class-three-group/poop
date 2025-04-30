@@ -24,7 +24,7 @@ function KnowledgeHorror() {
         setData(data);
       })
 
-  }, [])
+  }, [category])
 
   //버튼 이벤트
   const prevBtn = () => {
