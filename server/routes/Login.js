@@ -51,6 +51,7 @@ router.post('/',async(req,res)=>{
     req.session.user={
       user_id:rows[0].user_id
     }
+    // console.log('세션 저장 확인',req.session.user)
 
     //성공 - 반환
     return res.json({success:true, message:'로그인 성공',user:req.session.user})
