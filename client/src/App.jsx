@@ -45,10 +45,6 @@ function App() {
               element={<Layout showDom={showDom} setShowDom={setShowDom} />} // Layout에 상태 전달
             >
               <Route
-                path="/KnowledgeHorrorForm2"
-                element={<KnowledgeHorrorForm2 />}
-              />
-              <Route
                 path="/Quiz"
                 element={<Quiz showDom={showDom} setShowDom={setShowDom} />}
               />
@@ -56,10 +52,10 @@ function App() {
                 path="/Knowledge"
                 element={<Quiz showDom={showDom} setShowDom={setShowDom} />}
               />
-              <Route
+              {/* <Route
                 path="/horror"
                 element={<Horror showDom={showDom} setShowDom={setShowDom} />}
-              />
+              /> */}
             </Route>
           </Routes>
         </Home>
