@@ -8,15 +8,7 @@ const RegisterBirth = () => {
   const [birthdate, setBirthdate] = React.useState('');
 
   // 다음 버튼
-  const handeleNext = () => {
-    // 이동만 처리
-    navigate('/RegisterNickname');
-  };
 
-  // 이전 버튼
-  const hadlePrev = () => {
-    navigate('/RegisterEmail')
-  };
 
 
   return (
