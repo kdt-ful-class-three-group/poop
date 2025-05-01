@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import poopTimeApi from "../services/poopTimeApi.js";
+import { useAuth } from "../layout/AuthContext.jsx";
 function Mypage() {
+  const { logout } = useAuth();
   const navigate = useNavigate();
   const usernick = sessionStorage.getItem("nickname");
   const logOutFun = async () => {
@@ -11,6 +13,7 @@ function Mypage() {
       sessionStorage.clear();
       navigate("/quiz"); // 로그인 성공 시 /quiz로 이동
       console.log("로그아웃 성공");
+      logout(); //* 로그아웃 시 AuthContext logout 함수 호출 하여 리랜더링 진행
     }
   };
   return (
