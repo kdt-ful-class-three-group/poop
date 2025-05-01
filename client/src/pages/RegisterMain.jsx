@@ -54,7 +54,7 @@ function RegisterMain() {
           <RegisterNickname />
         </div>
       }
-      <Button text={flag === 4 ? "완료" : "다음"} colorClass={'bg-[#D9D9D9] w-full rounded-[3px] p-2 mt-5'} clickEvent={nextHandle} />
+      {/* <Button text={flag === 4 ? "완료" : "다음"} colorClass={'bg-[#D9D9D9] w-full rounded-[3px] p-2 mt-5'} clickEvent={nextHandle} /> */}
     </div>
   );
 }
