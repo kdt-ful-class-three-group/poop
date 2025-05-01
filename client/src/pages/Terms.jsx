@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 
 function Terms() {
+
+  //전체동의와 관련된 상태
+  const [all, setAll] = useState(false)
+
+  //전체동의 선택과 관련된 실행
+  useEffect(()=>{
+
+  },[all])
+
+
   return (
     <div>
       <div className="text-xl">
@@ -8,7 +19,7 @@ function Terms() {
       </div>
       <div className="mt-6 mb-1">
         <label className="flex items-center mb-3">
-          <input className="mr-2" type="checkbox" />
+          <input className="mr-2" type="checkbox" onChange={(e)=>{setAll(e.target.checked)}}/>
           <p className="text-xs">약관 전체 동의 하기</p>
         </label>
         <div className="flex items-center justify-between mb-3">
