@@ -3,6 +3,19 @@ import pool from "../config/database.js";
 const router = express.Router();
 
 
+router.get('/',async(req,res)=>{
+    try{
+        const [rows] = await pool.execute(`SELECT user_id FROM USER`)
+        return res.status(200).json({msg:'user 데이터 조회'})    
+    }
+    catch(err){
+        console.error('user 데이터 조회 에러',err)
+        res.status(500).json({success:false, msg:'서버 내부 에러'})
+
+    }
+})
+
+
 
 router.post("/", async (req,res) => {
 
