@@ -10,12 +10,18 @@ function Terms({setDisabled}) {
 
   //버튼 상태
   // const [disabled, setDisabled] = useState(true)
+  useEffect(()=>{
+    setDisabled(true)
+  },[])
 
   //전체동의 선택과 관련된 실행
   useEffect(()=>{
     if(all){
       setPersonal(all)
       setTerms(all)
+      //버튼이용할 수 있도록 
+      setDisabled(!all)
+    } else {
       setDisabled(!all)
     }
   },[all])
@@ -31,14 +37,6 @@ function Terms({setDisabled}) {
       setAll(false)
     }
   },[personal,terms])
-
-  //버튼에 따른 이동
-  // useEffect(()=>{
-  //   if(!disabled){
-  //     // console.log('이동')
-      
-  //   }
-  // },[disabled])
 
   return (
     <div>
