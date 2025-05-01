@@ -9,11 +9,11 @@ function RegisterEmail(){
 
   return(
     <div className="flex flex-col gap-10 mt-20">
-      <Button text='이전'
+      {/* <Button text='이전'
         colorClass={'bg-gray-300 w-[20%]'}
-      />
+      /> */}
       <Email/>
-      <Button text='다음' colorClass={'bg-gray-300 mt-15'}/>
+      {/* <Button text='다음' colorClass={'bg-gray-300 mt-15'}/> */}
     </div>
   )
 }
