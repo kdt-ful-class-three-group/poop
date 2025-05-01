@@ -73,12 +73,14 @@ function Register() {
   }
 
   const samePwCheck =(e)=>{
-
+    if(pw===e.target.value){
+      // setShowEmail(false)
+    }
   }
 
 
   //다음버튼 클릭이벤트
-  const buttonClick = (e) => {
+  const buttonClick = () => {
     setShowEmail(false);
   }
 
