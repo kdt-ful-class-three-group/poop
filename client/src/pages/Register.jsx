@@ -62,6 +62,8 @@ function Register() {
   const pwCheck = (e)=>{
     // 비밀번호 조건 충족
     const pattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{8,}$/
+    //입력창 활성화를 위해 입력
+    setPw(e.target.value)
 
     if(!pattern.test(e.target.value)){
       setPwText('영문+숫자+특수문자로 8자 이상 입력해주세요')
@@ -69,19 +71,25 @@ function Register() {
       setPwText('')
       setPw(e.target.value)
     }
-    setPw(e.target.value)
   }
 
   const samePwCheck =(e)=>{
+    setCheckPw(e.target.value)
     if(pw===e.target.value){
-      // setShowEmail(false)
+      setCheckPwText('비밀번호가 일치합니다')
+    } else {
+      setCheckPwText('다시 입력해주세요')
     }
   }
 
 
   //다음버튼 클릭이벤트
-  const buttonClick = () => {
-    setShowEmail(false);
+  const buttonClick = (e) => {
+    e.preventDefault()
+    //비밀번호 - 비밀번호 확인이 일치해야 넘어가도록 작성
+    if(pw===pwCheck){
+      setShowEmail(false);
+    }
   }
 
   return (
