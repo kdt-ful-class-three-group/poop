@@ -1,10 +1,26 @@
 import Input from "../components/Input.jsx"
 import RegisterEmail from '../components/RegisterEmail';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function Register() {
+
+  //아이디 값
+  const [user, setUser] = useState('')
+  //비밀번호
+  const [pw, setPw] = useState('')
+
+  //다음화면 보여줄 것인지
   const [showEmail, setShowEmail] = useState(true);
 
+  //제출 -> 아이디, 비밀번호 값 담기
+  const changeInput = ()=>{
+    // 아이디 특수문자 안됨
+
+    // 비밀번호 조건 충족
+  }
+
+
+  //다음버튼 클릭이벤트
   const buttonClick = (e) => {
     setShowEmail(false);
   }
