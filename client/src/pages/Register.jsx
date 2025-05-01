@@ -15,6 +15,8 @@ function Register() {
 
   //메시지
   const [idText, setIdText] = useState('')
+  const [pwText, setPwText] = useState('')
+  const [pwCheckText, setCheckPwText] = useState('')
 
   //유저 데이터
   const [userData, setUserData]= useState([])
@@ -59,7 +61,15 @@ function Register() {
   
   const pwCheck = (e)=>{
     // 비밀번호 조건 충족
-    
+    const pattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{8,}$/
+
+    if(!pattern.test(e.target.value)){
+      setPwText('영문+숫자+특수문자로 8자 이상 입력해주세요')
+    } else {
+      setPwText('')
+      setPw(e.target.value)
+    }
+    setPw(e.target.value)
   }
 
   const samePwCheck =(e)=>{
@@ -82,11 +92,13 @@ function Register() {
             <div className="h-100 flex flex-col justify-center items-center">
               <form className="w-full" onSubmit={buttonClick}>
                 <label className="text-sm text-black mb-2 ">아이디</label>
-                <p className="text-red-500">{idText}</p>
+                <p className="text-red-500 text-xs">{idText}</p>
                 <Input type="text" name="username" value={user} changeEvent={(e)=>userCheck(e)}/>
                 <label className="text-sm text-black mb-2">비밀번호</label>
+                <p className="text-red-500 text-xs">{pwText}</p>
                 <Input type="password" name="password" value={pw} changeEvent={(e)=>pwCheck(e)} />
                 <label className="text-sm text-black mb-2">비밀번호 확인</label>
+                <p className="text-red-500 text-xs">{pwCheckText}</p>
                 <Input type="password" name="passwordCheck" value={checkPw} changeEvent={(e)=>samePwCheck(e)} />
                 <button type="submit"
                   className="w-full h-8 text-center text-sm bg-gray-300 hover:bg-gray-500 py-2 rounded mt-4">
