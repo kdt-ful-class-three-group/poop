@@ -1,13 +1,23 @@
 // RegisterBirth.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import {useState} from "react";
 
-const RegisterBirth = () => {
-  const navigate = useNavigate();
-  const [gender, setGender] = React.useState('');
-  const [birthdate, setBirthdate] = React.useState('');
+const RegisterBirth = ({handleNext,handleBack}) => {
+
+  const [gender, setGender] = useState('');
+  const [birthdate, setBirthdate] = useState('');
 
   // 다음 버튼
+  const handleForward = () => {
+
+    handleNext();
+  }
+
+  const handlePrev = () => {
+
+    handleBack();
+  }
 
 
 
@@ -15,7 +25,7 @@ const RegisterBirth = () => {
 
     <div className="m-3 w-full ">
       <button  
-      onClick={hadlePrev}
+      onClick={handlePrev}
       className="mb-4 px-4 py-2 bg-gray-300 rounded"
       >
       이전
@@ -31,9 +41,9 @@ const RegisterBirth = () => {
             <input 
             type="radio" 
             name="gender" 
-            value="male" 
+            value="male"
             checked = {gender === 'male'}
-            onClick={(e) => setGender(e.target.value)}
+            onChange={(e) => setGender(e.target.value)}
             className="mr-2" 
             />
             남자
@@ -44,10 +54,10 @@ const RegisterBirth = () => {
             <input 
             type="radio" 
             name="gender" 
-            value="female" 
+            value="female"
             className="mr-2"
             checked = {gender === 'female'}
-            onClick={(e) => setGender(e.target.value)}
+            onChange={(e) => setGender(e.target.value)}
             />
             여자
           </label>
@@ -71,7 +81,7 @@ const RegisterBirth = () => {
       {/* 3. 다음 버튼 */}
       <div>
         <button
-        onClick={handeleNext}
+        onClick={handleForward}
         disabled = {!gender || !birthdate}
         className={`w-full py-2 rounded ${gender ? 'bg-yellow-900 text-white' : 'bg-gray-500 cursor-not-allowed'}`}
         >

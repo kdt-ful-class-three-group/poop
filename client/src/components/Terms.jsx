@@ -1,21 +1,24 @@
 import React from "react";
 import { useState } from "react";
 
+
 function Terms({handleNext}) {
+
 
   const [showRegister, setShowRegister] = useState(false);
   const [privacyChecked, setPrivacyChecked] = useState(false);
   const [termsChecked, setTermsChecked] = useState(false);
   const [allChecked, setAllChecked] = useState(false);
 
-  const nextHandler = () => {
+  const handleForward = () => {
     if(!privacyChecked || !termsChecked){
       alert("모든 필수 약관에 동의하셔야 회원가입이 가능합니다.");
       return;
     } else{
-      setShowRegister(true);
+
       console.log("다음 버튼 클릭");
     }
+
     handleNext();
 
   }
@@ -62,7 +65,7 @@ function Terms({handleNext}) {
             [동의하기] 버튼을 누르면 약관에 동의한 것으로 간주됩니다.
           </p>
         </div>
-        <button  type="submit" onClick={nextHandler} className="flex w-full justify-center rounded-[3px] p-2 mt-5 bg-[#D9D9D9] hover:bg-[#A9A9A9] text-sm cursor-pointer">
+        <button  type="submit" onClick={handleForward}  className="flex w-full justify-center rounded-[3px] p-2 mt-5 bg-[#D9D9D9] hover:bg-[#A9A9A9] text-sm cursor-pointer">
           다음
         </button>
       </div>

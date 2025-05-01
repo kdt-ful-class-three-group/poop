@@ -1,4 +1,4 @@
-// RegisterBirth.jsx
+
 import React from "react";
 
 const RegisterNickname = () => {
@@ -19,7 +19,7 @@ const RegisterNickname = () => {
 
       {/* 3. 다음 버튼 */}
       <div>
-        <button className="w-full py-2 bg-gray-300 rounded">다음</button>
+        <button  className="w-full py-2 bg-gray-300 rounded">다음</button>
       </div>
     </div>
   );
