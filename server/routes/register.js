@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/',async(req,res)=>{
     try{
         const [rows] = await pool.execute(`SELECT user_id FROM USER`)
-        return res.status(200).json({msg:'user 데이터 조회'})    
+        return res.status(200).json(rows)    
     }
     catch(err){
         console.error('user 데이터 조회 에러',err)
