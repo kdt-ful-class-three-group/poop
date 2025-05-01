@@ -14,6 +14,18 @@ function Terms() {
     setTerms(all)
   },[all])
 
+  //개별동의에 따른 전첵동의도 변경됨
+  //개별동의 다 체크되면 전체동의 체크
+  //개별동의 체크 하나만 헤제해도 전체동의 해제
+  useEffect(()=>{
+    if(personal&&terms){
+      setAll(true)
+    }
+    if(!personal || !terms){
+      setAll(false)
+    }
+  },[personal,terms])
+
 
   return (
     <div>
