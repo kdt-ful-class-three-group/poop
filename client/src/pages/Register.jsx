@@ -16,6 +16,15 @@ function Register() {
   //메시지
   const [idText, setIdText] = useState('')
 
+  //유저 데이터
+  const [userData, setUserData]= useState([])
+  //유저 가져오기
+  useEffect(()=>{
+    fetch('http://localhost:8080/register')
+    .then(response => response.json())
+    .then(data=> setUserData(data))
+  },[])
+
   //제출 -> 아이디, 비밀번호 값 담기
   const userCheck = (e)=>{
     // 아이디 특수문자 안됨
@@ -24,13 +33,28 @@ function Register() {
     const hasChar = /[^a-zA-Z0-9]/
     
     if(hasChar.test(input)){
-      setIdText('아이디에 특수문자 입력은 안됩니다')
+      setIdText('아이디에 특수문자는 포함할 수 없습니다')
     } else {
       setIdText('')
       setUser(input)
     }
-
   }
+
+  useEffect(()=>{
+    
+    userData.forEach(data=>{
+      if(user===data.user_id){
+        setIdText('이미 존재하는 아이디입니다')
+      } 
+      if(user !== data.user_id){
+        setIdText('사용 가능한 아이디입니다')
+      }
+      if(user.length===0) {
+        setIdText('')
+      }
+    })
+    
+  },[user])
 
   
   const pwCheck = (e)=>{
