@@ -1,10 +1,17 @@
-function Input({type, placeholder,name}) {
-
-    return(
-        <div>
-            <input className="bg-gray-300 h-10 w-full border-solid mb-8 p-2  "  autoFocus type={type} name={name} required  />
-        </div>
-    )
+function Input({ className, type, placeholder, name, value, onChange }) {
+  return (
+    <div>
+      <input
+        className={className}
+        autoFocus
+        type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
+        required
+      />
+    </div>
+  );
 }
 
 export default Input;

@@ -13,7 +13,7 @@ import Layout from "./layout/Layout.jsx";
 import Write from "./pages/Write.jsx";
 import RegisterBirth from "./pages/RegisterBirth.jsx";
 import RegisterNickname from "./pages/RegisterNickname.jsx";
-
+import { RegisterProvider } from "./layout/RegisterContext.jsx";
 import Nav from "./commonComponents/Nav.jsx";
 
 function App() {
@@ -34,12 +34,21 @@ function App() {
             <Route path="/Mypage" element={<Mypage />} />
             <Route path="/Admin" element={<Admin />} />
             <Route path="/Terms" element={<Terms />} />
-            <Route path="/Register" element={<Register />} />
+
+            <Route
+              path="/Register"
+              element={
+                <RegisterProvider>
+                  <Register />
+                </RegisterProvider>
+              }
+            />
             <Route path="/RegisterBirth" element={<RegisterBirth />} />
             <Route path="/RegisterNickname" element={<RegisterNickname />} />
+
             {/* Layout 적용 구간: path 가 "/KnowledgeHorror" 또는 "/Quiz" 인 경우에만 */}
             <Route element={<Layout />}>
-              <Route path="/Quiz" element={<Quiz />}/>
+              <Route path="/Quiz" element={<Quiz />} />
             </Route>
           </Routes>
         </Home>
