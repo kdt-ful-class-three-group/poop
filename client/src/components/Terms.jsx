@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-function Terms() {
+function Terms({setDisabled}) {
 
   //전체동의와 관련된 상태
   const [all, setAll] = useState(false)
@@ -9,7 +9,7 @@ function Terms() {
   const [terms, setTerms] = useState(false)
 
   //버튼 상태
-  const [disabled, setDisabled] = useState(true)
+  // const [disabled, setDisabled] = useState(true)
 
   //전체동의 선택과 관련된 실행
   useEffect(()=>{
@@ -33,12 +33,12 @@ function Terms() {
   },[personal,terms])
 
   //버튼에 따른 이동
-  useEffect(()=>{
-    if(!disabled){
-      // console.log('이동')
+  // useEffect(()=>{
+  //   if(!disabled){
+  //     // console.log('이동')
       
-    }
-  },[disabled])
+  //   }
+  // },[disabled])
 
   return (
     <div>

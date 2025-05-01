@@ -9,6 +9,8 @@ import RegisterNickname from "../components/RegisterNickname";
 function RegisterMain() {
   const [flag, setFlag] = useState(0);
 
+  const [disabled, setDisabled] = useState(true);
+
   const nextHandle = () => {
     if (flag < 4) {
       setFlag(flag + 1);
@@ -24,7 +26,7 @@ function RegisterMain() {
       {
         flag === 0 &&
         <div>
-          <Terms />
+          <Terms setDisabled={setDisabled} />
         </div>
       }
       {
@@ -54,7 +56,7 @@ function RegisterMain() {
           <RegisterNickname />
         </div>
       }
-      <Button text={flag === 4 ? "완료" : "다음"} colorClass={'bg-[#D9D9D9] w-full rounded-[3px] p-2 mt-5'} clickEvent={nextHandle} />
+      <Button text={flag === 4 ? "완료" : "다음"} colorClass={'bg-[#D9D9D9] w-full rounded-[3px] p-2 mt-5'} clickEvent={nextHandle} disabled={disabled} />
     </div>
   );
 }
