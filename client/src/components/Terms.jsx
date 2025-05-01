@@ -19,11 +19,8 @@ function Terms({setDisabled}) {
     if(all){
       setPersonal(all)
       setTerms(all)
-      //버튼이용할 수 있도록 
-      setDisabled(!all)
-    } else {
-      setDisabled(!all)
     }
+    setDisabled(!all)
   },[all])
 
   //개별동의에 따른 전첵동의도 변경됨
