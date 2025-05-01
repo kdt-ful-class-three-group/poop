@@ -20,8 +20,14 @@ function Register() {
   const userCheck = (e)=>{
     // 아이디 특수문자 안됨
     const input = e.target.value
-    if(input.includes(/[^a-zA-Z0-9]/g)){
+
+    const hasChar = /[^a-zA-Z0-9]/
+    
+    if(hasChar.test(input)){
       setIdText('아이디에 특수문자 입력은 안됩니다')
+    } else {
+      setIdText('')
+      setUser(input)
     }
 
   }
