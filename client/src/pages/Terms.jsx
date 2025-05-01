@@ -22,19 +22,19 @@ function Terms() {
       </div>
       <div className="mt-6 mb-1">
         <label className="flex items-center mb-3">
-          <input className="mr-2" type="checkbox" onChange={()=>{setAll(!all)}}/>
+          <input className="mr-2" type="checkbox" checked={all} onChange={()=>{setAll(!all)}}/>
           <p className="text-xs">약관 전체 동의 하기</p>
         </label>
         <div className="flex items-center justify-between mb-3">
           <label className="flex items-center">
-            <input className="mr-2" type="checkbox" onChange={()=>setPersonal(!personal)}/>
+            <input className="mr-2" type="checkbox" checked={personal} onChange={()=>setPersonal(!personal)}/>
             <p className="text-xs">개인정보 수집 및 이용 동의 (필수)</p>
           </label>
           <button className="text-xs">자세히</button>
         </div>
         <div className="flex items-center justify-between mb-3">
           <label className="flex items-center">
-            <input className="mr-2" type="checkbox" onChange={()=>setTerms(!terms)}/>
+            <input className="mr-2" type="checkbox" checked={terms} onChange={()=>setTerms(!terms)}/>
             <p className="text-xs">이용약관 동의 (필수)</p>
           </label>
           <button className="text-xs">자세히</button>
