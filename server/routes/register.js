@@ -17,6 +17,8 @@ router.post("/", async (req,res) => {
             [user_id, password, email, user_nick, gender, birth_date]
         )
 
+
+
         return res.status(200).json({msg:"유저 추가성공"});
 
     } catch (err) {

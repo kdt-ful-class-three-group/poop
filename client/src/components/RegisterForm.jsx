@@ -46,12 +46,15 @@ export default function RegisterForm({handleNext}) {
   }, [signupData]);
 
 
+
+
   return(
     <div className="w-full h-full">
             <h1 className="justify-start items-left mt-20">회원가입</h1>
             <div className="h-100 flex flex-col justify-center items-center">
               <form className="w-full" >
                 <label className="text-sm text-black mb-2 ">아이디</label>
+                <button onClick={}/>
                 <Input type="text" name="username" autoFocus={true} formData={formData} setFormData={setFormData} />
                 <label className="text-sm text-black mb-2">비밀번호</label>
                 <Input type="password" name="password" formData={formData} setFormData={setFormData} />
