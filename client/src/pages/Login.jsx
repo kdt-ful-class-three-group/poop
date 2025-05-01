@@ -26,7 +26,7 @@ function Login() {
       <LoginInput/>
       <FindAccount/>
       <EasyLogin/>
-      <Button text='회원가입' colorClass={''} clickEvent={()=>navigate('/Terms')}/>
+      <Button text='회원가입' colorClass={''} clickEvent={()=>navigate('/Register')}/>
     </div>
   );
 }
