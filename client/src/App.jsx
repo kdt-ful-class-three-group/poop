@@ -13,6 +13,7 @@ import Layout from "./layout/Layout.jsx";
 import Write from "./pages/Write.jsx";
 import RegisterBirth from "./pages/RegisterBirth.jsx";
 import RegisterNickname from "./pages/RegisterNickname.jsx";
+import RegisterMain from "./pages/RegisterMain.jsx";
 
 import Nav from "./commonComponents/Nav.jsx";
 
@@ -33,6 +34,7 @@ function App() {
             <Route path="/Login" element={<Login />} />
             <Route path="/Mypage" element={<Mypage />} />
             <Route path="/Admin" element={<Admin />} />
+            <Route path="/RegisterMain" element={<RegisterMain />} />
             <Route path="/Terms" element={<Terms />} />
             <Route path="/Register" element={<Register />} />
             <Route path="/RegisterBirth" element={<RegisterBirth />} />
