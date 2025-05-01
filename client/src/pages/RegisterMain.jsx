@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../components/Button";
 import Terms from '../components/Terms';
 import Register from "../components/Register";
@@ -7,26 +7,50 @@ import RegisterBirth from "../components/RegisterBirth";
 import RegisterNickname from "../components/RegisterNickname";
 
 function RegisterMain() {
+  const [flag, setFlag] = useState(0);
+
+  const nextHandle = () => {
+    if (flag < 4) {
+      setFlag(flag + 1);
+    }
+  }
+
   return (
     <div className=" w-full h-full">
-      <div className="hidden">
-        {<Terms/>}
-      </div>
-      <div className="hidden">
-        {<Register/>}
-      </div>
-      <div className="hidden">
-        <Button text='이전' colorClass={'bg-[#D9D9D9] flex justify-center rounded-[3px] p-2 mt-5'}/>
-        {<RegisterEmail/>}
-      </div>
-      <div className="hidden">
-        <Button text='이전' colorClass={'bg-[#D9D9D9] flex justify-center rounded-[3px] p-2 mt-5'}/>
-        {<RegisterBirth/>}
-      </div>
-      <div className="">
-        {<RegisterNickname/>}
-      </div>
-      <Button text='다음' colorClass={'bg-[#D9D9D9] flex w-full justify-center rounded-[3px] p-2 mt-5'}/>
+      {
+        flag === 0 &&
+        <div>
+          <Terms />
+        </div>
+      }
+      {
+        flag === 1 &&
+        <div>
+          <Register />
+        </div>
+      }
+      {
+        flag === 2 &&
+        <div>
+          <Button text={"이전"} colorClass={'bg-[#D9D9D9] rounded-[3px] p-2 mt-5'} clickEvent={nextHandle} />
+          <RegisterEmail />
+        </div>
+      }
+      {
+        flag === 3 &&
+        <div>
+          <Button text={"이전"} colorClass={'bg-[#D9D9D9] rounded-[3px] p-2 mt-5'} clickEvent={nextHandle} />
+          <RegisterBirth />
+        </div>
+      }
+      {
+        flag === 4 &&
+        <div>
+          <Button text={"이전"} colorClass={'bg-[#D9D9D9] rounded-[3px] p-2 mt-5'} clickEvent={nextHandle} />
+          <RegisterNickname />
+        </div>
+      }
+      <Button text={flag === 4 ? "완료" : "다음"} colorClass={'bg-[#D9D9D9] w-full rounded-[3px] p-2 mt-5'} clickEvent={nextHandle} />
     </div>
   );
 }
