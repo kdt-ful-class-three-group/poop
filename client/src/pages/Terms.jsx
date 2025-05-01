@@ -10,8 +10,10 @@ function Terms() {
 
   //전체동의 선택과 관련된 실행
   useEffect(()=>{
-    setPersonal(all)
-    setTerms(all)
+    if(all){
+      setPersonal(all)
+      setTerms(all)
+    }
   },[all])
 
   //개별동의에 따른 전첵동의도 변경됨
