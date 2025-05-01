@@ -21,6 +21,7 @@ function Register() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ username }),
+        credentials: 'same-origin'
       });
       const data = await response.json();
       if (data.available) {
