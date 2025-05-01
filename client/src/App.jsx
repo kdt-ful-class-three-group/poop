@@ -11,15 +11,17 @@ import Register from "./pages/Register.jsx";
 import Terms from "./components/Terms.jsx";
 import Layout from "./layout/Layout.jsx";
 import Write from "./pages/Write.jsx";
-import RegisterBirth from "./pages/RegisterBirth.jsx";
-import RegisterNickname from "./pages/RegisterNickname.jsx";
+import RegisterBirth from "./components/RegisterBirth.jsx";
+import RegisterNickname from "./components/RegisterNickname.jsx";
 
 import Nav from "./commonComponents/Nav.jsx";
+import {SignupProvider} from "./context/SignupContext.jsx";
 
 function App() {
   return (
     <div className="App">
       <Router>
+
         <Home>
           <Routes>
             {/* Layout 없이 렌더링할 페이지들 */}
