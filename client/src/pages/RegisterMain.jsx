@@ -15,6 +15,10 @@ function RegisterMain() {
     }
   }
 
+  const prevHandle = () => {
+      setFlag(flag - 1);
+  }
+
   return (
     <div className=" w-full h-full">
       {
@@ -32,21 +36,21 @@ function RegisterMain() {
       {
         flag === 2 &&
         <div>
-          <Button text={"이전"} colorClass={'bg-[#D9D9D9] rounded-[3px] p-2 mt-5'} clickEvent={nextHandle} />
+          <Button text={"이전"} colorClass={'bg-[#D9D9D9] rounded-[3px] p-2 mt-5'} clickEvent={prevHandle} />
           <RegisterEmail />
         </div>
       }
       {
         flag === 3 &&
         <div>
-          <Button text={"이전"} colorClass={'bg-[#D9D9D9] rounded-[3px] p-2 mt-5'} clickEvent={nextHandle} />
+          <Button text={"이전"} colorClass={'bg-[#D9D9D9] rounded-[3px] p-2 mt-5'} clickEvent={prevHandle} />
           <RegisterBirth />
         </div>
       }
       {
         flag === 4 &&
         <div>
-          <Button text={"이전"} colorClass={'bg-[#D9D9D9] rounded-[3px] p-2 mt-5'} clickEvent={nextHandle} />
+          <Button text={"이전"} colorClass={'bg-[#D9D9D9] rounded-[3px] p-2 mt-5'} clickEvent={prevHandle} />
           <RegisterNickname />
         </div>
       }
