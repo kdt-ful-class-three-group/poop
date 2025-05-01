@@ -8,11 +8,15 @@ function Terms() {
   const [personal, setPersonal] = useState(false)
   const [terms, setTerms] = useState(false)
 
+  //버튼 상태
+  const [disabled, setDisabled] = useState(true)
+
   //전체동의 선택과 관련된 실행
   useEffect(()=>{
     if(all){
       setPersonal(all)
       setTerms(all)
+      setDisabled(!all)
     }
   },[all])
 
@@ -28,6 +32,13 @@ function Terms() {
     }
   },[personal,terms])
 
+  //버튼에 따른 이동
+  useEffect(()=>{
+    if(!disabled){
+      // console.log('이동')
+      
+    }
+  },[disabled])
 
   return (
     <div>
@@ -59,7 +70,7 @@ function Terms() {
             [동의하기] 버튼을 누르면 약관에 동의한 것으로 간주됩니다.
           </p>
         </div>
-        <button className="flex w-full justify-center rounded-[3px] p-2 mt-5 bg-[#D9D9D9]">
+        <button className="flex w-full justify-center rounded-[3px] p-2 mt-5 bg-[#D9D9D9]" disabled={disabled}>
           다음
         </button>
       </div>
