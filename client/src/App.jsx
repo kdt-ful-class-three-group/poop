@@ -8,7 +8,7 @@ import Quiz from "./pages/Quiz.jsx";
 import Mypage from "./pages/Mypage.jsx";
 import Admin from "./pages/Admin.jsx";
 import Register from "./pages/Register.jsx";
-import Terms from "./pages/Terms.jsx";
+import Terms from "./components/Terms.jsx";
 import Layout from "./layout/Layout.jsx";
 import Write from "./pages/Write.jsx";
 import RegisterBirth from "./pages/RegisterBirth.jsx";
