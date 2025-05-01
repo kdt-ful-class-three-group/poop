@@ -1,9 +1,7 @@
 // RegisterBirth.jsx
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const RegisterBirth = () => {
-  const navigate = useNavigate();
   const [gender, setGender] = React.useState('');
   const [birthdate, setBirthdate] = React.useState('');
 
