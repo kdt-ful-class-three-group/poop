@@ -40,7 +40,7 @@ export const verifyEmail = async (email) => {
 }
 
 export const verifyCode = async (email, code) => {
-  const response = await fetch("http://localhost:8080/verifyCode/Check", {
+  const response = await fetch("http://localhost:8080/verifyCode/codeCheck", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

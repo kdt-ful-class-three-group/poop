@@ -28,7 +28,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.post("/verifyCode", (req, res) => {
+router.post("/codeCheck", (req, res) => {
   const {code, email} = req.body;
 
   if (req.session?.[email] === code) {

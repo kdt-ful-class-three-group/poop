@@ -7,6 +7,7 @@ import {SignupContext} from "../context/SignupContext.jsx";
 function Email(){
   const {signupData, updateSignupData} = useContext(SignupContext);
   const [check, setCheck] = useState(null);
+  const [authCode, setAuthCode] = useState("");
 
   const [formEmail, setFormEmail] = useState("");
 
@@ -75,7 +76,7 @@ function Email(){
       <div className="flex flex-col gap-1">
         <p className="text-sm">이메일</p>
         <div className="flex justify-between">
-          <input type="email" value={formEmail} onChange={(e) => setFormEmail(e.target.value)}  className="w-9/12 bg-gray-300 focus:bg-gray-100 px-2" required />
+          <input type="email" value={formEmail} onChange={(e) => setFormEmail(e.target.value)}   className="w-9/12 bg-gray-300 focus:bg-gray-100 px-2" required />
           <Button type="button" text='인증' onclick={(e)=>{ handleVerifyEmail(e,formEmail)}} colorClass={'bg-gray-300'}/>
         </div>
         {check === false ?
@@ -85,8 +86,8 @@ function Email(){
           check === true?
             <p className="text-green-500 text-xs">인증번호가 발송되었습니다.</p> &&
             <div>
-            <input type="text" className="w-full bg-gray-300 focus:bg-gray-100 px-2 mt-2" placeholder="인증번호를 입력하세요." required />
-            <Button type="button" onclick={handleVerifyCode} text='확인' colorClass={'bg-gray-300'}>인증확인</Button>
+            <input type="number" className="w-full bg-gray-300 focus:bg-gray-100 px-2 mt-2" onChange={(e) => setAuthCode(e.target.value)} placeholder="인증번호를 입력하세요." required />
+            <Button type="button" onclick={(e)=>{handleVerifyCode(e, authCode)}} text='확인' colorClass={'bg-gray-300'}>인증확인</Button>
             </div>
             :
             null
