@@ -1,4 +1,4 @@
-// src/co
+// src/context/registerContext.jsx
 import { createContext, useContext, useState} from "react"
 
 const RegisterContext = createContext(); 

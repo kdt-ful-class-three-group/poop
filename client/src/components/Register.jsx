@@ -1,6 +1,6 @@
 // commponent/Register.jsx
 import React, { useState, useEffect } from "react";
-import { userRegister } from "../context/registerContext";
+import { userRegister } from "../context/registerContext.jsx"
 
 function Register({nextHandle}) {
   const {formData, updateFormData} = userRegister();
