@@ -11,7 +11,7 @@ function NavDiv({ navRef, btnClick, closeNav }) {
     } else {
       setIsLogin(false);
     }
-  }, [])
+  }, [navigate])
 
   return (
     <div
