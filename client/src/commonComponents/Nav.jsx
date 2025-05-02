@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 
 import NavButton from "../components/NavButton";
 import NavDiv from "../components/NavDiv";
+import { LoginProvider } from "../context/loginContext";
 
 function Nav() {
   const [btnClick, setBtnClick] = useState(false);
@@ -24,7 +25,7 @@ function Nav() {
       // navRef.current.contains(event.target) = 클릭한 곳이 navRef 영역 안에 포함되는지 체크함
       if (navRef.current && !navRef.current.contains(event.target)) {
         setBtnClick(false);
-				
+
       }
     };
 
@@ -37,12 +38,14 @@ function Nav() {
 
   return (
     <div className="absolute bottom-0 transform -translate-x-50% w-full rounded-t-2xl flex items-center justify-center">
-			<NavButton onClick={showNav}/>
-      <NavDiv
-				navRef={navRef}
-				btnClick={btnClick}
-				closeNav={closeNav}
-			></NavDiv>
+      <NavButton onClick={showNav} />
+      <LoginProvider>
+        <NavDiv
+          navRef={navRef}
+          btnClick={btnClick}
+          closeNav={closeNav}
+        ></NavDiv>
+      </LoginProvider>
     </div>
   );
 }
