@@ -12,15 +12,17 @@ export const RegisterProvider = ({ children }) => {
     birth_date: "",
   });
 
-  // const updateRegisterData = (key, value) => {
-  //   setRegisterData((prevData) => ({
-  //     ...prevData,
-  //     [key]: value,
-  //   }));
-  // };
+  const updateRegisterData = (key, value) => {
+    setRegisterData((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
   console.log(registerData);
   return (
-    <RegisterContext.Provider value={{ registerData, setRegisterData }}>
+    <RegisterContext.Provider
+      value={{ registerData, setRegisterData, updateRegisterData }}
+    >
       {children}
     </RegisterContext.Provider>
   );

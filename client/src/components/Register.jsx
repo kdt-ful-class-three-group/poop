@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useRegister } from "../layout/registerContext.jsx";
 function Register({ flag, setFlag, nextHandle }) {
   // const [showEmail, setShowEmail] = useState(true);
-  const { setRegisterData } = useRegister();
+  const { setRegisterData, updateRegisterData } = useRegister();
   const [isPasswordMatch, setIsPasswordMatch] = useState(false);
   // const buttonClick = () => {
   //   setShowEmail(false);
@@ -21,6 +21,8 @@ function Register({ flag, setFlag, nextHandle }) {
       ...prev,
       ...localData,
     }));
+    updateRegisterData("user_id", localData.user_id); // user_id 저장
+    updateRegisterData("password", localData.password); // password 저장
     // setShowEmail(false);
     if (isPasswordMatch) {
       nextHandle("/Register/RegisterEmail");
