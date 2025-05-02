@@ -3,7 +3,7 @@ import RegisterEmail from '../components/RegisterEmail';
 import { useEffect, useState } from 'react'
 import { useContext } from "react";
 
-function Register() {
+function Register({setFlag}) {
   //아이디 값
   const [user, setUser] = useState('')
   //비밀번호
@@ -11,7 +11,7 @@ function Register() {
   const [checkPw, setCheckPw] = useState('') //비밀번호 확인
 
   //다음화면 보여줄 것인지
-  // const [showEmail, setShowEmail] = useState(true);
+  const [disabled, setDisabled] = useState(true)
 
   //메시지
   const [idText, setIdText] = useState('30자 이내로 입력해주세요')
@@ -75,8 +75,10 @@ function Register() {
     setCheckPw(e.target.value)
     if(pw===e.target.value){
       setCheckPwText('비밀번호가 일치합니다')
+      setDisabled(false)
     } else {
       setCheckPwText('다시 입력해주세요')
+      setDisabled(true)
     }
   }
 
@@ -84,10 +86,8 @@ function Register() {
   //다음버튼 클릭이벤트
   const buttonClick = (e) => {
     e.preventDefault()
-    //비밀번호 - 비밀번호 확인이 일치해야 넘어가도록 작성
-    if(pw===pwCheck){
-      setShowEmail(false);
-    }
+
+    setFlag(2)
   }
 
   return (
@@ -106,7 +106,7 @@ function Register() {
                 <p className="text-red-500 text-xs">{pwCheckText}</p>
                 <Input type="password" name="passwordCheck" value={checkPw} changeEvent={(e)=>samePwCheck(e)} />
                 <button type="submit"
-                  className="w-full h-8 text-center text-sm bg-gray-300 hover:bg-gray-500 py-2 rounded mt-4">
+                  className="w-full h-8 text-center text-sm bg-gray-300 hover:bg-gray-500 py-2 rounded mt-4" disabled={disabled}>
                   다음
                 </button>
               </form>
