@@ -1,17 +1,17 @@
 // commponent/Register.jsx
 import React, { useState, useEffect } from "react";
-import Input from "../components/Input.jsx";
-import RegisterEmail from "../components/RegisterEmail";
+import { userRegister } from "../context/registerContext";
 
-function Register() {
+function Register({nextHandle}) {
+  const {formData, updateFormData} = userRegister();
   const [showEmail, setShowEmail] = useState(true);
-  const [username, setUsername] = useState("");
   const [usernameMessage, setUsernameMessage] = useState("");
-  const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isPasswordCheckVisible, setIsPasswordCheckVisible] = useState(false);
   const [isButtonEnabled, setIsButtonEnabled] = useState(false);
+  const { username, password } = formData;
+
 
   // 아이디 중복 체크 함수
   const checkUsername = async (username) => {
@@ -44,8 +44,12 @@ function Register() {
   const isPasswordMatch = password === passwordCheck;
 
   useEffect(() => {
-    setIsButtonEnabled(username && password && passwordCheck && validatePassword(password) && isPasswordMatch);
-  }, [username, password, passwordCheck]);
+    const isUsernameValid = username.length > 0 && usernameMessage === "사용 가능한 아이디입니다.";
+    const isValidPassword = validatePassword(password);
+    const isFormValid = isUsernameValid && isValidPassword && passwordCheck.length > 0 && isPasswordMatch;
+
+    setIsButtonEnabled(isFormValid);
+  }, [username, password, passwordCheck, usernameMessage, isPasswordMatch]);
 
   const togglePasswordVisibility = () => setIsPasswordVisible((prev) => !prev);
   const togglePasswordCheckVisibility = () => setIsPasswordCheckVisible((prev) => !prev);
@@ -53,7 +57,7 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isButtonEnabled) {
-      setShowEmail(false);
+      nextHandle(); // 다음 단계로 이동
     }
   };
 
@@ -69,7 +73,7 @@ function Register() {
                 type="text"
                 name="username"
                 value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) => updateFormData("username", e.target.value)}
                 className="w-full p-2 border border-gray-300 rounded mb-1"
                 required
               />
@@ -81,7 +85,7 @@ function Register() {
                   type={isPasswordVisible ? "text" : "password"}
                   name="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => updateFormData("password", e.target.value)}
                   className="w-full p-2 border border-gray-300 rounded"
                   required
                 />
@@ -96,7 +100,7 @@ function Register() {
               <p className="text-sm mb-2 text-gray-600">
                 {validatePassword(password)
                   ? "유효한 비밀번호입니다."
-                  : "8자 이상, 영문/숫자 포함"}
+                  : "영문/숫자/특수문자 포함 8자 이상 입력해주세요."}
               </p>
 
               <label className="text-sm text-black mb-1">비밀번호 확인</label>

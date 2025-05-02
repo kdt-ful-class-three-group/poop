@@ -1,3 +1,4 @@
+// server/src/App.js 
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Community from "./pages/Community.jsx";
@@ -13,10 +14,14 @@ import RegisterMain from "./pages/RegisterMain.jsx";
 
 import Nav from "./commonComponents/Nav.jsx";
 
+import { RegisterProvider } from "./context/registerContext.jsx";
+
 function App() {
   return (
     <div className="App">
+        <RegisterProvider>
       <Router>
+
         <Home>
           <Routes>
             {/* Layout 없이 렌더링할 페이지들 */}
@@ -25,7 +30,7 @@ function App() {
             <Route
               path="/Community/CommunityDetail"
               element={<CommunityDetail />}
-            />
+              />
             <Route path="/Community/write" element={<Write />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/Mypage" element={<Mypage />} />
@@ -39,6 +44,7 @@ function App() {
         </Home>
         <Nav />
       </Router>
+        </RegisterProvider>
     </div>
   );
 }

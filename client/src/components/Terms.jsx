@@ -15,7 +15,7 @@ function Terms({nextHandle}) {
 
   // '자세히' 모달 닫기 함수
   const closeModal = () => setModalContent(null);
-
+ 
   const handleAllChecked = () => {
     const newValue = !allChecked;
     setAllChecked(newValue);

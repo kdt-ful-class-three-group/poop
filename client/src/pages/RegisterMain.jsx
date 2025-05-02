@@ -30,28 +30,28 @@ function RegisterMain() {
       {
         flag === 1 &&
         <div>
-          <Register />
+          <Register nextHandle={nextHandle}/>
         </div>
       }
       {
         flag === 2 &&
         <div>
           <Button text={"이전"} colorClass={'bg-[#D9D9D9] rounded-[3px] p-2 mt-5'} clickEvent={prevHandle} />
-          <RegisterEmail />
+          <RegisterEmail nextHandle={nextHandle}/>
         </div>
       }
       {
         flag === 3 &&
         <div>
           <Button text={"이전"} colorClass={'bg-[#D9D9D9] rounded-[3px] p-2 mt-5'} clickEvent={prevHandle} />
-          <RegisterBirth />
+          <RegisterBirth nextHandle={nextHandle} />
         </div>
       }
       {
         flag === 4 &&
         <div>
           <Button text={"이전"} colorClass={'bg-[#D9D9D9] rounded-[3px] p-2 mt-5'} clickEvent={prevHandle} />
-          <RegisterNickname />
+          <RegisterNickname nextHandle={nextHandle} />
         </div>
       }
       {/* <Button text={flag === 4 ? "완료" : "다음"} colorClass={'bg-[#D9D9D9] w-full rounded-[3px] p-2 mt-5'} clickEvent={nextHandle} /> */}
