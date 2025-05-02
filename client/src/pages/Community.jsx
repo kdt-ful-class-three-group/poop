@@ -1,13 +1,16 @@
 // pages/Community.jsx
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { LoginContext } from '../context/loginContext';
 export default function Community() {
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [isLogin, setIsLogin] = useState(false);
+  const {test} = useContext(LoginContext);
+  console.log(test);
   const navigate = useNavigate();
 
   const postsPerPage = 6; // 한 페이지당 게시글 수
