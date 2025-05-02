@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-function Terms({setDisabled}) {
+function Terms({setFlag}) {
 
   //전체동의와 관련된 상태
   const [all, setAll] = useState(false)
@@ -9,10 +9,7 @@ function Terms({setDisabled}) {
   const [terms, setTerms] = useState(false)
 
   //버튼 상태
-  // const [disabled, setDisabled] = useState(true)
-  useEffect(()=>{
-    setDisabled(true)
-  },[])
+  const [disabled, setDisabled] = useState(true)
 
   //전체동의 선택과 관련된 실행
   useEffect(()=>{
@@ -21,6 +18,7 @@ function Terms({setDisabled}) {
       setTerms(all)
     }
     setDisabled(!all)
+    
   },[all])
 
   //개별동의에 따른 전첵동의도 변경됨
@@ -65,6 +63,7 @@ function Terms({setDisabled}) {
             [동의하기] 버튼을 누르면 약관에 동의한 것으로 간주됩니다.
           </p>
         </div>
+        <button className="flex w-full justify-center rounded-[3px] p-2 mt-5 bg-[#D9D9D9]" disabled={disabled} onClick={()=>setFlag(1)}>다음</button>
       </div>
     </div>
   );
