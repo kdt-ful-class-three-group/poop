@@ -8,6 +8,26 @@ import commonsense from './routes/commonsense.js'
 import horror from "./routes/horror.js"
 import community from "./routes/community.js";
 
+//세션 & 메일설정
+import session from 'express-session'
+import nodemailer from 'nodemailer'
+
+import dotenv from 'dotenv'
+dotenv.config()
+
+app.use(session({
+  secret: process.env.SECRETKEY,
+  resave: false,
+  saveUninitialized: true,
+  cookie:{
+    maxAge: 1000 * 6 * 5
+  }
+}))
+
+const transporter = nodemailer.createTransport({
+  
+})
+
 const app = express();
 app.use(express.json());
 app.use(cors());
