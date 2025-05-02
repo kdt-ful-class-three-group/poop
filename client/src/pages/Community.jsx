@@ -7,6 +7,7 @@ export default function Community() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
 
   const postsPerPage = 6; // 한 페이지당 게시글 수
@@ -35,7 +36,13 @@ export default function Community() {
     setIsLoading(false);
   }, []);
   
-
+  useEffect(() => {
+    if (sessionStorage.getItem('user')) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, [])
 
   // 글쓰기 페이지로 이동
   const goToWritePage = () => {
@@ -106,13 +113,13 @@ export default function Community() {
 
           <div className="mt-3 relative">
           <h1 className="text-lg font-medium ">커뮤니티</h1>
-
-              <div className='flex justify-end mb-2'>
-              <button type="button" onClick={goToWritePage} className="px-3 py-2 bg-gray-200 rounded-md text-xs">
+            <div className='flex justify-end mb-2'>
+              {isLogin === true && 
+                <button type="button" onClick={goToWritePage} className="px-3 py-2 bg-gray-200 rounded-md text-xs">
                 글쓰기
-              </button>
-
-              </div>
+                </button>
+              }
+            </div>
 
               
             <form className="flex">
