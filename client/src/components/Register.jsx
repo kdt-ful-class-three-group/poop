@@ -1,5 +1,4 @@
 import Input from "../components/Input.jsx"
-import RegisterEmail from '../components/RegisterEmail';
 import { useEffect, useState } from 'react'
 import { useContext } from "react";
 import { RegisterContext } from '../context/RegisterContext'
@@ -41,24 +40,27 @@ function Register({setFlag}) {
     if(hasChar.test(input)){
       setIdText('아이디에 특수문자는 포함할 수 없습니다')
     } else {
-      setIdText('')
+      // setIdText('')
       setUser(input)
     }
   }
 
   useEffect(()=>{
+    //입력 내용이 없을 때
+    if(user.length===0){
+      setIdText('')
+      return
+    }
+
+    const isExist = userData.some(data => data.user_id === user)
+    const text = isExist ? '이미 존재하는 아이디입니다' : '사용 가능한 아이디입니다'
     
-    userData.forEach(data=>{
-      if(user===data.user_id){
-        setIdText('이미 존재하는 아이디입니다')
-      } 
-      if(user.length===0) {
-        setIdText('30자 이내로 입력해주세요')
-      }
-      setIdText('사용 가능한 아이디입니다')
-    })
+    //기존의 text와 같지 않으면 변경
+    if(idText !== text) {
+      setIdText(text)
+    }
     
-  },[user])
+  },[user,userData])
 
   
   const pwCheck = (e)=>{
