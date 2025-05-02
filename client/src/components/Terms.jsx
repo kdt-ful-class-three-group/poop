@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import RegisterDetailModal from "../components/RegisterDetailModal.jsx"; // 약관 동의 모달 컴포넌트
-function Terms() {
+function Terms({ nextHandle }) {
   const [allChecked, setAllChecked] = useState(false); //* 전체 동의 선택 상태
   const [individualChecks, setIndividualChecks] = useState({
     personalInfo: false,
@@ -91,6 +91,7 @@ function Terms() {
             allChecked ? "bg-[#62a3ff]" : "bg-[#D9D9D9]"
           }`}
           disabled={!allChecked} // 전체 동의가 체크되지 않으면 비활성화
+          onClick={() => nextHandle("/Register/Info")}
         >
           다음
         </button>

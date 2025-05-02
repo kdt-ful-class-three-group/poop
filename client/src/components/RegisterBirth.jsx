@@ -1,9 +1,9 @@
 // RegisterBirth.jsx
-import React from 'react';
+import React from "react";
 
-const RegisterBirth = () => {
-  const [gender, setGender] = React.useState('');
-  const [birthdate, setBirthdate] = React.useState('');
+const RegisterBirth = ({ nextHandle }) => {
+  const [gender, setGender] = React.useState("");
+  const [birthdate, setBirthdate] = React.useState("");
 
   return (
     <div>
@@ -47,6 +47,12 @@ const RegisterBirth = () => {
           onChange={(e) => setBirthdate(e.target.value)}
         />
       </div>
+      <button
+        className="bg-[#62a3ff] w-full rounded-[3px] p-2 mt-5"
+        onClick={() => nextHandle("/Register/RegisterNickname")}
+      >
+        다음
+      </button>
     </div>
   );
 };

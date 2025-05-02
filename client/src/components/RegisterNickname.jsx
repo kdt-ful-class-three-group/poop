@@ -13,6 +13,12 @@ const RegisterNickname = () => {
         maxLength="8"
         className="w-full p-2 border rounded bg-gray-200"
       />
+      <button
+        className="bg-[#62a3ff] w-full rounded-[3px] p-2 mt-5"
+        onClick={() => alert("회원가입 완료!")}
+      >
+        완료
+      </button>
     </div>
   );
 };

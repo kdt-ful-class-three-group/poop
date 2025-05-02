@@ -9,7 +9,7 @@ import Mypage from "./pages/Mypage.jsx";
 import Admin from "./pages/Admin.jsx";
 import Layout from "./layout/Layout.jsx";
 import Write from "./pages/Write.jsx";
-import { RegisterProvider } from "./layout/RegisterContext.jsx";
+import { RegisterProvider } from "./layout/registerContext.jsx";
 import RegisterMain from "./pages/RegisterMain.jsx";
 import Nav from "./commonComponents/Nav.jsx";
 
@@ -32,15 +32,15 @@ function App() {
             <Route path="/Admin" element={<Admin />} />
 
             <Route
-              path="/Register"
+              path="/Register/*"
               element={
                 <RegisterProvider>
-                  <Register />
+                  <RegisterMain />
                 </RegisterProvider>
               }
             />
 
-            <Route path="/Register" element={<RegisterMain />} />
+            {/* <Route path="/Register" element={<RegisterMain />} /> */}
 
             {/* Layout 적용 구간: path 가 "/KnowledgeHorror" 또는 "/Quiz" 인 경우에만 */}
             <Route element={<Layout />}>
