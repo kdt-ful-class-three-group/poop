@@ -1,15 +1,13 @@
 import React, { createContext } from "react";
 
-const LoginContext = createContext();
+export const LoginContext = createContext();
 
 export const LoginProvider = ({children}) => {
   const test = "test";
 
   return (
-    <loginContext.Provider value={{test}}>
+    <LoginContext.Provider value={{test}}>
       {children}
-    </loginContext.Provider>
+    </LoginContext.Provider>
   )
 }
-
-export const loginTest = () => useContext(LoginContext);
