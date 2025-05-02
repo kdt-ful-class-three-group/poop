@@ -13,6 +13,7 @@ export const SignupProvider = ({ children }) => {
     email: '',
   });
 
+
   const updateSignupData = (newData) => {
     setSignupData((prevData) => ({
       ...prevData,

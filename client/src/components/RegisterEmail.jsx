@@ -6,6 +6,7 @@ import { SignupContext } from "../context/SignupContext.jsx";
 function RegisterEmail({handleNext, handleBack}) {
 
   const {signupData, updateSignupData} = useContext(SignupContext);
+  const [check, setCheck] = useState(null);
 
   console.log("현재 유저 가입 정보", signupData)
 
