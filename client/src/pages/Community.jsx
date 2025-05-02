@@ -107,7 +107,7 @@ export default function Community() {
 
   // 실제 렌더링되는 부분
   return (
-    <div className="w-full max-w-md mx-auto bg-white min-h-screen">
+    <div className="w-full mx-auto bg-white">
       <div className="border-b border-gray-200">
         <div className="py-3 px-4">
 
