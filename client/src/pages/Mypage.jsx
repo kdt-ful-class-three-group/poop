@@ -1,4 +1,13 @@
+import { useNavigate } from "react-router-dom";
+
 function Mypage() {
+  const navigate = useNavigate();
+
+  const logoutHandle = () => {
+    navigate("/Quiz");
+    sessionStorage.removeItem('user');
+  }
+
   return (
     <div className="w-full">
       <div className="mb-4">
@@ -38,7 +47,7 @@ function Mypage() {
         <p className="text-sm">개인정보 처리방침</p>
         <img src="./public/img/arrowRight.svg" alt="" />
       </div>
-      <button className="flex w-full items-center mt-4 justify-center text-[#888888] text-xs">
+      <button className="flex w-full items-center mt-4 justify-center text-[#888888] text-xs" onClick={logoutHandle}>
         로그아웃
       </button>
     </div>
