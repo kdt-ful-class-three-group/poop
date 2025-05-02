@@ -10,6 +10,7 @@ import Admin from "./pages/Admin.jsx";
 import Layout from "./layout/Layout.jsx";
 import Write from "./pages/Write.jsx";
 import RegisterMain from "./pages/RegisterMain.jsx";
+import { LoginProvider } from "./context/loginContext.jsx";
 
 import Nav from "./commonComponents/Nav.jsx";
 
@@ -21,7 +22,9 @@ function App() {
           <Routes>
             {/* Layout 없이 렌더링할 페이지들 */}
             {/* <Route path="/" element={<Home />} /> */}
-            <Route path="/Community" element={<Community />} />
+            <LoginProvider>
+              <Route path="/Community" element={<Community />} />
+            </LoginProvider>
             <Route
               path="/Community/CommunityDetail"
               element={<CommunityDetail />}
