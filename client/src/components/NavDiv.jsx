@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { LoginContext } from '../context/loginContext';
 
 function NavDiv({ navRef, btnClick, closeNav }) {
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(false);
+  const {isLogin, setIsLogin} = useContext(LoginContext);
 
   useEffect(() => {
     if (sessionStorage.getItem('user')) {
@@ -11,7 +12,7 @@ function NavDiv({ navRef, btnClick, closeNav }) {
     } else {
       setIsLogin(false);
     }
-  }, [navigate])
+  }, [isLogin])
 
   return (
     <div
