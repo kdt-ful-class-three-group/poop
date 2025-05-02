@@ -5,6 +5,8 @@ import Register from "../components/Register";
 import RegisterEmail from '../components/RegisterEmail';
 import RegisterBirth from "../components/RegisterBirth";
 import RegisterNickname from "../components/RegisterNickname";
+//context관련
+import { RegisterProvider } from "../context/RegisterContext";
 
 function RegisterMain() {
   const [flag, setFlag] = useState(0);
@@ -22,6 +24,8 @@ function RegisterMain() {
   }
 
   return (
+    <RegisterProvider>
+
     <div className=" w-full h-full">
       {
         flag === 0 &&
@@ -58,6 +62,7 @@ function RegisterMain() {
       }
       {/* <Button text={flag === 4 ? "완료" : "다음"} colorClass={'bg-[#D9D9D9] w-full rounded-[3px] p-2 mt-5'} clickEvent={nextHandle} disabled={disabled} /> */}
     </div>
+    </RegisterProvider>
   );
 }
 
