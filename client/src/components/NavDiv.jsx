@@ -4,15 +4,8 @@ import { LoginContext } from '../context/loginContext';
 
 function NavDiv({ navRef, btnClick, closeNav }) {
   const navigate = useNavigate();
-  const {isLogin, setIsLogin} = useContext(LoginContext);
-
-  useEffect(() => {
-    if (sessionStorage.getItem('user')) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
-  }, [isLogin])
+  const { isLogin } = useContext(LoginContext);
+  console.log("div에서의 로그인 상태", isLogin);
 
   return (
     <div
@@ -43,20 +36,20 @@ function NavDiv({ navRef, btnClick, closeNav }) {
         >
           닫기
         </button>
-        { isLogin ? 
+        {isLogin ?
           <button
-          className="flex-1 text-center cursor-pointer  hover:font-bold"
-          onClick={() => {
-            navigate("/Mypage");
+            className="flex-1 text-center cursor-pointer  hover:font-bold"
+            onClick={() => {
+              navigate("/Mypage");
             }}
           >
             마이페이지
           </button>
-          : 
+          :
           <button
-          className="flex-1 text-center cursor-pointer  hover:font-bold"
-          onClick={() => {
-            navigate("/Login");
+            className="flex-1 text-center cursor-pointer  hover:font-bold"
+            onClick={() => {
+              navigate("/Login");
             }}
           >
             로그인
