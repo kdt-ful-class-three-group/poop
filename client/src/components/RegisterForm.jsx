@@ -53,6 +53,11 @@ export default function RegisterForm({handleNext}) {
   const handleForward = (e) => {
     e.preventDefault();
 
+    if(!check) {
+      alert("아이디 중복확인을 해주세요.");
+      return;
+    }
+
     if (!valid) {
       setError(message);
       alert(message);

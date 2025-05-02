@@ -7,6 +7,7 @@ import register from "./routes/register.js";
 import commonsense from './routes/commonsense.js'
 import horror from "./routes/horror.js"
 import community from "./routes/community.js";
+import emailVerify from "./routes/emailVerify.js";
 
 const app = express();
 app.use(express.json());
@@ -29,6 +30,7 @@ app.use("/register", register);
 app.use('/knowledge',commonsense)
 app.use("/horror", horror);
 app.use("/community", community);
+app.use("/verifyCode", emailVerify);
 
 const PORT = process.env.SERVERPORT;
 app.listen(PORT, () => {
