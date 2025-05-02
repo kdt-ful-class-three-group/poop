@@ -1,7 +1,17 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function NavDiv({ navRef, btnClick, closeNav }) {
   const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem('user')) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, [])
 
   return (
     <div
@@ -32,14 +42,26 @@ function NavDiv({ navRef, btnClick, closeNav }) {
         >
           닫기
         </button>
-        <button
+        { isLogin ? 
+          <button
+          className="flex-1 text-center cursor-pointer  hover:font-bold"
+          onClick={() => {
+            navigate("/Mypage");
+            }}
+          >
+            마이페이지
+          </button>
+          : 
+          <button
           className="flex-1 text-center cursor-pointer  hover:font-bold"
           onClick={() => {
             navigate("/Login");
-          }}
-        >
-          로그인
-        </button>
+            }}
+          >
+            로그인
+          </button>
+        }
+
       </div>
     </div>
   )
