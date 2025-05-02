@@ -35,6 +35,7 @@ function LoginInput({ autoLogin }) {
       sessionStorage.setItem('user', result.user.user_id)
       // 성공하면 퀴즈로 이동
       navigate('/quiz');
+      //! 실행이 안되는 것 같음
       loginHandle;
     } else {
       setText(result.message)
