@@ -9,28 +9,8 @@ import horror from "./routes/horror.js"
 import community from "./routes/community.js";
 
 //세션 & 메일설정
-import session from 'express-session'
-import nodemailer from 'nodemailer'
-
-import dotenv from 'dotenv'
-dotenv.config()
-
-app.use(session({
-  secret: process.env.SECRETKEY,
-  resave: false,
-  saveUninitialized: true,
-  cookie:{
-    maxAge: 1000 * 6 * 5
-  }
-}))
-
-const transporter = nodemailer.createTransport({
-  service: process.env.EMAIL_SERVICE,
-  auth:{
-    user : process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD
-  }
-})
+import sessionMiddleware from "./config/auth.js";
+app.use(sessionMiddleware)
 
 const app = express();
 app.use(express.json());
