@@ -17,6 +17,7 @@ import RegisterBirth from "./pages/RegisterBirth.jsx";
 import RegisterNickname from "./pages/RegisterNickname.jsx";
 import { AuthProvider } from "./layout/AuthContext.jsx";
 import ProtectedRoute from "./layout/ProtectedRoute.jsx";
+import loggedInRoute from "./layout/loggedInRoute.jsx";
 import Nav from "./commonComponents/Nav.jsx";
 
 function App() {
@@ -34,7 +35,14 @@ function App() {
                 element={<CommunityDetail />}
               />
               <Route path="/Community/write" element={<Write />} />
-              <Route path="/Login" element={<Login />} />
+              <Route
+                path="/Login"
+                element={
+                  <loggedInRoute>
+                    <Login />
+                  </loggedInRoute>
+                }
+              />
 
               <Route
                 path="/Mypage"
