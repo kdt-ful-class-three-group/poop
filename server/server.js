@@ -10,7 +10,12 @@ import community from "./routes/community.js";
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors(
+  {
+    origin: "http://localhost:3030",
+    credentials: true,
+  }
+));
 dotenv.config();
 
 app.get("/", (req, res) => {
