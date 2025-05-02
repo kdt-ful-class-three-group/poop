@@ -22,10 +22,10 @@ function RegisterMain() {
   return (
     <div className=" w-full h-full">
       {
-        flag === 0 &&
-        <div>
-          <Terms />
-        </div>
+      flag === 0 &&
+      <div>
+      <Terms nextHandle={nextHandle} />
+      </div>
       }
       {
         flag === 1 &&

@@ -1,3 +1,4 @@
+// commponent/Register.jsx
 import React, { useState, useEffect } from "react";
 import Input from "../components/Input.jsx";
 import RegisterEmail from "../components/RegisterEmail";
