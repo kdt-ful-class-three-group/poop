@@ -1,6 +1,9 @@
 import express from 'express'
 import nodemailer from 'nodemailer'
 
+//transport
+import transport from '../utils/mail'
+
 //라우터
 const router = express.Router()
 
@@ -25,6 +28,13 @@ router.get('/sendCode',async(req,res)=>{
   }
 
   //실행 - 에러 처리
+  try{
+    await transport.sendMail(mailOptions)
+    res.json({message:'이메일 발송 완료'})
+  }catch(err){
+    console.error(err)
+    res.status(500).json({message:'이메일 전송 실패'})
+  }
 })
 
 //인증 코드 확인
