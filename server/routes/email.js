@@ -30,7 +30,7 @@ router.post('/sendCode',async(req,res)=>{
   //실행 - 에러 처리
   try{
     await transport.sendMail(mailOptions)
-    res.json({message:'이메일 발송 완료'})
+    res.json({message:'이메일 발송 완료',code:code})
   }catch(err){
     console.error(err)
     res.status(500).json({message:'이메일 전송 실패'})
