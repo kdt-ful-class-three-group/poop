@@ -1,12 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { LoginContext } from "../context/loginContext";
 
 function Mypage() {
-  const navigate = useNavigate();
-
-  const logoutHandle = () => {
-    navigate("/Quiz");
-    sessionStorage.removeItem('user');
-  }
+  const { logoutHandle } = useContext(LoginContext);
 
   return (
     <div className="w-full">
@@ -47,7 +43,7 @@ function Mypage() {
         <p className="text-sm">개인정보 처리방침</p>
         <img src="./public/img/arrowRight.svg" alt="" />
       </div>
-      <button className="flex w-full items-center mt-4 justify-center text-[#888888] text-xs" onClick={logoutHandle}>
+      <button className="flex w-full items-center mt-4 justify-center text-[#888888] text-xs" onClick={() => {logoutHandle()}}>
         로그아웃
       </button>
     </div>
