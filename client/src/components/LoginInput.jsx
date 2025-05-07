@@ -15,7 +15,7 @@ function LoginInput({ autoLogin }) {
   const { loginHandle } = useContext(LoginContext);
 
   const login = async () => {
-    const response = await fetch('http://localhost:8080/login', {
+    const response = await fetch('http://localhost:8081/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ function LoginInput({ autoLogin }) {
       // 성공하면 퀴즈로 이동
       navigate('/quiz');
       //! 실행이 안되는 것 같음
-      loginHandle;
+      loginHandle();
     } else {
       setText(result.message)
       console.log(result.success)

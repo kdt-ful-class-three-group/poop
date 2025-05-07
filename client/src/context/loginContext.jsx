@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 export const LoginContext = createContext();
 
@@ -10,9 +10,7 @@ export const LoginProvider = ({ children }) => {
   }
 
   const loginHandle = () => {
-    console.log("제대로 실행이 완료되었다.");
     setIsLogin(true);
-    console.log("로그인 상태", isLogin);
   }
 
   return (
