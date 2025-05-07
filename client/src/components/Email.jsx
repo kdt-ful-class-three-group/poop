@@ -4,8 +4,10 @@ import { RegisterContext } from '../context/RegisterContext';
 
 function Email({setFlag}){
 
+  //창고에 데이터 저장
+  const {registerData, updateData} = useContext(RegisterContext)
   //이메일 입력값
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState(registerData.email||'')
   //이메일 관련 텍스트
   const [emailText, setEmailText] = useState('')
   //이메일 인증 값
@@ -14,8 +16,6 @@ function Email({setFlag}){
   const [code, setCode] = useState('')
   //인증 관련 텍스트
   const [checkText, setCheckText] = useState('')
-  //창고에 데이터 저장
-  const {updateData} = useContext(RegisterContext)
   //버튼에 적용
   const [disabled, setDisabled] = useState(true)
   //인증 버튼
