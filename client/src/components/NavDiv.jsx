@@ -5,7 +5,6 @@ import { LoginContext } from '../context/loginContext';
 function NavDiv({ navRef, btnClick, closeNav }) {
   const navigate = useNavigate();
   const { isLogin } = useContext(LoginContext);
-  console.log("div에서의 로그인 상태", isLogin);
 
   return (
     <div
