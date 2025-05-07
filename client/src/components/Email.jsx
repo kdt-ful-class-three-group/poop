@@ -39,7 +39,8 @@ function Email({setFlag}){
   }
 
   //인증버튼 클릭
-  const checkCode = async()=>{
+  const checkCode = async(e)=>{
+    e.preventDefault()
     try{
       const response = await fetch('http://localhost:8080/authEmail/sendCode',{
         method:'POST',
@@ -51,9 +52,18 @@ function Email({setFlag}){
         body:JSON.stringify({email})
       })
 
+      const data = await response.json()
+
+      //응답
+      if(response.ok){
+        setCheckText('이메일에서 인증코드를 확인해주세요')
+      } else {
+        setCheckText('오류가 발생했습니다')
+      }
+
     }
     catch(err){
-
+      console.error(err)
     }
   }
 
@@ -64,7 +74,7 @@ function Email({setFlag}){
         <p className="text-sm">이메일</p>
         <div className="flex justify-between">
           <input type="text" className="w-9/12 bg-gray-300 focus:bg-gray-100" onChange={(e)=>rightEmail(e)} name='email' value={email}/>
-          <Button text='인증' colorClass={'bg-gray-300'} disabled={isUnCheck}/>
+          <Button text='인증' colorClass={'bg-gray-300'} disabled={isUnCheck} clickEvent={(e)=>checkCode(e)}/>
         </div>
         <p className="text-xs text-red-500">{emailText}</p>
       </form>
@@ -72,7 +82,7 @@ function Email({setFlag}){
       <div className="flex flex-col gap-1">
         <p className="text-sm" >이메일 인증</p>
         <input type='number' name='code' className="w-full bg-gray-300 py-2 focus:bg-gray-100"/>
-        <p className="text-xs text-red-500">다시 입력해주세요</p>
+        <p className="text-xs text-red-500">{checkText}</p>
       </div>
       <button type="submit"
               className="w-full h-8 text-center text-sm bg-gray-300 hover:bg-gray-500 py-2 rounded mt-4" disabled={disabled}>다음</button>
