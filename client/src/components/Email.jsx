@@ -21,13 +21,13 @@ function Email({setFlag}){
   //인증 버튼
   const [isUnCheck, setIsUnCheck] = useState(true)
   //이메일 중복 확인 데이터
-  const [dbEmail, setDbEmail] = useState([])
+  const [dbData, setDbData] = useState([])
 
-  //이메일 중복 겁사
+  //이메일 데이터
   useEffect(()=>{
     fetch('http://localhost:8080/register')
       .then(response => response.json())
-      .then(data => setDbEmail(data))
+      .then(data => setDbData(data))
   },[])
 
   //이메일 형식 체크
@@ -43,8 +43,11 @@ function Email({setFlag}){
       setEmailText('이메일 형식과 일치하지 않습니다')
       setIsUnCheck(true)
     } else {
-      setEmailText('')
-      setIsUnCheck(false)
+      //중복 검사
+      const isEixst = dbData.some(data => data.email === e.target.value)
+      const existText = isEixst ? '이미 존재하는 이메일입니다' : '사용 가능한 이메일입니다'
+      setEmailText(existText)
+      setIsUnCheck(isEixst)
     }
   }
 
