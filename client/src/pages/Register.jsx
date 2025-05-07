@@ -1,9 +1,7 @@
-import Input from "../components/Input.jsx"
-import RegisterEmail from '../components/RegisterEmail';
+// import RegisterEmail from '../components/RegisterEmail';
 import React, {useState, useEffect } from "react";
 
 function Register() {
-  const [showEmail, setShowEmail] = useState(true);
   const [username, setUsername] = useState("");
   const [usernameMessage, setUsernameMessage] = useState("");
   const [password, setPassword] = useState("");
@@ -21,6 +19,7 @@ function Register() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ username }),
+        // credenials : 'same'은 브라우저에서 인증 쿠키 보내는 용도, 서버에 인증이 없으면 생략 가능
         credentials: 'same'
       });
       const data = await response.json();
@@ -71,10 +70,6 @@ function Register() {
     // 회원가입 로직
   };
 
-
-  const buttonClick = (e) => {
-    setShowEmail(false);
-  }
 
   return (
     <div className="w-full h-full">
