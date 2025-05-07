@@ -38,7 +38,7 @@ function App() {
             </Route>
           </Routes>
         </Home>
-        <Nav />
+        <LoginProvider><Nav /></LoginProvider>
       </Router>
     </div>
   );

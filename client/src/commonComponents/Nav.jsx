@@ -39,13 +39,11 @@ function Nav() {
   return (
     <div className="absolute bottom-0 transform -translate-x-50% w-full rounded-t-2xl flex items-center justify-center">
       <NavButton onClick={showNav} />
-      <LoginProvider>
-        <NavDiv
-          navRef={navRef}
-          btnClick={btnClick}
-          closeNav={closeNav}
-        ></NavDiv>
-      </LoginProvider>
+      <NavDiv
+        navRef={navRef}
+        btnClick={btnClick}
+        closeNav={closeNav}
+      ></NavDiv>
     </div>
   );
 }
