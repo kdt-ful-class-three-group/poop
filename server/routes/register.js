@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/',async(req,res)=>{
     try{
-        const [rows] = await pool.execute(`SELECT user_id FROM USER`)
+        const [rows] = await pool.execute(`SELECT user_id, email FROM USER`)
         return res.status(200).json(rows)    
     }
     catch(err){
