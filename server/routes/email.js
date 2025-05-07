@@ -8,7 +8,7 @@ import transport from '../utils/mail.js'
 const router = express.Router()
 
 //인증 코드 전송
-router.get('/sendCode',async(req,res)=>{
+router.post('/sendCode',async(req,res)=>{
   const {email} = req.body
 
   //6자리 랜덤 코드
@@ -38,7 +38,7 @@ router.get('/sendCode',async(req,res)=>{
 })
 
 //인증 코드 확인
-router.get('/checkCode',(req,res)=>{
+router.post('/checkCode',(req,res)=>{
   // email & code
   const {email, code} = req.body
   //세션
