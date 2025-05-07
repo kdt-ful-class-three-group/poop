@@ -2,7 +2,7 @@ import express from 'express'
 import nodemailer from 'nodemailer'
 
 //transport
-import transport from '../utils/mail'
+import transport from '../utils/mail.js'
 
 //라우터
 const router = express.Router()

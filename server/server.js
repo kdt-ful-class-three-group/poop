@@ -8,9 +8,6 @@ import commonsense from './routes/commonsense.js'
 import horror from "./routes/horror.js"
 import community from "./routes/community.js";
 
-//세션 & 메일설정
-import sessionMiddleware from "./config/auth.js";
-app.use(sessionMiddleware)
 
 //메일
 import email from './routes/email.js'
@@ -19,6 +16,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 dotenv.config();
+
+//세션 & 메일설정
+import sessionMiddleware from "./config/auth.js";
+app.use(sessionMiddleware)
 
 app.get("/", (req, res) => {
   res.send("Hello World");
