@@ -14,7 +14,11 @@ import email from './routes/email.js'
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3030',
+  credentials:true //세션, 쿠키 허용
+
+}));
 dotenv.config();
 
 //세션 & 메일설정
