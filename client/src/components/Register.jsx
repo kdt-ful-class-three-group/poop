@@ -4,8 +4,11 @@ import { useContext } from "react";
 import { RegisterContext } from '../context/RegisterContext'
 
 function Register({setFlag}) {
+  //창고에서 데이터 가져오기
+  const {registerData, updateData} = useContext(RegisterContext)
+
   //아이디 값
-  const [user, setUser] = useState('')
+  const [user, setUser] = useState(registerData.user_id||'')
   //비밀번호
   const [pw, setPw] = useState('')
   const [checkPw, setCheckPw] = useState('') //비밀번호 확인
@@ -27,8 +30,6 @@ function Register({setFlag}) {
     .then(data=> setUserData(data))
   },[])
 
-  //창고에서 데이터 가져오기
-  const {updateData} = useContext(RegisterContext)
 
   //제출 -> 아이디, 비밀번호 값 담기
   const userCheck = (e)=>{
