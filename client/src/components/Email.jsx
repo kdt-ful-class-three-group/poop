@@ -81,7 +81,7 @@ function Email({setFlag}){
       {/* 이메일 인증 */}
       <div className="flex flex-col gap-1">
         <p className="text-sm" >이메일 인증</p>
-        <input type='number' name='code' className="w-full bg-gray-300 py-2 focus:bg-gray-100"/>
+        <input type='number' name='code' className="w-full bg-gray-300 py-2 focus:bg-gray-100" value={check} onChange={(e)=>setCheck(e.target.value)}/>
         <p className="text-xs text-red-500">{checkText}</p>
       </div>
       <button type="submit"
