@@ -8,9 +8,7 @@ export default function Community() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
-  const [isLogin, setIsLogin] = useState(false);
-  const loginTest = useContext(LoginContext)
-  console.log(loginTest.test);
+  const {isLogin} = useContext(LoginContext)
   const navigate = useNavigate();
 
   const postsPerPage = 6; // 한 페이지당 게시글 수
@@ -38,14 +36,6 @@ export default function Community() {
 
     setIsLoading(false);
   }, []);
-  
-  useEffect(() => {
-    if (sessionStorage.getItem('user')) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
-  }, [])
 
   // 글쓰기 페이지로 이동
   const goToWritePage = () => {
