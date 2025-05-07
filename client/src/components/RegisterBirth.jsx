@@ -1,9 +1,21 @@
 // RegisterBirth.jsx
 import React from 'react';
 
+//context
+import { useContext } from 'react';
+import { RegisterContext } from '../context/RegisterContext';
+
 const RegisterBirth = () => {
   const [gender, setGender] = React.useState('');
   const [birthdate, setBirthdate] = React.useState('');
+
+  //데이터
+  const {updateData} = useContext(RegisterContext)
+
+  //테스트
+  const {registerData} = useContext(RegisterContext)
+  const {user_id, password, email} = registerData
+  console.log(user_id, password, email)
 
   return (
     <div>
