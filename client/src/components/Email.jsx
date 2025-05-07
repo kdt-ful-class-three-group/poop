@@ -75,7 +75,7 @@ function Email({setFlag}){
     setCheck(e.target.value)
 
     //인증번호 동일 > 버튼 활성화 & 메시지
-    if(code === check){
+    if(code === e.target.value){
       setCheckText('인증 완료했습니다')
       setDisabled(false)
     }
@@ -86,6 +86,15 @@ function Email({setFlag}){
       setDisabled(true)
     }
   }
+
+  //다음 버튼 클릭 이벤트
+  const buttonClick = (e) => {
+    e.preventDefault()
+
+    setFlag(3)
+    updateData({'email':email})
+  }
+
 
   return(
     <div className="flex flex-col gap-1 w-full">
@@ -105,6 +114,7 @@ function Email({setFlag}){
         <p className="text-xs text-red-500">{checkText}</p>
       </div>
       <button type="submit"
+              onClick={(e)=>buttonClick(e)}
               className="w-full h-8 text-center text-sm bg-gray-300 hover:bg-gray-500 py-2 rounded mt-4" disabled={disabled}>다음</button>
     </div>
   )
