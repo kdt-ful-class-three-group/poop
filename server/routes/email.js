@@ -39,5 +39,28 @@ router.get('/sendCode',async(req,res)=>{
 
 //인증 코드 확인
 router.get('/checkCode',(req,res)=>{
+  // email & code
+  const {email, code} = req.body
+  //세션
+  const {authCode, authEmail, authExpire} = req.session
 
+  //값이 없을 때
+  if(!authCode || !authEmail || !authExpire){
+    return res.status(400).json({message:'인증 요청 없음'})
+  }
+
+  //만료기간
+  if(Date.now()>authExpire){
+    return res.status(400).json({message:'코드 만료'})
+  }
+
+  //조건에 해당할 때
+  if(authCode===code && authEmail===email){
+    req.session.authCode=null
+    res.json({message:'인증 성공'})
+  }else {
+    res.status(400).json({message:'코드 불일치'})
+  }
 })
+
+export default router
