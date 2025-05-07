@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 // '자세히' 모달 컴포넌트 추가
 import DetailModal from "../components/DetailModal";
 
-function Terms() {
+function Terms({ setFlag, flag }) {
 
   const navigate = useNavigate();
 
@@ -95,7 +95,7 @@ function Terms() {
         <button className={`flex w-full justify-center rounded-[3px] p-2 mt-5 ${privacyChecked && termsChecked ? "bg-blue-500 text-white" : "bg-[#D9D9D9]"}`}
           onClick={() => {
             if (privacyChecked && termsChecked) {
-              navigate("/Register"); // 회원가입 페이지로 이동
+              setFlag(++flag); // 회원가입 페이지로 이동
             } else {
               alert("모든 필수 약관에 동의하셔야 회원가입이 가능합니다.");
             }
