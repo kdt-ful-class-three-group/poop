@@ -38,6 +38,25 @@ function Email({setFlag}){
     }
   }
 
+  //인증버튼 클릭
+  const checkCode = async()=>{
+    try{
+      const response = await fetch('http://localhost:8080/authEmail/sendCode',{
+        method:'POST',
+        //세션 유지
+        credentials:'include',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify({email})
+      })
+
+    }
+    catch(err){
+
+    }
+  }
+
   return(
     <div className="flex flex-col gap-1 w-full">
       {/* 이메일 */}
