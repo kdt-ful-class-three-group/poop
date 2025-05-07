@@ -4,3 +4,24 @@ import nodemailer from 'nodemailer'
 //라우터
 const router = express.Router()
 
+//인증 코드 전송
+router.get('/sendCode',async(req,res)=>{
+  const {email} = req.body
+
+  //6자리 랜덤 코드
+  const code = String(Math.floor(100000+Math.random()*90000))
+
+  //세션에 저장
+  req.session.authCode = code
+  req.session.authEmail = email
+  req.session.authExpire = Date.now() + 1000*60*5
+
+  //메일 옵션
+
+  //실행 - 에러 처리
+})
+
+//인증 코드 확인
+router.get('/checkCode',(req,res)=>{
+
+})
