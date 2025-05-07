@@ -18,27 +18,29 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Home>
-          <Routes>
-            {/* Layout 없이 렌더링할 페이지들 */}
-            {/* <Route path="/" element={<Home />} /> */}
-            <Route path="/Community" element={<LoginProvider><Community /></LoginProvider>} />
-            <Route
-              path="/Community/CommunityDetail"
-              element={<CommunityDetail />}
-            />
-            <Route path="/Community/write" element={<Write />} />
-            <Route path="/Login" element={<LoginProvider><Login /></LoginProvider>} />
-            <Route path="/Mypage" element={<LoginProvider><Mypage /></LoginProvider>} />
-            <Route path="/Admin" element={<Admin />} />
-            <Route path="/Register" element={<RegisterMain />} />
-            {/* Layout 적용 구간: path 가 "/KnowledgeHorror" 또는 "/Quiz" 인 경우에만 */}
-            <Route element={<Layout />}>
-              <Route path="/Quiz" element={<Quiz />} />
-            </Route>
-          </Routes>
-        </Home>
-        <LoginProvider><Nav /></LoginProvider>
+        <LoginProvider>
+          <Home>
+            <Routes>
+              {/* Layout 없이 렌더링할 페이지들 */}
+              {/* <Route path="/" element={<Home />} /> */}
+              <Route path="/Community" element={<Community />} />
+              <Route
+                path="/Community/CommunityDetail"
+                element={<CommunityDetail />}
+              />
+              <Route path="/Community/write" element={<Write />} />
+              <Route path="/Login" element={<Login />} />
+              <Route path="/Mypage" element={<Mypage />} />
+              <Route path="/Admin" element={<Admin />} />
+              <Route path="/Register" element={<RegisterMain />} />
+              {/* Layout 적용 구간: path 가 "/KnowledgeHorror" 또는 "/Quiz" 인 경우에만 */}
+              <Route element={<Layout />}>
+                <Route path="/Quiz" element={<Quiz />} />
+              </Route>
+            </Routes>
+          </Home>
+          <Nav />
+        </LoginProvider>
       </Router>
     </div>
   );
