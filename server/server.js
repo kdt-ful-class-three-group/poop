@@ -12,6 +12,9 @@ import community from "./routes/community.js";
 import sessionMiddleware from "./config/auth.js";
 app.use(sessionMiddleware)
 
+//메일
+import email from './routes/email.js'
+
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -28,6 +31,7 @@ app.use("/register", register);
 app.use('/knowledge',commonsense)
 app.use("/horror", horror);
 app.use("/community", community);
+app.use('/authEmail',email)
 
 const PORT = process.env.SERVERPORT;
 app.listen(PORT, () => {
