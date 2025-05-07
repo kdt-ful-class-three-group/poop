@@ -1,18 +1,45 @@
-// RegisterBirth.jsx
-import React from 'react';
+
+import React, {useContext, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {useState} from "react";
+import {SignupContext} from "../context/SignupContext.jsx";
 
 const RegisterBirth = ({handleNext,handleBack}) => {
 
   const [gender, setGender] = useState('');
   const [birthdate, setBirthdate] = useState('');
+  const {signupData, updateSignupData}=useContext(SignupContext);
 
   // 다음 버튼
-  const handleForward = () => {
+  const handleForward = (e) => {
+    e.preventDefault()
+
+    if(!birthdate || birthdate.trim() === "") {
+      alert("생년월일을 입력해주세요.");
+      return;
+    }
+    if(birthdate.length !== 8) {
+      alert("생년월일은 8자리로 입력해주세요.");
+      return;
+    }
+    if(isNaN(birthdate)) {
+      alert("생년월일은 숫자로 입력해주세요.");
+      return;
+    }
+    const updated = {
+      birthDate: birthdate,
+      gender:gender
+    };
+    updateSignupData(updated);
+    console.log("업데이트된 유저 정보", signupData);
 
     handleNext();
   }
+  useEffect(() => {
+    console.log("현재 유저 가입 정보", signupData);
+  }, []);
+
+
 
   const handlePrev = () => {
 

@@ -3,6 +3,7 @@ import {Fragment, useState} from "react";
 import {verifyCode, verifyEmail} from "../api/fectchApi.js";
 import {useContext} from "react";
 import {SignupContext} from "../context/SignupContext.jsx";
+import {validation} from "../functions/Validation.js";
 
 function Email(){
   const {signupData, updateSignupData} = useContext(SignupContext);
@@ -11,10 +12,16 @@ function Email(){
 
   const [formEmail, setFormEmail] = useState("");
 
+  const {valid, message} = validation(formEmail);
+
   const handleVerifyEmail = async (e, email)=>{
 
     if(!formEmail || formEmail.trim() === "") {
       alert("이메일을 입력해주세요.");
+      return;
+    }
+    if(!valid) {
+      alert(message);
       return;
     }
 
@@ -76,7 +83,7 @@ function Email(){
       <div className="flex flex-col gap-1">
         <p className="text-sm">이메일</p>
         <div className="flex justify-between">
-          <input type="email" value={formEmail} onChange={(e) => setFormEmail(e.target.value)}   className="w-9/12 bg-gray-300 focus:bg-gray-100 px-2" required />
+          <input type="email" value={formEmail} onChange={(e) => setFormEmail(e.target.value)} className="w-9/12 bg-gray-300 focus:bg-gray-100 px-2" required />
           <Button type="button" text='인증' onclick={(e)=>{ handleVerifyEmail(e,formEmail)}} colorClass={'bg-gray-300'}/>
         </div>
         {check === false ?
@@ -93,8 +100,6 @@ function Email(){
             null
         }
       </div>
-
-
 
     </div>
   )
