@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import Button from "./Button";
 import { RegisterContext } from '../context/RegisterContext';
 
@@ -20,7 +20,15 @@ function Email({setFlag}){
   const [disabled, setDisabled] = useState(true)
   //인증 버튼
   const [isUnCheck, setIsUnCheck] = useState(true)
+  //이메일 중복 확인 데이터
+  const [dbEmail, setDbEmail] = useState([])
 
+  //이메일 중복 겁사
+  useEffect(()=>{
+    fetch('http://localhost:8080/register')
+      .then(response => response.json())
+      .then(data => setDbEmail(data))
+  },[])
 
   //이메일 형식 체크
   const rightEmail =(e)=>{
@@ -39,6 +47,7 @@ function Email({setFlag}){
       setIsUnCheck(false)
     }
   }
+
 
   //인증버튼 클릭
   const sendCode = async(e)=>{
