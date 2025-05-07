@@ -60,7 +60,6 @@ function Email({setFlag}){
       if(response.ok){
         setCheckText('이메일에서 인증코드를 확인해주세요')
         setCode(data.code)
-        console.log(data)
       } else {
         setCheckText('오류가 발생했습니다')
       }
@@ -76,10 +75,16 @@ function Email({setFlag}){
     setCheck(e.target.value)
 
     //인증번호 동일 > 버튼 활성화 & 메시지
-    // if()
-    console.log(code, typeof code)
+    if(code === check){
+      setCheckText('인증 완료했습니다')
+      setDisabled(false)
+    }
 
     //인증번호 불일치 > 버튼 비활성화 & 메시지
+    else {
+      setCheckText('다시 입력해주세요')
+      setDisabled(true)
+    }
   }
 
   return(
