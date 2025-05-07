@@ -17,6 +17,12 @@ router.get('/sendCode',async(req,res)=>{
   req.session.authExpire = Date.now() + 1000*60*5
 
   //메일 옵션
+  const mailOptions = {
+    from : process.env.EMAIL_USER,
+    to : email,
+    subject:'이메일 인증 코드',
+    text: `인증 코드는 ${code} 입니다`
+  }
 
   //실행 - 에러 처리
 })
