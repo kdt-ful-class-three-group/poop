@@ -22,7 +22,7 @@ dotenv.config();
 
 //세션 미들웨어
 app.use(session({
-  secret: process.env.SECRETKEY,
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {

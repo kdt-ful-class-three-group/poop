@@ -14,15 +14,15 @@ export default function Community() {
   const postsPerPage = 6; // 한 페이지당 게시글 수
 
 
-  // 게시글 더미데이터
+  // 게시글 가져오는 useEffect
   useEffect(() => {
    const fetchPosts = async () => {
     try {
-      const res = await fetch('http://localhost:4000/api/community/post');
-      const data = await res.json();
+      const res = await fetch('http://localhost:8080/community/post');
+      const data = await res.json(); // 실제 받아온 데이터를 변수에 저장
 
       // console.log('가져온 게시글:', data); // 디버깅용
-      setPosts(dummyPosts);
+      setPosts(data);// 받아온 데이터를 상태에 저장
 
     // ✅ 총 페이지 수 계산 (최소 1페이지는 유지)
     const calculatedPages = Math.ceil(dummyPosts.length / postsPerPage);
@@ -35,7 +35,7 @@ export default function Community() {
    };
 
    fetchPosts();
-  }, []);
+  }, []); // 컴포넌트다 마운트될 때 한 번만 실행
 
   // 글쓰기 페이지로 이동
   const goToWritePage = () => {
@@ -141,13 +141,13 @@ export default function Community() {
           </div>
         ) : visiblePosts.length > 0 ? (
           visiblePosts.map((post) => (
-            <Link to={`/Community/CommunityDetail/${post.id}`} key={post.id} className="block px-4 py-2 hover:bg-gray-50">
+            <Link to={`/Community/CommunityDetail/${post.board_id}`} key={post.board_id} className="block px-4 py-2 hover:bg-gray-50">
               <div className="flex flex-col">
                 <h2 className="text-base font-medium text-gray-900">{post.title}</h2>
                 <div className="flex items-center text-xs text-gray-500 mt-1">
-                  <span>{post.author}</span>
+                  <span>{post.user_id}</span>
                   {/* <span className="mx-1">•</span> */}
-                  <span>{new Date(post.createdAt).toLocaleDateString()}</span>
+                  <span>{new Date(post.data).toLocaleDateString()}</span>
                 </div>   
               </div>
             </Link>
