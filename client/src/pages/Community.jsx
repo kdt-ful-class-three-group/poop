@@ -13,28 +13,28 @@ export default function Community() {
 
   const postsPerPage = 6; // 한 페이지당 게시글 수
 
+
   // 게시글 더미데이터
   useEffect(() => {
-    const dummyPosts = [
-      { id: 1, title: '임시 게시글 제목 1', author: '테스트유저1', createdAt: new Date() },
-      { id: 2, title: '임시 게시글 제목 2', author: '테스트유저2', createdAt: new Date() },
-      { id: 3, title: '임시 게시글 제목 3', author: '테스트유저3', createdAt: new Date() },
-      { id: 4, title: '임시 게시글 제목 4', author: '테스트유저4', createdAt: new Date() },
-      { id: 5, title: '임시 게시글 제목 5', author: '테스트유저5', createdAt: new Date() },
-      { id: 6, title: '임시 게시글 제목 6', author: '테스트유저6', createdAt: new Date() },
-      { id: 7, title: '하하', author: '테스트유저7', createdAt: new Date() },
-    ];
+   const fetchPosts = async () => {
+    try {
+      const res = await fetch('http://localhost:4000/api/community/post');
+      const data = await res.json();
 
-
-    console.log('더미 게시글:', dummyPosts);
-    // 더미 게시글 저장
-    setPosts(dummyPosts);
+      // console.log('가져온 게시글:', data); // 디버깅용
+      setPosts(dummyPosts);
 
     // ✅ 총 페이지 수 계산 (최소 1페이지는 유지)
     const calculatedPages = Math.ceil(dummyPosts.length / postsPerPage);
     setTotalPages(Math.max(1, calculatedPages));
+    } catch (err) {
+      console.error('게시글 불러오기 실패:', err);
+    }finally {
+      setIsLoading(false);
+    }
+   };
 
-    setIsLoading(false);
+   fetchPosts();
   }, []);
 
   // 글쓰기 페이지로 이동
