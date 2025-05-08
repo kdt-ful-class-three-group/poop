@@ -26,18 +26,23 @@ const RegisterBirth = ({handleNext,handleBack}) => {
       alert("생년월일은 숫자로 입력해주세요.");
       return;
     }
+
+    const formattedBirthdate = `${birthdate.slice(0, 4)}-${birthdate.slice(4, 6)}-${birthdate.slice(6, 8)}`;
+
     const updated = {
-      birthDate: birthdate,
+      birth_date: formattedBirthdate,
       gender:gender
     };
     updateSignupData(updated);
-    console.log("업데이트된 유저 정보", signupData);
+    console.log("생년월일을 받은 유저 정보", updated);
+
+     console.log("생년월일 업데이트된 유저 정보", signupData);
 
     handleNext();
   }
   useEffect(() => {
     console.log("현재 유저 가입 정보", signupData);
-  }, []);
+  }, [signupData]);
 
 
 
@@ -68,8 +73,8 @@ const RegisterBirth = ({handleNext,handleBack}) => {
             <input 
             type="radio" 
             name="gender" 
-            value="male"
-            checked = {gender === 'male'}
+            value="M"
+            checked = {gender === 'M'}
             onChange={(e) => setGender(e.target.value)}
             className="mr-2" 
             />
@@ -81,9 +86,9 @@ const RegisterBirth = ({handleNext,handleBack}) => {
             <input 
             type="radio" 
             name="gender" 
-            value="female"
+            value="F"
             className="mr-2"
-            checked = {gender === 'female'}
+            checked = {gender === 'F'}
             onChange={(e) => setGender(e.target.value)}
             />
             여자

@@ -7,10 +7,10 @@ export const SignupProvider = ({ children }) => {
   const [signupData, setSignupData] = useState({
     user_id: '',
     password: '',
-    nickname: '',
-    birthDate: '',
-    gender: '',
     email: '',
+    user_nick: '',
+    gender: '',
+    birth_date: '',
   });
 
 

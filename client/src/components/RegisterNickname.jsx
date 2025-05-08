@@ -1,17 +1,71 @@
 
 import React from "react";
+import {SignupContext} from "../context/SignupContext.jsx";
+import {fetchRegister} from "../api/fectchApi.js";
+import {useNavigate} from "react-router-dom";
+
 
 const RegisterNickname = () => {
+
+  const navigate = useNavigate();
+  const{signupData, updateSignupData} = React.useContext(SignupContext);
+  console.log("현재까지 받은 유저 정보",signupData)
+
+  const [nickname, setNickname] = React.useState("");
+
+  const handelSubmit = async (e) => {
+
+
+    if(!nickname || nickname.trim() === "") {
+      alert("닉네임을 입력해주세요.");
+      return;
+    }
+    if(nickname.length < 2 || nickname.length > 20) {
+      alert("닉네임은 2자리 이상 8자리 이하로 입력해주세요.");
+      return;
+    }
+    if(!/^[a-zA-Z0-9가-힣]+$/.test(nickname)) {
+      alert("닉네임은 한국어 및 영문자와 숫자만 입력 가능합니다.");
+      return;
+    }
+    const updated = {
+      user_nick: nickname
+    }
+    updateSignupData(updated);
+    console.log("닉네임을 받은 유저 정보", updated);
+    console.log("최종 유저 정보", signupData);
+
+    const finalSignupData = {
+      ...signupData,
+      user_nick: nickname,
+    };
+
+    try {
+      const userData = await fetchRegister(finalSignupData);
+      console.log("유저 등록 성공", userData);
+      alert("회원가입이 완료되었습니다.");
+      navigate("/login");
+
+    }catch (err) {
+      console.error("유저 등록 에러", err);
+    }
+
+  }
+
+
+
   return (
     <div className="m-3 w-full ">
       <button className="mb-4 px-4 py-2 bg-gray-300 rounded">이전</button>
-      {/* 2. 생년월일 */}
+
       <div className="mb-4">
         <label className="block font-bold mb-2">닉네임</label>
         <input
           type="text"
-          name="birthdate"
+          name="nickname"
+          onChange={(e) => setNickname(e.target.value)}
           placeholder="닉네임을 입력해 주세요"
+          value={nickname}
           maxLength="8"
           className="w-full p-2 border rounded bg-gray-200"
         />
@@ -19,7 +73,7 @@ const RegisterNickname = () => {
 
       {/* 3. 다음 버튼 */}
       <div>
-        <button  className="w-full py-2 bg-gray-300 rounded">다음</button>
+        <button onClick={handelSubmit} type="submit" className="w-full py-2 bg-gray-300 rounded">다음</button>
       </div>
     </div>
   );
