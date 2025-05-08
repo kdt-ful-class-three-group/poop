@@ -45,9 +45,9 @@ function Register({ flag, setFlag, nextHandle }) {
       nextHandle("/Register/RegisterEmail");
     }
   };
-  useEffect(() => {
-    console.log("flag", flag); // 상태 변경 확인
-  }, [flag]);
+  // useEffect(() => {
+  //   console.log("flag", flag); // 상태 변경 확인
+  // }, [flag]);
   // 비밀번호와 비밀번호 확인이 같은지 확인
   useEffect(() => {
     setIsPasswordMatch(
@@ -132,9 +132,9 @@ function Register({ flag, setFlag, nextHandle }) {
             <button
               type="submit"
               className={`w-full text-center text-sm py-2 rounded mt-7 ${
-                isPasswordMatch ? "bg-[#62a3ff]" : "bg-[#D9D9D9]"
+                isPasswordMatch && !isUserId ? "bg-[#62a3ff]" : "bg-[#D9D9D9]"
               }`}
-              disabled={!isPasswordMatch}
+              disabled={!isPasswordMatch || isUserId}
             >
               다음
             </button>
