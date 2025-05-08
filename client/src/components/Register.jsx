@@ -1,12 +1,13 @@
 import Input from "../components/Input.jsx";
 import RegisterEmail from "../components/RegisterEmail";
 import { useState, useEffect } from "react";
-// import poopTimeApi from "../services/poopTimeApi.js";
+import poopTimeApi from "../services/poopTimeApi.js";
 import { useRegister } from "../layout/registerContext.jsx";
 function Register({ flag, setFlag, nextHandle }) {
   // const [showEmail, setShowEmail] = useState(true);
   const { setRegisterData, updateRegisterData } = useRegister();
   const [isPasswordMatch, setIsPasswordMatch] = useState(false);
+  const [isUserId, setIsUserId] = useState(false);
   // const buttonClick = () => {
   //   setShowEmail(false);
   // };
@@ -15,6 +16,22 @@ function Register({ flag, setFlag, nextHandle }) {
     password: "",
     passwordCheck: "",
   });
+
+  const checkUserId = async (value) => {
+    try {
+      const userData = await poopTimeApi("userIdTest", "POST", {
+        userName: value,
+      });
+      setIsUserId(userData.exists);
+    } catch (error) {}
+  };
+  // useEffect(() => {
+  //   const userIdTestApi = async () => {
+  //     const userIdTestUrl = await poopTimeApi("userIdTest");
+  //     console.log(userIdTestUrl);
+  //   };
+  //   userIdTestApi();
+  // }, []);
   const nextBtnClick = (e) => {
     e.preventDefault();
     setRegisterData((prev) => ({
@@ -46,23 +63,38 @@ function Register({ flag, setFlag, nextHandle }) {
         <h1 className="justify-start items-left mt-20">회원가입</h1>
         <div className="h-100 flex flex-col justify-center items-center">
           <form className="w-full" onSubmit={nextBtnClick}>
-            <label className="text-sm text-black mb-2 ">아이디</label>
+            <label className="inline-block text-sm text-black mb-2 ">
+              아이디
+            </label>
             <Input
-              className="bg-gray-300 w-full border-solid mb-8 p-2 "
+              className="bg-gray-300 w-full border-solid p-2 "
               type="text"
               name="username"
               placeholder=""
               value={localData.user_id || ""}
               onChange={(e) => {
-                setLocalData((prev) => ({
-                  ...prev,
-                  user_id: e.target.value,
-                }));
+                const value = e.target.value;
+                if (/^[a-zA-Z0-9]*$/.test(value)) {
+                  setLocalData((prev) => ({
+                    ...prev,
+                    user_id: value,
+                  }));
+                  checkUserId(value);
+                  // poopTimeApi("userIdTest", "POST", { userName: value });
+                }
               }}
             />
-            <label className="text-sm text-black mb-2">비밀번호</label>
+            {isUserId && (
+              <p className="text-red-600 text-[12px] block">
+                아이디가 중복되었습니다.
+              </p>
+            )}
+
+            <label className="inline-block text-sm text-black mb-2 mt-8">
+              비밀번호
+            </label>
             <Input
-              className="bg-gray-300 w-full border-solid mb-8 p-2 "
+              className="bg-gray-300 w-full border-solid p-2 "
               type="password"
               name="password"
               placeholder=""
@@ -74,7 +106,9 @@ function Register({ flag, setFlag, nextHandle }) {
                 }));
               }}
             />
-            <label className="text-sm text-black mb-2">비밀번호 확인</label>
+            <label className="inline-block text-sm text-black mb-2 mt-8">
+              비밀번호 확인
+            </label>
             <Input
               className="bg-gray-300 w-full border-solid mb-2 p-2 "
               type="password"
