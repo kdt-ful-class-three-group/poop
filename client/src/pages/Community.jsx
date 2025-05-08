@@ -25,7 +25,7 @@ export default function Community() {
       setPosts(data);// 받아온 데이터를 상태에 저장
 
     // ✅ 총 페이지 수 계산 (최소 1페이지는 유지)
-    const calculatedPages = Math.ceil(dummyPosts.length / postsPerPage);
+    const calculatedPages = Math.ceil(data.length / postsPerPage);
     setTotalPages(Math.max(1, calculatedPages));
     } catch (err) {
       console.error('게시글 불러오기 실패:', err);
@@ -35,6 +35,7 @@ export default function Community() {
    };
 
    fetchPosts();
+   
   }, []); // 컴포넌트다 마운트될 때 한 번만 실행
 
   // 글쓰기 페이지로 이동
@@ -162,7 +163,7 @@ export default function Community() {
       {/* 페이지네이션 */}
       {totalPages > 1 && (
         <div className="flex justify-center py-4 border-t border-gray-200">
-          <nav className="inline-flex text-sm">{renderPagination()}</nav>
+          <nav className="inline-flex text-sm"> {renderPagination()}</nav>
         </div>
       )}
     </div>
