@@ -64,8 +64,8 @@ function Register({ setFlag, flag }) {
 
 
   const pwCheck = (e) => {
-    // 비밀번호 조건 충족
-    const pattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{8,}$/
+    // 비밀번호 조건 충족    
+    const pattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     //입력창 활성화를 위해 입력
     setPw(e.target.value)
 
