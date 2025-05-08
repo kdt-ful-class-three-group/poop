@@ -102,7 +102,7 @@ export default function Community() {
   // 실제 렌더링되는 부분
   return (
     <div className="w-full mx-auto bg-white">
-      <div className="border-b border-gray-200">
+      <div>
         <div className="py-3 px-4">
 
           <div className="mt-3 relative">
@@ -162,10 +162,11 @@ export default function Community() {
 
       {/* 페이지네이션 */}
       {totalPages > 1 && (
-        <div className="flex justify-center py-4 border-t border-gray-200">
+        <div className="flex justify-center py-4">
           <nav className="inline-flex text-sm"> {renderPagination()}</nav>
         </div>
       )}
+
     </div>
   );
 }
