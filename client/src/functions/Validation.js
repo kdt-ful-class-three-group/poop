@@ -1,7 +1,7 @@
 export function validation (username, password, passwordCheck, ) {
   const idRegex = /[ \{\}\[\]\/?.,;:|\)*~`!^\_+┼<>@\#$%&\'\"\\\(\=]/gi;
   const passwordRegex = /[ \{\}\[\]\/?.,;:|\)*~!^\_+┼<>@\#$%&\'\"\\\(\=]/gi;
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 
   if (username.trim().length < 4 || username.length > 20) {
     return { valid: false, message: "아이디는 4자 이상 20자 이하로 입력해주세요." };
@@ -24,5 +24,19 @@ export function validation (username, password, passwordCheck, ) {
     return { valid: false, message: "모든 필드를 입력해주세요." };
   }
 
+  return { valid: true };
+}
+
+
+
+
+export function validationEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email) {
+    return { valid: false, message: "이메일을 입력해주세요." };
+  }
+  if (!emailRegex.test(email)) {
+    return { valid: false, message: "유효한 이메일 주소를 입력해주세요." };
+  }
   return { valid: true };
 }
