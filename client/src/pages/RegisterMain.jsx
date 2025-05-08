@@ -6,6 +6,7 @@ import RegisterEmail from '../components/RegisterEmail';
 import RegisterBirth from "../components/RegisterBirth";
 import RegisterNickname from "../components/RegisterNickname";
 import RegisterprevBtn from "../components/RegisterprevBtn";
+import { RegisterProvider } from "../context/RegisterContext";
 
 function RegisterMain() {
   const [flag, setFlag] = useState(0);
