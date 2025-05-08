@@ -53,3 +53,19 @@ export const verifyCode = async (email, code) => {
   const data = await response.json();
   return { status: response.status, data };
 }
+
+
+export const fetchRegister = async (userData) => {
+  const response = await fetch("http://localhost:8080/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify(userData),
+    }
+  );
+
+  if (!response.ok) throw new Error("회원가입 실패");
+  return await response.json();
+}
