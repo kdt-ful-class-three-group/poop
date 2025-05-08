@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useContext } from "react";
 import { RegisterContext } from '../context/RegisterContext'
 
-function Register({ setFlag }) {
+function Register({ setFlag, flag }) {
   //아이디 값
   const [user, setUser] = useState('')
   //비밀번호
@@ -98,7 +98,7 @@ function Register({ setFlag }) {
   const buttonClick = (e) => {
     e.preventDefault()
 
-    setFlag(2)
+    setFlag(++flag);
     updateData({ 'user_id': user, 'password': pw })
   }
 
