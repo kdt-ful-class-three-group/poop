@@ -5,32 +5,28 @@ import {useContext} from "react";
 import {SignupContext} from "../context/SignupContext.jsx";
 import {validation} from "../functions/Validation.js";
 
-function Email(){
+function Email({email,setEmail,setEmailVerified}) {
   const {signupData, updateSignupData} = useContext(SignupContext);
   const [check, setCheck] = useState(null);
   const [authCode, setAuthCode] = useState("");
 
-  const [formEmail, setFormEmail] = useState("");
 
-  const {valid, message} = validation(formEmail);
 
-  const handleVerifyEmail = async (e, email)=>{
 
-    if(!formEmail || formEmail.trim() === "") {
+  const handleVerifyEmail = async ()=>{
+
+    if(!email || email.trim() === "") {
       alert("이메일을 입력해주세요.");
       return;
     }
-    if(!valid) {
-      alert(message);
-      return;
-    }
+
 
     try{
       const {status, data} = await verifyEmail(email);
 
 
       if(status === 200) {
-        alert("인증번호가 발송되었습니다. 5분 이내에 인증번호를 입력해주세요.");
+        alert("인증번호가 발송되었습니다.");
         setCheck(true);
       } else{
         alert("인증번호 발송에 실패했습니다.");
@@ -53,20 +49,21 @@ function Email(){
     }
 
     try{
-      const {status, data} = await verifyCode(code);
+      const {status, data} = await verifyCode(email,code);
       const updated ={
-        email: formEmail
+        email: email
       }
 
       if(status === 200) {
         alert("인증번호가 확인되었습니다.");
         setCheck(true);
-        updateSignupData({email: formEmail});
+        setEmailVerified(true);
+        updateSignupData({email: email});
         updateSignupData(updated);
       } else{
         alert("인증번호 확인에 실패했습니다.");
         setCheck(false);
-        e.preventDefault()
+
       }
 
     } catch (err) {
@@ -83,8 +80,8 @@ function Email(){
       <div className="flex flex-col gap-1">
         <p className="text-sm">이메일</p>
         <div className="flex justify-between">
-          <input type="email" value={formEmail} onChange={(e) => setFormEmail(e.target.value)} className="w-9/12 bg-gray-300 focus:bg-gray-100 px-2" required />
-          <Button type="button" text='인증' onclick={(e)=>{ handleVerifyEmail(e,formEmail)}} colorClass={'bg-gray-300'}/>
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-9/12 bg-gray-300 focus:bg-gray-100 px-2" required />
+          <Button type="button" text='인증' onclick={ handleVerifyEmail} colorClass={'bg-gray-300'}/>
         </div>
         {check === false ?
           <p className="text-red-500 text-xs">인증번호 발송에 실패했습니다.</p>

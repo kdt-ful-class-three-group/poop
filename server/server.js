@@ -8,15 +8,30 @@ import commonsense from './routes/commonsense.js'
 import horror from "./routes/horror.js"
 import community from "./routes/community.js";
 import verify from "./routes/emailVerify.js";
+import session from "express-session";
 
 const app = express();
-app.use(express.json());
+
 app.use(cors(
   {
     origin: "http://localhost:3030",
     credentials: true,
   }
 ));
+
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 5 * 60 * 1000, // 5분
+    httpOnly: true,
+    secure: false,
+  }
+}));
+
+
 dotenv.config();
 
 app.get("/", (req, res) => {
