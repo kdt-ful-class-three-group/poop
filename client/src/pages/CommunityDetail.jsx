@@ -23,24 +23,26 @@ function CommunityDetail() {
   const deleteBtn = async(e)=>{
     e.preventDefault()
 
+    console.log('삭제 요청',data.board_id)
+
     //fetch
-    const response = await fetch(`http://localhost:8080/delete/${data.board_id}`,{
+    const response = await fetch(`http://localhost:8080/community/delete/${data.board_id}`,{
       method:'DELETE'
     })
 
-    const result = await response.json()
-
+    
     if(response.ok){
       // 삭제 후 목록으로 이동
       navigate('/community')
     } else {
       alert('삭제 실패했습니다')
     }
+    // const result = await response.json()
   }
 
   //버튼 데이터
   const btnArr = [
-    {text:'수정',colorClass:'bg-gray-300',clickEvent:''}
+    {text:'수정',colorClass:'bg-gray-300',clickEvent:(e)=>deleteBtn(e)}
   ]
 
 
@@ -63,7 +65,7 @@ function CommunityDetail() {
         <>
           <div className="">
             <Button text={'수정'} colorClass={'bg-gray-300'}/>
-            <Button text={'삭제'} colorClass={'bg-gray-300'}/>
+            <Button text={'삭제'} colorClass={'bg-gray-300'} clickEvent={(e)=>deleteBtn(e)}/>
           </div>
         </>
         :
