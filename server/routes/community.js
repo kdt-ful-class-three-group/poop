@@ -36,6 +36,14 @@ router.post('/write', async (req, res) => {
 });
 
 //수정
+router.put('/update/:id',async(req,res)=>{
+  //boarder_id
+  const id = req.params.id
+  const {title, content} = req.body
+  const date = new Date()
+
+  await pool.execute(`UPDATE board SET title = ? ,content = ?, date = ? WHERE board_id=?`,[title, content, date])
+})
 
 //삭제
 router.delete('/delete/:id',async(req,res)=>{
