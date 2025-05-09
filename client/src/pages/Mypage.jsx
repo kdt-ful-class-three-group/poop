@@ -1,11 +1,21 @@
 import { useContext } from "react";
 import { LoginContext } from "../context/loginContext";
+import { useNavigate } from "react-router-dom";
 
 
 
 function Mypage() {
+  const navigate = useNavigate();
   const { logoutHandle } = useContext(LoginContext);
   const nickname = sessionStorage.getItem("user_nick");
+  const user_id = sessionStorage.getItem("id");
+
+  if(!user_id || !nickname){
+    alert("로그인 후 이용해주세요.");
+    navigate("/Login");
+  }
+
+
 
   return (
     <div className="w-full">
