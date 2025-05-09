@@ -10,12 +10,16 @@ function CommunityDetail() {
   const [data, setData] = useState({})
   //날짜
   const [day, setDay] = useState('')
-
+  //로그인 상태
   const {isLogin} = useContext(LoginContext)
+  //로그인 > 닉네임 가져오기
+  const [nick, setNick] = useState(sessionStorage.getItem('user_nick'),'')
 
   useEffect(()=>{
     setData(location.state)
     setDay((data.date||'').split('T')[0].replace(/-/g,'.'))
+    console.log('로그인 nick',nick)
+    console.log('작성자 nick',data.nickname)
   },[data])
 
 
