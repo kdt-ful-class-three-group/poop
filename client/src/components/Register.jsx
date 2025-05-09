@@ -96,7 +96,8 @@ function Register({ nextHandle }) {
   //다음버튼 클릭이벤트
   const buttonClick = (e) => {
     e.preventDefault()
-    updateFormData({ 'user_id': user, 'password': pw })
+    updateFormData("user_id", user);
+    updateFormData("password", pw);
     nextHandle();
   }
 
