@@ -20,7 +20,7 @@ router.get('/',async(req,res)=>{
 router.post("/", async (req,res) => {
 
     try {
-        const {user_id, password, email, user_nick, gender, birth_date} = req.body;
+    const {user_id, password, email, user_nick, gender, birth_date} = req.body;
         console.log("Register attempt:", {user_id, password, email, user_nick, gender, birth_date}); // 디버깅용 로그
 
 

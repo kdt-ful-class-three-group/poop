@@ -23,7 +23,7 @@ function Email({ nextHandle }) {
   // 인증코드 전송
   const handleSendCode = async () => {
     try {
-      const res = await fetch("http://localhost:8080/email/send", {
+      const res = await fetch("http://localhost:8081/email/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include", // 세션 유지 필수!
@@ -45,7 +45,7 @@ function Email({ nextHandle }) {
 
     if (value.length === 6) {
       try {
-        const res = await fetch("http://localhost:8080/email/verify", {
+        const res = await fetch("http://localhost:8081/email/verify", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",

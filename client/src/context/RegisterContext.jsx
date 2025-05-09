@@ -5,11 +5,12 @@ const RegisterContext = createContext();
 
 export const RegisterProvider = ({children}) => {
   const [formData, setFormData] = useState({
+    user_id : "",
     password: "",
     email: "",
-    nickname: "",
+    user_nick: "",
     gender : "",
-    birth: "",
+    birth_date: "",
   });
 
   const updateFormData = (key, value) => {

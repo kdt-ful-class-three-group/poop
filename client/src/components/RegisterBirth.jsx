@@ -32,7 +32,7 @@ const RegisterBirth = ({ nextHandle }) => {
       gender: gender
     };
     updateFormData("gender", gender);
-    updateFormData("birth", formattedBirthdate);
+    updateFormData("birth_date", formattedBirthdate);
     
     console.log("생년월일을 받은 유저 정보", updated);
     
