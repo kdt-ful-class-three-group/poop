@@ -21,7 +21,7 @@ function CommunityDetail() {
   //네비게이터
   const navigate = useNavigate()
   useEffect(()=>{
-    fetch(`http://localhost:8081/community/post/${params.board_id}`)
+    fetch(`http://localhost:8080/community/post/${params.board_id}`)
     .then(response => response.json())
     .then(i => {
       setData(i[0])
@@ -44,13 +44,13 @@ function CommunityDetail() {
     console.log('삭제 요청',data.board_id)
 
     //fetch
-    const response = await fetch(`http://localhost:8081/community/delete/${data.board_id}`,{
+    const response = await fetch(`http://localhost:8080/community/delete/${data.board_id}`,{
       method:'DELETE'
     })
 
     
     if(response.ok){
-      // 삭제 후 목록으로 이동
+      alert("삭제 성공")
       navigate('/community')
     } else {
       alert('삭제 실패했습니다')
@@ -85,7 +85,7 @@ function CommunityDetail() {
 
   useEffect(() => {
     if (!board_id) return;
-    fetch(`http://localhost:8081/comment/${board_id}`, {
+    fetch(`http://localhost:8080/comment/${board_id}`, {
       credentials: "include"
     })
       .then(res => res.json())
@@ -102,7 +102,7 @@ function CommunityDetail() {
     }
 
 
-    const response = await fetch("http://localhost:8081/comment/write", {
+    const response = await fetch("http://localhost:8080/comment/write", {
       method:"POST",
       headers:{
         "Content-Type": "application/json",
@@ -119,7 +119,7 @@ function CommunityDetail() {
 
     alert("댓글 작성 성공");
     setContent("");
-    fetch(`http://localhost:8081/comment/${board_id}`, {
+    fetch(`http://localhost:8080/comment/${board_id}`, {
       credentials: "include"
     })
       .then(r => r.json())
