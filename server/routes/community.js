@@ -42,26 +42,21 @@ router.get('/post/:board_id', async (req, res) => {
 });
 
 
-
-
-
-router.post('/write', async (req, res) => {
-  const { title, content, user_id } = req.body;
-  console.log("Community write attempt:", { user_id, title, content }); // 디버깅용 로그
+router.post("/write", async (req, res) => {
+  const { title, content, user_id, date } = req.body;
+  console.log("글쓰기 요청 body:", req.body);
 
   try {
     await pool.execute(
-      "INSERT INTO board(user_id, title, content) VALUES(?, ?, ?)",
-      [user_id, title, content]
+      `INSERT INTO board (title, content, user_id, date) VALUES (?, ?, ?, ?)`,
+      [title, content, user_id, date]
     );
-    return res.status(200).json({ msg: "글 작성성공" });
+    res.status(200).json({ msg: "성공" });
   } catch (err) {
-    console.error("Community write error:", err);
-    res.status(500).json({
-      success: false,
-      msg: "서버 내부 에러"
-    });
+    console.error("글 등록 오류:", err);
+    res.status(500).json({ msg: "서버 오류" });
   }
 });
+
 
 export default router;

@@ -1,3 +1,5 @@
+// components/QuilEditer.jsx
+
 import React from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -30,8 +32,8 @@ const QuillEditor = ({ value, onChange }) => {
                 onChange={onChange}
                 modules={modules}
                 formats={formats}
-                className="h-full"
-                placeholder="내용을 입력하세요..."
+                className="h-60"
+                placeholder="내용을 입력하세요"
             />
         </div>
     );
