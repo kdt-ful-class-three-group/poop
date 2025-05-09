@@ -6,18 +6,18 @@ import RegisterEmail from '../components/RegisterEmail';
 import RegisterBirth from "../components/RegisterBirth";
 import RegisterNickname from "../components/RegisterNickname";
 import RegisterprevBtn from "../components/RegisterprevBtn";
-import { RegisterProvider } from "../context/RegisterContext";
+import { RegisterProvider } from "../context/registerContext";
 
 function RegisterMain() {
   const [flag, setFlag] = useState(0);
 
   // const [disabled, setDisabled] = useState(true);
 
-  // const nextHandle = () => {
-  //   if (flag < 4) {
-  //     setFlag(flag + 1);
-  //   }
-  // }
+  const nextHandle = () => {
+    if (flag < 4) {
+      setFlag(flag + 1);
+    }
+  }
 
   return (
     <RegisterProvider>
@@ -39,7 +39,7 @@ function RegisterMain() {
         {
           flag === 2 &&
           <div>
-            <RegisterEmail setFlag={setFlag} flag={flag} />
+            <RegisterEmail nextHandle={nextHandle} />
           </div>
         }
         {

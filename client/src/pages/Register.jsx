@@ -1,124 +1,136 @@
-import Input from "../components/Input.jsx"
-import RegisterEmail from '../components/RegisterEmail';
-import { useEffect, useState } from 'react'
+// import RegisterEmail from '../components/RegisterEmail';
+import React, {useState, useEffect } from "react";
 
 function Register() {
+  const [username, setUsername] = useState("");
+  const [usernameMessage, setUsernameMessage] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordCheck, setPasswordCheck] = useState("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isPasswordCheckVisible, setIsPasswordCheckVisible] = useState(false);
+  const [isButtonEnabled, setIsButtonEnabled] = useState(false);
 
-  //아이디 값
-  const [user, setUser] = useState('')
-  //비밀번호
-  const [pw, setPw] = useState('')
-  const [checkPw, setCheckPw] = useState('') //비밀번호 확인
-
-  //다음화면 보여줄 것인지
-  const [showEmail, setShowEmail] = useState(true);
-
-  //메시지
-  const [idText, setIdText] = useState('')
-  const [pwText, setPwText] = useState('')
-  const [pwCheckText, setCheckPwText] = useState('')
-
-  //유저 데이터
-  const [userData, setUserData]= useState([])
-  //유저 가져오기
-  useEffect(()=>{
-    fetch('http://localhost:8080/register')
-    .then(response => response.json())
-    .then(data=> setUserData(data))
-  },[])
-
-  //제출 -> 아이디, 비밀번호 값 담기
-  const userCheck = (e)=>{
-    // 아이디 특수문자 안됨
-    const input = e.target.value
-
-    const hasChar = /[^a-zA-Z0-9]/
-    
-    if(hasChar.test(input)){
-      setIdText('아이디에 특수문자는 포함할 수 없습니다')
-    } else {
-      setIdText('')
-      setUser(input)
-    }
-  }
-
-  useEffect(()=>{
-    
-    userData.forEach(data=>{
-      if(user===data.user_id){
-        setIdText('이미 존재하는 아이디입니다')
-      } 
-      if(user !== data.user_id){
-        setIdText('사용 가능한 아이디입니다')
+  // 아이디 중복 체크 함수
+  const checkUsername = async (username) => {
+    try {
+      const response = await fetch('http://localhost:8080/login/check-username', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username }),
+        // credenials : 'same'은 브라우저에서 인증 쿠키 보내는 용도, 서버에 인증이 없으면 생략 가능
+        credentials: 'same'
+      });
+      const data = await response.json();
+      if (data.available) {
+        setUsernameMessage("사용 가능한 아이디입니다.");
+      } else {
+        setUsernameMessage("이미 사용 중인 아이디입니다.");
       }
-      if(user.length===0) {
-        setIdText('')
-      }
-    })
-    
-  },[user])
+    } catch (error) {
+      console.error("Error checking username:", error);
+    }
+  };
 
-  
-  const pwCheck = (e)=>{
-    // 비밀번호 조건 충족
-    const pattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{8,}$/
-    //입력창 활성화를 위해 입력
-    setPw(e.target.value)
+  useEffect(() => {
+    if (username) {
+      checkUsername(username); // 아이디가 변경될 때마다 중복 체크 실행
+    }
+  }, [username]);
 
-    if(!pattern.test(e.target.value)){
-      setPwText('영문+숫자+특수문자로 8자 이상 입력해주세요')
+  // 비밀번호 유효성 검사
+  const validatePassword = (password) => {
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // 최소 8자, 문자와 숫자 포함
+    return regex.test(password);
+  };
+
+  // 비밀번호 확인 유효성
+  const isPasswordMatch = password === passwordCheck;
+
+  // "다음" 버튼 활성화 여부
+  useEffect(() => {
+    if (username && password && passwordCheck) {
+      setIsButtonEnabled(true);
     } else {
-      setPwText('')
-      setPw(e.target.value)
+      setIsButtonEnabled(false);
     }
-  }
+  }, [username, password, passwordCheck]);
 
-  const samePwCheck =(e)=>{
-    setCheckPw(e.target.value)
-    if(pw===e.target.value){
-      setCheckPwText('비밀번호가 일치합니다')
-    } else {
-      setCheckPwText('다시 입력해주세요')
-    }
-  }
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
 
+  const togglePasswordCheckVisibility = () => {
+    setIsPasswordCheckVisible(!isPasswordCheckVisible);
+  };
 
-  //다음버튼 클릭이벤트
-  const buttonClick = (e) => {
-    e.preventDefault()
-    //비밀번호 - 비밀번호 확인이 일치해야 넘어가도록 작성
-    if(pw===pwCheck){
-      setShowEmail(false);
-    }
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault() ;
+    // 회원가입 로직
+  };
+
 
   return (
-    <div className=" w-full h-full">
-      {showEmail
-        ?
-        (
-          <div className="w-full h-full">
-            <h1 className="justify-start items-left mt-20">회원가입</h1>
-            <div className="h-100 flex flex-col justify-center items-center">
-              <form className="w-full" onSubmit={buttonClick}>
-                <label className="text-sm text-black mb-2 ">아이디</label>
-                <p className="text-red-500 text-xs">{idText}</p>
-                <Input type="text" name="username" value={user} changeEvent={(e)=>userCheck(e)}/>
-                <label className="text-sm text-black mb-2">비밀번호</label>
-                <p className="text-red-500 text-xs">{pwText}</p>
-                <Input type="password" name="password" value={pw} changeEvent={(e)=>pwCheck(e)} />
-                <label className="text-sm text-black mb-2">비밀번호 확인</label>
-                <p className="text-red-500 text-xs">{pwCheckText}</p>
-                <Input type="password" name="passwordCheck" value={checkPw} changeEvent={(e)=>samePwCheck(e)} />
-                <button type="submit"
-                  className="w-full h-8 text-center text-sm bg-gray-300 hover:bg-gray-500 py-2 rounded mt-4">
-                  다음
-                </button>
-              </form>
-            </div>
+    <div className="w-full h-full">
+      <h1 className="justify-start items-left mt-20">회원가입</h1>
+      <div className="h-100 flex flex-col justify-center items-center">
+        <form className="w-full" onSubmit={handleSubmit}>
+          <label className="text-sm text-black mb-2">아이디</label>
+          <input
+            type="text"
+            name="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded mb-2"
+            required
+          />
+          <p className="text-sm text-gray-500">{usernameMessage}</p>
+
+          <label className="text-sm text-black mb-2">비밀번호</label>
+          <div className="relative">
+            <input
+              type={isPasswordVisible ? "text" : "password"}
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded mb-2"
+              required
+            />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="absolute right-2 top-2"
+            >
+              👁️
+            </button>
           </div>
-        )
-        : (<RegisterEmail />)}
+          <p className="text-sm text-gray-500">
+            {validatePassword(password) ? "유효한 비밀번호입니다." : "8자 이상, 영문, 숫자, 특수문자 포함"}
+          </p>
+
+          <label className="text-sm text-black mb-2">비밀번호 확인</label>
+          <input 
+            type={isPasswordCheckVisible ? "text" : "password"}
+            name="passwordCheck"
+            value={passwordCheck}
+            onChange={(e) => setPasswordCheck(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded mb-2"
+            required
+          />
+          <p className={`test-sm ${isPasswordMatch ? "text-green-500" : "text-red-500"}`}>
+            {isPasswordMatch ? "비밀번호가 일치합니다." : "다시 입력해주세요"}
+          </p>
+
+          <button
+            type="submit"
+            className={`w-full h-8 text-center text-sm bg-gray-300 hover:bg-gray-500 py-2 rounded mt-4 ${isButtonEnabled ? "bg-blue-500" : "bg-gray-300"}`}
+            disabled={!isButtonEnabled}
+          >
+            다음
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
