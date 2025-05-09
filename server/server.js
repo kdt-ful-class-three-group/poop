@@ -11,6 +11,7 @@ import community from "./routes/community.js";
 import login from "./routes/Login.js";
 import email from "./routes/email.js";
 import comment from "./routes/comment.js";
+import check from "./routes/authRoutes.js";
 
 //세션
 import session from "express-session";
@@ -28,7 +29,7 @@ dotenv.config();
 //세션 미들웨어
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SECRETKEY,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -41,6 +42,7 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
+app.use("/auth", check);
 app.use("/quiz", quiz);
 app.use("/register", register);
 app.use("/knowledge", commonsense);
