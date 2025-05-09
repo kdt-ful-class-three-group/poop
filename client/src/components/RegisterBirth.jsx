@@ -44,17 +44,7 @@ const RegisterBirth = ({ nextHandle }) => {
     console.log("현재 유저 가입 정보", formData);
   }, [formData]);
 
-
-
-  const handlePrev = () => {
-
-    handleBack();
-  }
-
-
-
   return (
-
     <div className="w-full ">
       {/* 1. 성별 */}
       <div className="mb-4">
