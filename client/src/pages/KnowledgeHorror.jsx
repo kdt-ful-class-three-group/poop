@@ -18,7 +18,7 @@ function KnowledgeHorror() {
 
   //fetch 가져오기
   useEffect(() => {
-    fetch(`http://localhost:8081/${category}`)
+    fetch(`http://localhost:8080/${category}`)
       .then((res) => res.json())
       .then((data) => {
         setData(data);

@@ -56,7 +56,7 @@ export const verifyCode = async (email, code) => {
 
 
 export const fetchRegister = async (userData) => {
-  const response = await fetch("http://localhost:8081/register", {
+  const response = await fetch("http://localhost:8080/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
