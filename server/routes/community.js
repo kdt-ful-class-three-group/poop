@@ -4,7 +4,7 @@ import express from 'express';
 import pool from "../config/database.js";
 const router = express.Router();
 
-// ✅ 게시글 전체 목록 조회 (user_nick 포함)
+// ✅ 게시글 전체 목록 조회 (user_nick 포함) 죽석
 router.get("/post", async (req, res) => {
   try {
     const [posts] = await pool.execute(`
