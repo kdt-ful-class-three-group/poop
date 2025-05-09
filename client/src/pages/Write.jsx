@@ -12,6 +12,36 @@ function Write() {
     // 작성 완료 -> 상세페이지로 이동
     const navigate = useNavigate()
 
+    // 유저 아이디
+    const user_id = sessionStorage.getItem('id')
+    // const user_pk = sessionStorage.getItem('id')
+
+
+    // 글 등록 이벤트
+    const writeBtn = async(e)=>{
+        e.preventDefault()
+        console.log('등록 요청',data)
+        //fetch
+        const response = await fetch('http://localhost:8080/community/write',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({user_id,title:data.title, content:data.content})
+
+        })
+
+
+
+        if(response.ok){
+            alert("글 등록 성공")
+            navigate('/community')
+        }else {
+            alert('등록 실패했습니다')
+        }
+    }
+
+
     //수정 클릭 이벤트
     const editBtn = async(e)=>{
         e.preventDefault()
@@ -45,7 +75,7 @@ function Write() {
                 <form className="w-full">
                     <div className="mb-4 flex flex-col gap-4 w-full">
                         <input
-                            className="border-2 border-solid rounded-lg w-full h-10 mb-4"
+                            className="border-2 px-1 border-solid rounded-lg w-full h-10 mb-4"
                             type="text"
                             id="title"
                             name="title"
@@ -61,7 +91,7 @@ function Write() {
                     <button
                         className="mt-10 w-full bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
                         type="submit"
-                        onClick={(e)=>editBtn(e)}
+                        onClick={(e)=>writeBtn(e)}
                     >
                         등록하기
                     </button>
