@@ -1,9 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { LoginContext } from "../context/loginContext";
 import Button from "../components/Button";
 
 function CommunityDetail() {
+  // params
+  const params = useParams()
   //Community에서 link로 전달받은 state
   const location = useLocation()
   //데이터
@@ -18,13 +20,21 @@ function CommunityDetail() {
   const [isSame, setIsSame] = useState(false)
   //네비게이터
   const navigate = useNavigate()
+  useEffect(()=>{
+    fetch(`http://localhost:8080/community/post/${params.board_id}`)
+    .then(response => response.json())
+    .then(i => {
+      setData(i[0])
+    })
+  },[])
   
   useEffect(()=>{
-    setData(location.state)
     setDay((data.date||'').split('T')[0].replace(/-/g,'.'))
+    console.log(data)
     console.log('로그인 nick',nick)
     console.log('작성자 nick',data.nickname)
     setIsSame(nick===data.nickname)
+    // setData(location.state)
   },[data,isLogin])
 
   //삭제 함수
@@ -47,19 +57,6 @@ function CommunityDetail() {
     }
     // const result = await response.json()
   }
-
-  //수정 함수
-  //버튼 클릭 > write + 내용 담기기
-  const editBtn = async(e)=>{
-    navigate(`/community/write/${data.board_id}`)
-  }
-
-  //버튼 데이터
-  const btnArr = [
-    {text:'수정',colorClass:'bg-gray-300',clickEvent:(e)=>deleteBtn(e)}
-  ]
-
-
 
   return (
     <div className="w-full">
