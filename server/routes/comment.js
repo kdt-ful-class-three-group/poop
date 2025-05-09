@@ -12,6 +12,7 @@ router.get("/", async (req, res) => {
       "SELECT * FROM comment WHERE board_id = ?",
       [board_id]
     );
+
     res.status(200).json(comment);
     console.log("댓글 데이터", comment); // 디버깅용 로그
   } catch (err) {
@@ -25,13 +26,12 @@ router.get("/", async (req, res) => {
 
 router.post("/write", async (req, res) => {
   const { content, user_id, board_id } = req.body;
-  console.log("작성 요청:", { content, user_id, board_id }); // 디버깅용 로그
+  console.log("작성 요청:", { user_id, content, board_id }); // 디버깅용 로그
 
   try {
-    // board_id가 유효한지 확인
-    const [board] = await pool.execute(
-      "SELECT * FROM board WHERE board_id = ?",
-      [board_id]
+    await pool.execute(
+      "INSERT INTO comment(user_id, content, board_id ) VALUES(?, ?, ?)",
+      [user_id, content, board_id]
     );
     if (board.length === 0) {
       return res
