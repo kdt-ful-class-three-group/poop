@@ -16,6 +16,23 @@ router.get("/post", async (req, res) => {
   }
 });
 
+//특정 파일 조회
+router.get('/post/:id',async(req,res)=>{
+  const id = req.params.id
+  try{
+    const [post] = await pool.execute('SELECT * FROM board WHERE board_id=?',[id])
+    res.status(200).json(post)
+    console.log('데이터',post)
+  }
+  catch(err){
+    console.error("Community get error:", err);
+    res.status(500).json({
+      success: false,
+      msg: "서버 내부 에러"
+    });
+  }
+})
+
 router.post('/write', async (req, res) => {
   const { title, content, user_id } = req.body;
   console.log("Community write attempt:", { user_id, title, content }); // 디버깅용 로그
