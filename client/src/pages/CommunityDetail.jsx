@@ -24,7 +24,7 @@ function CommunityDetail() {
         <h4 className="text-xl">{data.title}</h4>
       </div>
       <div className="flex items-center border-b border-[#d9d9d9] pb-1 mb-1">
-        <p className="text-sm mr-2">{data.user_id}</p>
+        <p className="text-sm mr-2">{data.nickname}</p>
         <span className="text-xs">{day}</span>
       </div>
       <div className="flex items-center mb-5">
