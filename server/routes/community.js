@@ -40,9 +40,23 @@ router.put('/update/:id',async(req,res)=>{
   //boarder_id
   const id = req.params.id
   const {title, content} = req.body
-  const date = new Date()
 
-  await pool.execute(`UPDATE board SET title = ? ,content = ?, date = ? WHERE board_id=?`,[title, content, date])
+  //디버깅
+  console.log('수정할 board_id',id)
+  console.log('수정할 내용', req.body)
+
+  try{
+    await pool.execute(`UPDATE board SET title = ? ,content = ? WHERE board_id=?`,[title, content,id])
+    return res.status(200).json({msg:'글 수정 성공'})
+    
+  }
+  catch(err){
+    console.log('err',err)
+    res.status(500).json({
+      success:false,
+      msg:'서버 내부 에러'
+    })
+  }
 })
 
 //삭제
