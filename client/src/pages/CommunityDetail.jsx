@@ -24,7 +24,7 @@ function CommunityDetail() {
     .then(i => {
       setData(i[0])
     })
-  },[])
+  },[params])
   
   useEffect(()=>{
     setDay((data.date||'').split('T')[0].replace(/-/g,'.'))
