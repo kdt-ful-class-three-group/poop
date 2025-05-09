@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { LoginContext } from "../context/loginContext";
+import Button from "../components/Button";
 
 function CommunityDetail() {
   //Community에서 link로 전달받은 state
@@ -8,6 +10,8 @@ function CommunityDetail() {
   const [data, setData] = useState({})
   //날짜
   const [day, setDay] = useState('')
+
+  const {isLogin} = useContext(LoginContext)
 
   useEffect(()=>{
     setData(location.state)
@@ -20,6 +24,17 @@ function CommunityDetail() {
       <div>
         <h2 className="text-xl">커뮤니티 상세</h2>
       </div>
+      {
+        isLogin ? 
+        <>
+          <div className="">
+            <Button text={'수정'} colorClass={'bg-gray-300'}/>
+            <Button text={'삭제'} colorClass={'bg-gray-300'}/>
+          </div>
+        </>
+        :
+        <></>
+      }
       <div className="mt-6 mb-1">
         <h4 className="text-xl">{data.title}</h4>
       </div>
