@@ -3,8 +3,8 @@ import pool from "../config/database.js";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  const { board_id } = req.query;
+router.get("/:board_id", async (req, res) => {
+  const { board_id } = req.params;
   console.log("댓글 요청", { board_id }); // 디버깅용 로그
 
   try {
@@ -31,12 +31,6 @@ router.post("/write", async (req, res) => {
   console.log("작성 요청:", { user_id, content, board_id }); // 디버깅용 로그
 
   try {
-    await pool.execute(
-      "INSERT INTO comment(user_id, content, board_id ) VALUES(?, ?, ?)",
-      [user_id, content, board_id]
-    );
-   
-
     // 댓글 저장 (board_id 포함)
     await pool.execute(
       "INSERT INTO comment(content, user_id, board_id) VALUES(?, ?, ?)", // 3개의 컬럼
