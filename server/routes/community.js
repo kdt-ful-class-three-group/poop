@@ -1,3 +1,5 @@
+// route/community.js
+
 import express from 'express';
 import pool from "../config/database.js";
 const router = express.Router();
@@ -15,6 +17,33 @@ router.get("/post", async (req, res) => {
     });
   }
 });
+
+router.get('/post/:board_id', async (req, res) => {
+  const board_id = req.params.board_id;
+
+  try {
+    const [result] = await pool.execute(
+      `SELECT board.*, user.user_id AS user_account_id
+       FROM board
+       JOIN user ON board.user_id = user.id
+       WHERE board.board_id = ?`,
+      [board_id]
+    );
+
+    if (result.length === 0) {
+      return res.status(404).json({ success: false, message: "게시글 없음" });
+    }
+
+    res.status(200).json(result[0]);
+  } catch (err) {
+    console.error("Community detail get error:", err);
+    res.status(500).json({ success: false, message: "DB 오류" });
+  }
+});
+
+
+
+
 
 router.post('/write', async (req, res) => {
   const { title, content, user_id } = req.body;

@@ -25,7 +25,7 @@ function App() {
               {/* <Route path="/" element={<Home />} /> */}
               <Route path="/Community" element={<Community />} />
               <Route
-                path="/Community/CommunityDetail"
+                path="/Community/CommunityDetail/:board_id"
                 element={<CommunityDetail />}
               />
               <Route path="/Community/write" element={<Write />} />
