@@ -21,6 +21,21 @@ export const LoginProvider = ({ children }) => {
   },[])
 
   const logoutHandle = () => {
+    fetch("http://localhost:8080/auth/logout", {
+      method: "POST",
+      credentials: "include",
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("로그아웃 되었습니다.");
+        } else {
+          alert("로그아웃 실패");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+    sessionStorage.clear()
     navigate("/Quiz");
     setIsLogin(false);
   }
