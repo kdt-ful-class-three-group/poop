@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Terms from '../components/Terms';
-import Button from "../components/Button";
 import Register from "../components/Register";
 import RegisterEmail from '../components/RegisterEmail';
 import RegisterBirth from "../components/RegisterBirth";

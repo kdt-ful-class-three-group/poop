@@ -1,12 +1,59 @@
-// RegisterBirth.jsx
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useState } from "react";
+import { userRegister } from "../context/RegisterContext";
 
-const RegisterBirth = () => {
-  const [gender, setGender] = React.useState('');
-  const [birthdate, setBirthdate] = React.useState('');
+const RegisterBirth = ({ nextHandle }) => {
+
+  const [gender, setGender] = useState('');
+  const [birthdate, setBirthdate] = useState('');
+  const { formData, updateFormData } = userRegister();
+
+  // 다음 버튼
+  const handleForward = (e) => {
+    e.preventDefault()
+
+    if (!birthdate || birthdate.trim() === "") {
+      alert("생년월일을 입력해주세요.");
+      return;
+    }
+    if (birthdate.length !== 8) {
+      alert("생년월일은 8자리로 입력해주세요.");
+      return;
+    }
+    if (isNaN(birthdate)) {
+      alert("생년월일은 숫자로 입력해주세요.");
+      return;
+    }
+
+    const formattedBirthdate = `${birthdate.slice(0, 4)}-${birthdate.slice(4, 6)}-${birthdate.slice(6, 8)}`;
+
+    const updated = {
+      birth_date: formattedBirthdate,
+      gender: gender
+    };
+    updateFormData(updated);
+    console.log("생년월일을 받은 유저 정보", updated);
+
+    console.log("생년월일 업데이트된 유저 정보", formData);
+
+    nextHandle();
+  }
+  useEffect(() => {
+    console.log("현재 유저 가입 정보", formData);
+  }, [formData]);
+
+
+
+  const handlePrev = () => {
+
+    handleBack();
+  }
+
+
 
   return (
-    <div>
+
+    <div className="w-full ">
       {/* 1. 성별 */}
       <div className="mb-4">
         <label className="block font-bold mb-2 mt-3">성별</label>
@@ -15,8 +62,9 @@ const RegisterBirth = () => {
             <input
               type="radio"
               name="gender"
-              value="male"
-              onClick={(e) => setGender(e.target.value)}
+              value="M"
+              checked={gender === 'M'}
+              onChange={(e) => setGender(e.target.value)}
               className="mr-2"
             />
             남자
@@ -25,9 +73,10 @@ const RegisterBirth = () => {
             <input
               type="radio"
               name="gender"
-              value="female"
+              value="F"
               className="mr-2"
-              onClick={(e) => setGender(e.target.value)}
+              checked={gender === 'F'}
+              onChange={(e) => setGender(e.target.value)}
             />
             여자
           </label>
@@ -46,6 +95,17 @@ const RegisterBirth = () => {
           value={birthdate}
           onChange={(e) => setBirthdate(e.target.value)}
         />
+      </div>
+
+      {/* 3. 다음 버튼 */}
+      <div>
+        <button
+          onClick={handleForward}
+          disabled={!gender || !birthdate}
+          className={`w-full py-2 rounded ${gender ? 'bg-yellow-900 text-white' : 'bg-gray-500 cursor-not-allowed'}`}
+        >
+          다음
+        </button>
       </div>
     </div>
   );

@@ -1,6 +1,5 @@
 import Input from "../components/Input.jsx"
 import { useEffect, useState } from 'react'
-import { useContext } from "react";
 import { userRegister } from '../context/registerContext.jsx'
 
 function Register({ nextHandle }) {
