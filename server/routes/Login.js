@@ -1,7 +1,8 @@
-//user_id,password 
+//user_id,password
 
 import express from 'express'
 import pool from '../config/database.js'
+import session from "express-session";
 const router = express.Router()
 
 //모든 데이터조회
@@ -37,10 +38,15 @@ router.get('/:user_id',async(req,res)=>{
 
 //로그인 요청 처리
 router.post('/',async(req,res)=>{
-  const {user_id, password,autoLogin} = req.body
+  const {user_id, password,autoLogin, } = req.body
   try{
+    if(!user_id || !password){
+      return res.status(400).json({success:false, message:'아이디와 비밀번호를 입력하세요'})
+    }
+
     //조회
-    const [rows] =await pool.execute('SELECT user_id FROM USER WHERE user_id=? AND password = ?',[user_id,password])
+    const [rows] =await pool.execute('SELECT user_id, user_nick FROM USER WHERE user_id=? AND password = ?',
+      [user_id,password])
 
     //값이 없을 때
     if(rows.length===0){
@@ -48,10 +54,7 @@ router.post('/',async(req,res)=>{
     }
 
     //응답 - 세션에 저장
-    req.session.user={
-      user_id:rows[0].user_id
-    }
-    // console.log('세션 저장 확인',req.session.user)
+
 
     //자동로그인 체크에 따른 만료시간 연장
     if(autoLogin){
@@ -64,8 +67,16 @@ router.post('/',async(req,res)=>{
 
     console.log('기간확인',req.session.cookie.maxAge)
 
+    req.session.user={
+      user_id:rows[0].user_id,
+      user_nick:rows[0].user_nick,
+    }
+    console.log('세션 저장 확인',req.session.user)
+
     //성공 - 반환
     return res.json({success:true, message:'로그인 성공',user:req.session.user})
+
+
   }
   catch(err){
     console.error('로그인 처리 중 오류',err)
