@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/post", async (req, res) => {
   try {
-    const [posts] = await pool.execute("SELECT * FROM board");  // 변수명 수정: posts
+    const [posts] = await pool.execute("SELECT * FROM board"); 
     res.status(200).json(posts);  // posts를 보내야 함
     console.log("게시글 데이터", posts);  // 디버깅용
   } catch (err) {
