@@ -24,7 +24,7 @@ function Write() {
             headers:{
                 'Content-Type':'application/json'
             },
-            body:JSON.stringify({title:data.title, content:data.content,id:page})
+            body:JSON.stringify({title:data.title, content:data.content})
         })
 
         if(response.ok){
@@ -51,9 +51,12 @@ function Write() {
                             name="title"
                             required
                             placeholder="제목"
+                            onChange={(e)=> setData({...data,title:e.target.value})}
                             value={params ? data.title : '제목'}
                         />
-                        <QuilEditor value={params ? data.content : null}/>
+                        <QuilEditor value={params ? data.content : null}
+                        onChange={(content)=>setData({...data,content:content})}
+                        />
                     </div>
                     <button
                         className="mt-10 w-full bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
