@@ -38,7 +38,7 @@ router.post('/write', async (req, res) => {
 //수정
 
 //삭제
-router.get('/delete/:id',async(req,res)=>{
+router.delete('/delete/:id',async(req,res)=>{
   // board_id 가져오기
   const id = req.params.id
 
