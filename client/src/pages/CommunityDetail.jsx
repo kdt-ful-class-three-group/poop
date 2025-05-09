@@ -14,13 +14,19 @@ function CommunityDetail() {
   const {isLogin} = useContext(LoginContext)
   //로그인 > 닉네임 가져오기
   const [nick, setNick] = useState(sessionStorage.getItem('user_nick'),'')
+  //동일한지
+  const [isSame, setIsSame] = useState(false)
+
+  //버튼 데이터
+
 
   useEffect(()=>{
     setData(location.state)
     setDay((data.date||'').split('T')[0].replace(/-/g,'.'))
     console.log('로그인 nick',nick)
     console.log('작성자 nick',data.nickname)
-  },[data])
+    setIsSame(nick===data.nickname)
+  },[data,isLogin])
 
 
   return (
@@ -29,7 +35,7 @@ function CommunityDetail() {
         <h2 className="text-xl">커뮤니티 상세</h2>
       </div>
       {
-        isLogin ? 
+        isLogin && isSame ? 
         <>
           <div className="">
             <Button text={'수정'} colorClass={'bg-gray-300'}/>
