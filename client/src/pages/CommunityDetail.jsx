@@ -1,11 +1,11 @@
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 
 function CommunityDetail() {
   //Community에서 link로 전달받은 state
   const location = useLocation()
-  const post = location.state || {}
-
-  console.log(post)
+  //데이터
+  const [data, setData] = useState(location.state||{})
 
 
   return (
@@ -14,24 +14,24 @@ function CommunityDetail() {
         <h2 className="text-xl">커뮤니티 상세</h2>
       </div>
       <div className="mt-6 mb-1">
-        <h4 className="text-xl">커뮤 제목</h4>
+        <h4 className="text-xl">{data.title}</h4>
       </div>
       <div className="flex items-center border-b border-[#d9d9d9] pb-1 mb-1">
-        <p className="text-sm mr-2">닉네임</p>
-        <span className="text-xs">2025.04.02</span>
+        <p className="text-sm mr-2">{data.user_id}</p>
+        <span className="text-xs">{data.date}</span>
       </div>
       <div className="flex items-center mb-5">
         <div className="mr-3">
           <img src="" alt="" />
-          <p className="text-sm">76</p>
+          <p className="text-sm">{data.recommand_amout}</p>
         </div>
         <div>
           <img src="" alt="" />
-          <p className="text-sm">76</p>
+          <p className="text-sm">{data.view_amout}</p>
         </div>
       </div>
       <div>
-        <p className="text-base">커뮤내용</p>
+        <p className="text-base">{data.content}</p>
       </div>
       <div className="flex items-center mt-3 mb-3">
         <button className="text-sm">
