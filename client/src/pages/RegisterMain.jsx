@@ -27,13 +27,13 @@ function RegisterMain() {
         {
           flag === 0 &&
           <div>
-            <Terms setFlag={setFlag} flag={flag} />
+            <Terms nextHandle={nextHandle} />
           </div>
         }
         {
           flag === 1 &&
           <div>
-            <Register setFlag={setFlag} flag={flag} />
+            <Register nextHandle={nextHandle} />
           </div>
         }
         {
@@ -54,7 +54,6 @@ function RegisterMain() {
             <RegisterNickname setFlag={setFlag} flag={flag} />
           </div>
         }
-        {/* <Button text={flag === 4 ? "완료" : "다음"} colorClass={'bg-[#D9D9D9] w-full rounded-[3px] p-2 mt-5'} clickEvent={nextHandle} disabled={disabled} /> */}
       </div>
     </RegisterProvider>
   );
