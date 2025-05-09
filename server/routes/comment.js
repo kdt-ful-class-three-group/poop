@@ -35,11 +35,7 @@ router.post("/write", async (req, res) => {
       "INSERT INTO comment(user_id, content, board_id ) VALUES(?, ?, ?)",
       [user_id, content, board_id]
     );
-    if (board.length === 0) {
-      return res
-        .status(400)
-        .json({ success: false, msg: "유효하지 않은 board_id입니다." });
-    }
+   
 
     // 댓글 저장 (board_id 포함)
     await pool.execute(
