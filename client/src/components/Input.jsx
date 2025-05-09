@@ -7,12 +7,12 @@ function Input({ className, type, placeholder, name, value, onChange }) {
     const hasInputForbiddenPattern = forbiddenPattern.test(inputValue);
     if (hasInputForbiddenPattern) {
       setInputPattern(false);
-      inputValue = inputValue.replace(forbiddenPattern, ""); //* 정규식 패턴 입력 시 value값을 지워줌
-      // return;
+      inputValue = inputValue.replace(forbiddenPattern, "");
+       return;
     } else {
       setInputPattern(true);
     }
-    onChange({ target: { name, value: inputValue } }); //* input에 name값과 value값을 넣어줌
+    onChange({ target: { name, value: inputValue } });
   };
   return (
     <div>

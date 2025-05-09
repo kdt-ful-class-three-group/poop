@@ -8,6 +8,7 @@ import commonsense from './routes/commonsense.js'
 import horror from "./routes/horror.js"
 import community from "./routes/community.js";
 import login from './routes/Login.js'
+import comment from './routes/comment.js'
 
 //세션
 import session from 'express-session'
@@ -22,7 +23,7 @@ dotenv.config();
 
 //세션 미들웨어
 app.use(session({
-  secret: process.env.SECRETKEY,
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -42,6 +43,7 @@ app.use('/knowledge', commonsense)
 app.use("/horror", horror);
 app.use("/community", community);
 app.use("/login", login);
+app.use("/comment", comment);
 
 const PORT = process.env.SERVERPORT;
 app.listen(PORT, () => {
