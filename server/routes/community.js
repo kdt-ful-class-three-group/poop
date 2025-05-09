@@ -35,4 +35,27 @@ router.post('/write', async (req, res) => {
   }
 });
 
+//수정
+
+//삭제
+router.get('/delete/:id',async(req,res)=>{
+  // board_id 가져오기
+  const id = req.params.id
+
+  //디버깅
+  console.log('삭제할 board_id',id)
+
+  try{
+    await pool.execute(`DELETE FROM board WHERE board_id=?`,[id])
+    return res.status(200).json({msg:'글 삭제 성공'})
+  }
+  catch(err){
+    console.log('err',err)
+    res.status(500).json({
+      success:false,
+      msg:'서버 내부 에러'
+    })
+  }
+})
+
 export default router;
