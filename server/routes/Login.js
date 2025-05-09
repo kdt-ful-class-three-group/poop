@@ -8,7 +8,7 @@ const router = express.Router()
 //모든 데이터조회
 router.get('/',async (req,res)=>{
   try{
-    const [rows] = await pool.execute('SELECT user_id,password FROM USER')
+    const [rows] = await pool.execute('SELECT user_id,password FROM user')
     res.json(rows)
   }
   catch(err){
@@ -20,7 +20,7 @@ router.get('/',async (req,res)=>{
 router.get('/:user_id',async(req,res)=>{
   const userId = req.params.user_id
   try{
-    const [rows] = await pool.execute('SELECT user_id, password FROM USER WHERE user_id = ? ',[userId])
+    const [rows] = await pool.execute('SELECT user_id, password FROM user WHERE user_id = ? ',[userId])
 
     //존재하지 않을 때 - 빈 배열 반환
     if(rows.length===0){
@@ -45,7 +45,7 @@ router.post('/',async(req,res)=>{
     }
 
     //조회
-    const [rows] =await pool.execute('SELECT id, user_id, user_nick FROM USER WHERE  user_id=? AND password = ?',
+    const [rows] =await pool.execute('SELECT id, user_id, user_nick FROM user WHERE  user_id=? AND password = ?',
       [user_id,password])
 
     //값이 없을 때
