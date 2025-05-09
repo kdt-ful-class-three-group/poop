@@ -92,7 +92,7 @@ function CommunityDetail() {
         </div>
       </div>
       <div>
-        <p className="text-base">{data.content}</p>
+        <div className="text-base" dangerouslySetInnerHTML={{__html:data.content}}></div>
       </div>
       <div className="flex items-center mt-3 mb-3">
         <button className="text-sm">
