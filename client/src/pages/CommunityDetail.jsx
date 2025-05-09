@@ -40,7 +40,7 @@ const formattedDate = post.date ? new Date(post.date).toLocaleDateString() : "�
 
       {/* 작성자와 날짜 */}
       <div className="flex items-center text-sm text-gray-600 border-b border-[#d9d9d9] pb-1 mb-2">
-        <p className="mr-2">{post.user_account_id}</p>
+        <p className="mr-2">{post.user_nick}</p>
         <span>{formattedDate}</span>
       </div>
 

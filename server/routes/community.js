@@ -23,7 +23,7 @@ router.get('/post/:board_id', async (req, res) => {
 
   try {
     const [result] = await pool.execute(
-      `SELECT board.*, user.user_id AS user_account_id
+      `SELECT board.*, user.user_nick
        FROM board
        JOIN user ON board.user_id = user.id
        WHERE board.board_id = ?`,
