@@ -32,7 +32,8 @@ function LoginInput({ autoLogin }) {
       setText('')
       console.log(result.success)
       //성공하면 sessionStorage에 저장
-      sessionStorage.setItem('user', result.user.user_id)
+      sessionStorage.setItem('id', result.user.id)
+      sessionStorage.setItem('user_id', result.user.user_id)
       sessionStorage.setItem('user_nick', result.user.user_nick)
       // 성공하면 퀴즈로 이동
       navigate('/quiz');

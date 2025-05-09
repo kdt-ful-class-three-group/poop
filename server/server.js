@@ -10,6 +10,9 @@ import horror from "./routes/horror.js";
 import community from "./routes/community.js";
 import login from "./routes/Login.js";
 import email from "./routes/email.js";
+import comment from "./routes/comment.js";
+
+//세션
 import session from "express-session";
 
 const app = express();
@@ -22,13 +25,17 @@ app.use(
 );
 dotenv.config();
 
-app.use(session({
-  secret: process.env.SESSION_SECRET,// 세션 암호화 키
-  resave: false,
-  saveUninitialized: false,
-  // 개발 환경에서는 false (HTTPS 아니면 true 하면 안 됨)
-  cookie: {secure: false},
-}));
+//세션 미들웨어
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 1000 * 60 * 60,
+    },
+  })
+);
 
 app.get("/", (req, res) => {
   res.send("Hello World");
@@ -40,6 +47,7 @@ app.use("/knowledge", commonsense);
 app.use("/horror", horror);
 app.use("/community", community);
 app.use("/login", login);
+app.use("/comment", comment);
 app.use("/email", email);
 
 const PORT = process.env.SERVERPORT;

@@ -16,7 +16,7 @@ export default function Community() {
   // 게시글 더미데이터
   useEffect(() => {
     //fetch로 데이터 가져오기
-    fetch('http://localhost:8080/community/post')
+    fetch('http://localhost:8081/community/post')
     .then(response => response.json())
     .then(community => {
       setPosts(community)

@@ -3,15 +3,17 @@ import pool from "../config/database.js";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  const { board_id } = req.query;
+router.get("/:board_id", async (req, res) => {
+  const { board_id } = req.params;
   console.log("댓글 요청", { board_id }); // 디버깅용 로그
 
   try {
-    const [comment] = await pool.execute(
-      "SELECT * FROM comment WHERE board_id = ?",
-      [board_id]
-    );
+    const [comment] = await pool.execute(`
+      SELECT c.comment_id AS id, c.content, c.date, u.user_nick, u.user_id
+      FROM comment AS c
+      JOIN user AS u ON c.user_id = u.id
+      WHERE c.board_id = ?
+    `, [board_id]);
 
     res.status(200).json(comment);
     console.log("댓글 데이터", comment); // 디버깅용 로그
@@ -29,16 +31,6 @@ router.post("/write", async (req, res) => {
   console.log("작성 요청:", { user_id, content, board_id }); // 디버깅용 로그
 
   try {
-    await pool.execute(
-      "INSERT INTO comment(user_id, content, board_id ) VALUES(?, ?, ?)",
-      [user_id, content, board_id]
-    );
-    if (board.length === 0) {
-      return res
-        .status(400)
-        .json({ success: false, msg: "유효하지 않은 board_id입니다." });
-    }
-
     // 댓글 저장 (board_id 포함)
     await pool.execute(
       "INSERT INTO comment(content, user_id, board_id) VALUES(?, ?, ?)", // 3개의 컬럼
