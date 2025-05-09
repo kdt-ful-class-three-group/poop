@@ -1,4 +1,55 @@
+import Input from "../components/Input.jsx";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 function CommunityDetail() {
+  const navigate = useNavigate();
+  const [user_nick, setUserNick] = useState(null);
+  const [user_pk, setUserPk] = useState(null);
+  const [content, setContent] = useState("");
+
+  useEffect(() => {
+    const storedUserId = sessionStorage.getItem("user_id");
+    const storedUserNick = sessionStorage.getItem("user_nick");
+    const id = sessionStorage.getItem("id");
+
+    if (!storedUserId || !storedUserNick) {
+      alert("로그인 후 이용해주세요.");
+      navigate("/login");
+    } else {
+      setUserNick(storedUserNick);
+      setUserPk(id);
+      console.log("세션 유저 pk", id);
+      console.log("세션 유저 닉네임", storedUserNick);
+    }
+  }, []);
+
+  const commentWrite = async () => {
+    if (!content || content.trim() === "") {
+      alert("댓글 내용을 입력해주세요.");
+      return;
+    }
+
+    const response = await fetch("http://localhost:8080/comment/write", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        content: content,
+        user_id: user_pk,
+        recommend_amount: 0,
+        board_id: 3,
+      }),
+    });
+    if (!response.ok) throw new Error("댓글 작성 실패");
+    await response.json();
+
+    alert("댓글 작성 성공");
+    setContent("");
+  };
+
   return (
     <div className="w-full">
       <div>
@@ -34,18 +85,27 @@ function CommunityDetail() {
           <p>즐찾</p>
         </button>
       </div>
+
+      {/*댓글영역*/}
+
       <div className="border-[1px] flex border-[#D9D9D9]/70 mb-3">
-        <input
+        <Input
           className="w-full outline-none p-2 text-sm"
           type="text"
           placeholder="댓글을 입력해주세요."
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
         />
-        <button className="bg-[#8E5E43] border-[#8E5E43] p-2 rounded-[0px_3px_3px_0px] text-white whitespace-nowrap text-sm">
+        <button
+          onClick={commentWrite}
+          className="bg-[#8E5E43] border-[#8E5E43] p-2 rounded-[0px_3px_3px_0px] text-white whitespace-nowrap text-sm cursor-pointer"
+        >
           확인
         </button>
       </div>
       <div>
         <p className="text-lg">댓글</p>
+
         <div className="flex items-center border-b border-[#d9d9d9] pb-1 mb-1">
           <p className="text-sm mr-2">닉네임</p>
           <span className="text-xs">2025.04.02</span>
