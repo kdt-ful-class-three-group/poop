@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { LoginContext } from "../context/loginContext";
 import Button from "../components/Button";
 
@@ -18,6 +18,14 @@ function CommunityDetail() {
   const [isSame, setIsSame] = useState(false)
   //네비게이터
   const navigate = useNavigate()
+  
+  useEffect(()=>{
+    setData(location.state)
+    setDay((data.date||'').split('T')[0].replace(/-/g,'.'))
+    console.log('로그인 nick',nick)
+    console.log('작성자 nick',data.nickname)
+    setIsSame(nick===data.nickname)
+  },[data,isLogin])
 
   //삭제 함수
   const deleteBtn = async(e)=>{
@@ -40,19 +48,17 @@ function CommunityDetail() {
     // const result = await response.json()
   }
 
+  //수정 함수
+  //버튼 클릭 > write + 내용 담기기
+  const editBtn = async(e)=>{
+    navigate(`/community/write/${data.board_id}`)
+  }
+
   //버튼 데이터
   const btnArr = [
     {text:'수정',colorClass:'bg-gray-300',clickEvent:(e)=>deleteBtn(e)}
   ]
 
-
-  useEffect(()=>{
-    setData(location.state)
-    setDay((data.date||'').split('T')[0].replace(/-/g,'.'))
-    console.log('로그인 nick',nick)
-    console.log('작성자 nick',data.nickname)
-    setIsSame(nick===data.nickname)
-  },[data,isLogin])
 
 
   return (
@@ -64,7 +70,9 @@ function CommunityDetail() {
         isLogin && isSame ? 
         <>
           <div className="">
+            <Link to={`/community/write/${data.board_id}`} state={data}>
             <Button text={'수정'} colorClass={'bg-gray-300'}/>
+              </Link>
             <Button text={'삭제'} colorClass={'bg-gray-300'} clickEvent={(e)=>deleteBtn(e)}/>
           </div>
         </>
