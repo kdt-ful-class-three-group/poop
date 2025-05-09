@@ -1,11 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 function CommunityDetail() {
   //Community에서 link로 전달받은 state
   const location = useLocation()
   //데이터
-  const [data, setData] = useState(location.state||{})
+  const [data, setData] = useState({})
+  //날짜
+  const [day, setDay] = useState('')
+
+  useEffect(()=>{
+    setData(location.state)
+    setDay((data.date||'').split('T')[0].replace(/-/g,'.'))
+  },[data])
 
 
   return (
@@ -18,7 +25,7 @@ function CommunityDetail() {
       </div>
       <div className="flex items-center border-b border-[#d9d9d9] pb-1 mb-1">
         <p className="text-sm mr-2">{data.user_id}</p>
-        <span className="text-xs">{data.date}</span>
+        <span className="text-xs">{day}</span>
       </div>
       <div className="flex items-center mb-5">
         <div className="mr-3">
