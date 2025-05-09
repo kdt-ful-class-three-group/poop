@@ -1,4 +1,5 @@
 import Button from "./Button";
+import {NaverBtn, GoogleBtn, KakaoBtn} from "oauth-btn";
 
 function EasyLogin(){
 
@@ -9,14 +10,12 @@ function EasyLogin(){
   ]
 
   return(
-    <div className="flex flex-col gap-2">
-      {ButtonTexts.map((text,i)=>(
-        <Button
-          key={i}
-          text={text}
-          colorClass='bg-gray-300'></Button>
-      ))}
+    <div className="flex  gap-2">
+      <KakaoBtn shape="circle" className="w-80"/>
+      <NaverBtn shape="circle" className="w-80"/>
+      <GoogleBtn  shape="circle" className= "w-80" />
     </div>
+
   )
 }
 
