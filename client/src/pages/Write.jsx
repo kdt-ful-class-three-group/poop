@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 function Write() {
   const [form, setForm] = useState({ title: "", content: "" });
   const navigate = useNavigate();
-  const { user_id, user_nick } = useUser();
 
   // 제목 변경 핸들러
   const handleChange = (e) => {
@@ -32,8 +31,6 @@ function Write() {
 
   const rawContent = stripHtml(form.content);
 
-  
-
   // 제출 핸들러
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,8 +50,7 @@ function Write() {
         body: JSON.stringify({
             title: form.title,
             content: rawContent,
-            user_id,
-            user_nick,
+            user_id: 1,
             date: now,
           }),
       });

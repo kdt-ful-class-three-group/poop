@@ -4,20 +4,23 @@ import express from 'express';
 import pool from "../config/database.js";
 const router = express.Router();
 
+// ✅ 게시글 전체 목록 조회 (user_nick 포함)
 router.get("/post", async (req, res) => {
   try {
-    const [posts] = await pool.execute("SELECT * FROM board"); 
-    res.status(200).json(posts);  // posts를 보내야 함
-    console.log("게시글 데이터", posts);  // 디버깅용
+    const [posts] = await pool.execute(`
+      SELECT board.*, user.user_nick 
+      FROM board 
+      JOIN user ON board.user_id = ?
+      ORDER BY board.board_id DESC
+    `);
+    res.status(200).json(posts);
   } catch (err) {
     console.error("Community get error:", err);
-    res.status(500).json({
-      success: false,
-      msg: "서버 내부 에러"
-    });
+    res.status(500).json({ success: false, msg: "서버 내부 에러" });
   }
 });
 
+// ✅ 게시글 상세 조회 (user_nick 포함)
 router.get('/post/:board_id', async (req, res) => {
   const board_id = req.params.board_id;
 
@@ -41,10 +44,9 @@ router.get('/post/:board_id', async (req, res) => {
   }
 });
 
-
+// ✅ 게시글 작성
 router.post("/write", async (req, res) => {
   const { title, content, user_id, date } = req.body;
-  console.log("글쓰기 요청 body:", req.body);
 
   try {
     await pool.execute(
@@ -57,6 +59,5 @@ router.post("/write", async (req, res) => {
     res.status(500).json({ msg: "서버 오류" });
   }
 });
-
 
 export default router;
