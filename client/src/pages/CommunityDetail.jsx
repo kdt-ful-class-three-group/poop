@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { LoginContext } from "../context/loginContext";
 import Button from "../components/Button";
 
@@ -16,15 +16,26 @@ function CommunityDetail() {
   const [nick, setNick] = useState(sessionStorage.getItem('user_nick'),'')
   //동일한지
   const [isSame, setIsSame] = useState(false)
+  //네비게이터
+  const navigate = useNavigate()
 
   //삭제 함수
-  const deleteBtn = (e)=>{
+  const deleteBtn = async(e)=>{
     e.preventDefault()
 
     //fetch
-    fetch(`http://localhost:8080/delete/${data.board_id}`,{
+    const response = await fetch(`http://localhost:8080/delete/${data.board_id}`,{
       method:'DELETE'
     })
+
+    const result = await response.json()
+
+    if(response.ok){
+      // 삭제 후 목록으로 이동
+      navigate('/community')
+    } else {
+      alert('삭제 실패했습니다')
+    }
   }
 
   //버튼 데이터
