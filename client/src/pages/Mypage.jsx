@@ -1,8 +1,11 @@
 import { useContext } from "react";
 import { LoginContext } from "../context/loginContext";
 
+
+
 function Mypage() {
   const { logoutHandle } = useContext(LoginContext);
+  const nickname = sessionStorage.getItem("user_nick");
 
   return (
     <div className="w-full">
@@ -13,7 +16,7 @@ function Mypage() {
       </div>
       <div className="flex items-center pb-3 mb-3 ">
         <img className="w-[40px]" src="./public/img/poopNameImg.svg" alt="" />
-        <h4 className="text-xm ml-4">공미남</h4>
+        <h4 className="text-xm ml-4">{nickname} 님</h4>
       </div>
       <div className="flex items-center justify-between shadow-[0_0_5px_0_rgba(0,0,0,0.1),_0_0_1px_0_rgba(0,0,0,0.1)] p-3 mb-2">
         <p className="text-sm">회원정보</p>
