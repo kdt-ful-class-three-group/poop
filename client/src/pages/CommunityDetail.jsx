@@ -1,4 +1,13 @@
+import { useLocation } from "react-router-dom";
+
 function CommunityDetail() {
+  //Community에서 link로 전달받은 state
+  const location = useLocation()
+  const post = location.state || {}
+
+  console.log(post)
+
+
   return (
     <div className="w-full">
       <div>
