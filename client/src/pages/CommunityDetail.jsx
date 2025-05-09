@@ -6,8 +6,6 @@ import Button from "../components/Button";
 function CommunityDetail() {
   // params
   const params = useParams()
-  //Community에서 link로 전달받은 state
-  const location = useLocation()
   //데이터
   const [data, setData] = useState({})
   //날짜
