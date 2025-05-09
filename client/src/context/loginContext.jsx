@@ -7,6 +7,19 @@ export const LoginProvider = ({ children }) => {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(false);
 
+  useEffect(()=>{
+    fetch("http://localhost:8080/auth/check",{
+      credentials:"include",
+    })
+    .then((response) => {
+      if (response.ok) {
+        setIsLogin(true);
+      } else {
+        setIsLogin(false);
+      }
+    })
+  },[])
+
   const logoutHandle = () => {
     navigate("/Quiz");
     setIsLogin(false);
