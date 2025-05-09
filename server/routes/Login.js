@@ -38,14 +38,14 @@ router.get('/:user_id',async(req,res)=>{
 
 //로그인 요청 처리
 router.post('/',async(req,res)=>{
-  const {user_id, password,autoLogin, } = req.body
+  const {id,user_id, password,autoLogin, } = req.body
   try{
     if(!user_id || !password){
       return res.status(400).json({success:false, message:'아이디와 비밀번호를 입력하세요'})
     }
 
     //조회
-    const [rows] =await pool.execute('SELECT user_id, user_nick FROM USER WHERE user_id=? AND password = ?',
+    const [rows] =await pool.execute('SELECT id, user_id, user_nick FROM USER WHERE  user_id=? AND password = ?',
       [user_id,password])
 
     //값이 없을 때
@@ -68,6 +68,7 @@ router.post('/',async(req,res)=>{
     console.log('기간확인',req.session.cookie.maxAge)
 
     req.session.user={
+      id:rows[0].id,
       user_id:rows[0].user_id,
       user_nick:rows[0].user_nick,
     }

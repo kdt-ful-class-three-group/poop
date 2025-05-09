@@ -1,13 +1,42 @@
 import Input from "../components/Input.jsx";
-
+import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 
 function CommunityDetail() {
+  const navigate = useNavigate();
+  const [user_nick, setUserNick] = useState(null);
+  const [user_pk, setUserPk] = useState(null);
+  const [content, setContent] = useState("");
 
 
 
 
-  const commentWrite = async ({content, user_id, board_id,user_nick})=>{
+  useEffect(() => {
+    const storedUserId = sessionStorage.getItem("user_id");
+    const storedUserNick = sessionStorage.getItem("user_nick");
+    const id = sessionStorage.getItem("id");
+
+    if (!storedUserId || !storedUserNick) {
+      alert("로그인 후 이용해주세요.");
+      navigate("/login");
+    } else {
+      setUserNick(storedUserNick);
+      setUserPk(id);
+      console.log("세션 유저 pk", id);
+      console.log("세션 유저 닉네임", storedUserNick);
+    }
+  }, []);
+
+
+
+  const commentWrite = async ()=>{
+    if(!content || content.trim() === ""){
+      alert("댓글 내용을 입력해주세요.");
+      return;
+    }
+
+
     const response = await fetch("http://localhost:8080/comment/write", {
       method:"POST",
       headers:{
@@ -15,14 +44,19 @@ function CommunityDetail() {
       },
       credentials: "include",
       body: JSON.stringify({
-        user_nick:user_nick ,
         content:content ,
-        user_id:user_id ,
-        board_id:board_id
+        user_id:user_pk,
+        recommend_amount:0,
+        board_id:3
       })
     });
     if (!response.ok) throw new Error("댓글 작성 실패");
-    return await response.json();
+    await response.json();
+
+    alert("댓글 작성 성공");
+    setContent("");
+
+
   }
 
 
@@ -71,6 +105,8 @@ function CommunityDetail() {
           className="w-full outline-none p-2 text-sm"
           type="text"
           placeholder="댓글을 입력해주세요."
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
         />
         <button onClick={commentWrite} className="bg-[#8E5E43] border-[#8E5E43] p-2 rounded-[0px_3px_3px_0px] text-white whitespace-nowrap text-sm cursor-pointer">
           확인

@@ -6,11 +6,11 @@ const router = express.Router();
 
 
 router.get("/", async (req, res) => {
-  const { post_id } = req.query;
-  console.log("댓글 요청", { post_id }); // 디버깅용 로그
+  const { board_id } = req.query;
+  console.log("댓글 요청", { board_id }); // 디버깅용 로그
 
   try {
-    const [comment] = await pool.execute("SELECT * FROM comment WHERE post_id = ?", [post_id]);
+    const [comment] = await pool.execute("SELECT * FROM comment WHERE board_id = ?", [board_id]);
     res.status(200).json(comment);
     console.log("댓글 데이터", comment); // 디버깅용 로그
   } catch (err) {
@@ -26,15 +26,16 @@ router.get("/", async (req, res) => {
 
 
 router.post("/write", async (req, res) => {
-  const {content, user_id, board_id, user_nick} = req.body;
-  console.log("작성 요청:", { user_id, content, board_id, user_nick }); // 디버깅용 로그
+  const {content, user_id, board_id} = req.body;
+  console.log("작성 요청:", {user_id, content, board_id }); // 디버깅용 로그
 
   try{
     await pool.execute(
-      "INSERT INTO comment(user_id, content, board_id, user_nick) VALUES(?, ?, ?,?)",
-      [user_id, content, board_id, user_nick]
+      "INSERT INTO comment(user_id, content, board_id ) VALUES(?, ?, ?)",
+      [user_id, content, board_id]
     );
     return res.status(200).json({ msg: "댓글 작성성공" });
+
 
 
   } catch(err){
