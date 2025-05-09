@@ -29,6 +29,8 @@ function App() {
                 element={<CommunityDetail />}
               />
               <Route path="/Community/write" element={<Write />} />
+              {/* 게시글 수정 라우터 */}
+              <Route path="/Community/write/:board_id" element={<Write />} />
               <Route path="/Login" element={<Login />} />
               <Route path="/Mypage" element={<Mypage />} />
               <Route path="/Admin" element={<Admin />} />
