@@ -2,9 +2,11 @@
 import { useState } from "react";
 import Input from "../components/Input";
 import QuillEditor from "../components/QuilEditor";
+import { useNavigate } from "react-router-dom";
 
 function Write() {
   const [form, setForm] = useState({ title: "", content: "" });
+  const navigate = useNavigate();
 
   // 제목 변경 핸들러
   const handleChange = (e) => {
@@ -56,6 +58,7 @@ function Write() {
       const result = await response.json();
       if (response.ok) {
         alert("글이 성공적으로 등록되었습니다!");
+        navigate("/Community");
       } else {
         alert(result.msg || "글 등록 실패");
       }
