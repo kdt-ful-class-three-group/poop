@@ -29,7 +29,7 @@ if (isLoading) return <div className='p-4'> 로딩 중... </div>;
 if (!post) return <div className='p-4'>게시글을 찾을 수 없습니다. </div>;
 
 // post.Date를 제대로 처리하려면, 날짜 형식 확인 후 변환
-const formattedDate = post.Date ? new Date(post.Date).toLocaleDateString() : "날짜 정보 없음";
+const formattedDate = post.date ? new Date(post.date).toLocaleDateString() : "날짜 정보 없음";
 
   return (
     <div className="w-full p-4">
