@@ -17,7 +17,20 @@ function CommunityDetail() {
   //동일한지
   const [isSame, setIsSame] = useState(false)
 
+  //삭제 함수
+  const deleteBtn = (e)=>{
+    e.preventDefault()
+
+    //fetch
+    fetch(`http://localhost:8080/delete/${data.board_id}`,{
+      method:'DELETE'
+    })
+  }
+
   //버튼 데이터
+  const btnArr = [
+    {text:'수정',colorClass:'bg-gray-300',clickEvent:''}
+  ]
 
 
   useEffect(()=>{
