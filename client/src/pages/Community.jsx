@@ -141,13 +141,13 @@ export default function Community() {
           </div>
         ) : visiblePosts.length > 0 ? (
           visiblePosts.map((post) => (
-            <Link to={`/Community/CommunityDetail/${post.id}`} key={post.id} className="block px-4 py-2 hover:bg-gray-50">
+            <Link to={`/Community/CommunityDetail/${post.board_id}`} key={post.board_id} className="block px-4 py-2 hover:bg-gray-50">
               <div className="flex flex-col">
                 <h2 className="text-base font-medium text-gray-900">{post.title}</h2>
                 <div className="flex items-center text-xs text-gray-500 mt-1">
-                  <span>{post.author}</span>
+                  <span>{post.user_id}</span>
                   {/* <span className="mx-1">•</span> */}
-                  <span>{new Date(post.createdAt).toLocaleDateString()}</span>
+                  <span>{new Date(post.date).toLocaleDateString()}</span>
                 </div>   
               </div>
             </Link>
