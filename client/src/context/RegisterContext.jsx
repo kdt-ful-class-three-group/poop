@@ -5,7 +5,6 @@ const RegisterContext = createContext();
 
 export const RegisterProvider = ({children}) => {
   const [formData, setFormData] = useState({
-    username: "",
     password: "",
     email: "",
     nickname: "",
