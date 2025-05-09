@@ -10,7 +10,13 @@ router.get("/", async (req, res) => {
   console.log("댓글 요청", { board_id }); // 디버깅용 로그
 
   try {
-    const [comment] = await pool.execute("SELECT * FROM comment WHERE board_id = ?", [board_id]);
+    const [comment] = await pool.execute(`
+      SELECT c.comment_id AS id, c.content, c.date, u.user_nick, u.user_id
+      FROM comment AS c
+      JOIN user AS u ON c.user_id = u.id
+      WHERE c.board_id = ?
+    `, [board_id]);
+
     res.status(200).json(comment);
     console.log("댓글 데이터", comment); // 디버깅용 로그
   } catch (err) {
