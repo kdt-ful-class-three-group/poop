@@ -15,26 +15,26 @@ export default function Community() {
 
   // 게시글 더미데이터
   useEffect(() => {
-    const dummyPosts = [
-      { id: 1, title: '임시 게시글 제목 1', author: '테스트유저1', createdAt: new Date() },
-      { id: 2, title: '임시 게시글 제목 2', author: '테스트유저2', createdAt: new Date() },
-      { id: 3, title: '임시 게시글 제목 3', author: '테스트유저3', createdAt: new Date() },
-      { id: 4, title: '임시 게시글 제목 4', author: '테스트유저4', createdAt: new Date() },
-      { id: 5, title: '임시 게시글 제목 5', author: '테스트유저5', createdAt: new Date() },
-      { id: 6, title: '임시 게시글 제목 6', author: '테스트유저6', createdAt: new Date() },
-      { id: 7, title: '하하', author: '테스트유저7', createdAt: new Date() },
-    ];
-
-
-    console.log('더미 게시글:', dummyPosts);
-    // 더미 게시글 저장
-    setPosts(dummyPosts);
-
-    // ✅ 총 페이지 수 계산 (최소 1페이지는 유지)
-    const calculatedPages = Math.ceil(dummyPosts.length / postsPerPage);
-    setTotalPages(Math.max(1, calculatedPages));
-
-    setIsLoading(false);
+    // const dummyPosts = [
+    //   { id: 1, title: '임시 게시글 제목 1', author: '테스트유저1', createdAt: new Date() },
+    //   { id: 2, title: '임시 게시글 제목 2', author: '테스트유저2', createdAt: new Date() },
+    //   { id: 3, title: '임시 게시글 제목 3', author: '테스트유저3', createdAt: new Date() },
+    //   { id: 4, title: '임시 게시글 제목 4', author: '테스트유저4', createdAt: new Date() },
+    //   { id: 5, title: '임시 게시글 제목 5', author: '테스트유저5', createdAt: new Date() },
+    //   { id: 6, title: '임시 게시글 제목 6', author: '테스트유저6', createdAt: new Date() },
+    //   { id: 7, title: '하하', author: '테스트유저7', createdAt: new Date() },
+    // ];
+    //fetch로 데이터 가져오기
+    fetch('http://localhost:8080/community/post')
+    .then(response => response.json())
+    .then(community => {
+      setPosts(community)
+      
+      // ✅ 총 페이지 수 계산 (최소 1페이지는 유지)
+      const calculatedPages = Math.ceil(community.length / postsPerPage);
+      setTotalPages(Math.max(1, calculatedPages));
+      setIsLoading(false);
+    })
   }, []);
 
   // 글쓰기 페이지로 이동
