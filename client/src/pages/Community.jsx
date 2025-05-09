@@ -146,9 +146,9 @@ export default function Community() {
               <div className="flex flex-col">
                 <h2 className="text-base font-medium text-gray-900">{post.title}</h2>
                 <div className="flex items-center text-xs text-gray-500 mt-1">
-                  <span>{post.user_id}</span>
+                  <span>{post.user_nick}</span>
                   {/* <span className="mx-1">•</span> */}
-                  <span>{new Date(post.data).toLocaleDateString()}</span>
+                  <span>{new Date(post.date).toLocaleDateString()}</span>
                 </div>   
               </div>
             </Link>

@@ -40,7 +40,7 @@ router.post('/',async(req,res)=>{
   const {user_id, password,autoLogin} = req.body
   try{
     //조회
-    const [rows] =await pool.execute('SELECT user_id FROM USER WHERE user_id=? AND password = ?',[user_id,password])
+    const [rows] =await pool.execute('SELECT user_id, id FROM USER WHERE user_id=? AND password = ?',[user_id,password])
 
     //값이 없을 때
     if(rows.length===0){
@@ -49,7 +49,8 @@ router.post('/',async(req,res)=>{
 
     //응답 - 세션에 저장
     req.session.user={
-      user_id:rows[0].user_id
+      user_id:rows[0].user_id,
+      id : rows[0].id
     }
     // console.log('세션 저장 확인',req.session.user)
 

@@ -50,7 +50,7 @@ function Write() {
         body: JSON.stringify({
             title: form.title,
             content: rawContent,
-            user_id: 1,
+            user_id: sessionStorage.getItem('id'),
             date: now,
           }),
       });

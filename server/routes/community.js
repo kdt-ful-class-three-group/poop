@@ -50,8 +50,8 @@ router.post("/write", async (req, res) => {
 
   try {
     await pool.execute(
-      `INSERT INTO board (title, content, user_id, date) VALUES (?, ?, ?, ?)`,
-      [title, content, user_id, date]
+      `INSERT INTO board (title, content, user_id,  date) VALUES (?, ?, ?, ?)`,
+      [title, content, user_id,  date]
     );
     res.status(200).json({ msg: "성공" });
   } catch (err) {
