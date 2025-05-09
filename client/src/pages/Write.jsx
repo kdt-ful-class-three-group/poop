@@ -58,7 +58,9 @@ function Write() {
         })
 
         if(response.ok){
+            alert("글 수정 성공")
             navigate(`/community/communityDetail/${page}`)
+
         }else {
             alert('수정 실패했습니다')
         }
@@ -91,9 +93,9 @@ function Write() {
                     <button
                         className="mt-10 w-full bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
                         type="submit"
-                        onClick={(e)=>writeBtn(e)}
+                        onClick={page ? editBtn : writeBtn}
                     >
-                        등록하기
+                        {page ? '수정하기' : '작성하기'}
                     </button>
                 </form>
             </div>
