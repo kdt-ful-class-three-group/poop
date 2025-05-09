@@ -1,29 +1,30 @@
-//모듈 가져오기
-import { createContext, useContext, useState } from 'react'
+// src/context/registerContext.jsx
+import { createContext, useContext, useState} from "react"
 
-//창고 만들기 (+내보내기)
-export const RegisterContext = createContext()
+const RegisterContext = createContext(); 
 
-//전달할 내용 (+내보내기)
-export const RegisterProvider =({children})=>{
+export const RegisterProvider = ({children}) => {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    email: "",
+    nickname: "",
+    gender : "",
+    birth: "",
+  });
 
-  //가져올 데이터
-  const [registerData, setRegisterData] = useState({
-    user_id: '',
-    password: '',
-    nickname: '',
-    birthDate: '',
-    gender: '',
-    email: ''
-  })
-
-  const updateData = (inputData)=>{
-    setRegisterData(prev=>({...prev,...inputData}))
-  }
+  const updateFormData = (key, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      [key] : value,
+    }));
+  };
 
   return(
-    <RegisterContext.Provider value={{registerData,updateData}}>
+    <RegisterContext.Provider value={{formData, updateFormData}}>
       {children}
     </RegisterContext.Provider>
-  )
-}
+  );
+};
+
+export const userRegister = () => useContext(RegisterContext);

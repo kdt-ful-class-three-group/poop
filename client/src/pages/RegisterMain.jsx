@@ -6,18 +6,18 @@ import RegisterEmail from '../components/RegisterEmail';
 import RegisterBirth from "../components/RegisterBirth";
 import RegisterNickname from "../components/RegisterNickname";
 import RegisterprevBtn from "../components/RegisterprevBtn";
-import { RegisterProvider } from "../context/RegisterContext";
+import { RegisterProvider } from "../context/registerContext";
 
 function RegisterMain() {
   const [flag, setFlag] = useState(0);
 
   // const [disabled, setDisabled] = useState(true);
 
-  // const nextHandle = () => {
-  //   if (flag < 4) {
-  //     setFlag(flag + 1);
-  //   }
-  // }
+  const nextHandle = () => {
+    if (flag < 4) {
+      setFlag(flag + 1);
+    }
+  }
 
   return (
     <RegisterProvider>
@@ -27,34 +27,33 @@ function RegisterMain() {
         {
           flag === 0 &&
           <div>
-            <Terms setFlag={setFlag} flag={flag} />
+            <Terms nextHandle={nextHandle} />
           </div>
         }
         {
           flag === 1 &&
           <div>
-            <Register setFlag={setFlag} flag={flag} />
+            <Register nextHandle={nextHandle} />
           </div>
         }
         {
           flag === 2 &&
           <div>
-            <RegisterEmail setFlag={setFlag} flag={flag} />
+            <RegisterEmail nextHandle={nextHandle} />
           </div>
         }
         {
           flag === 3 &&
           <div>
-            <RegisterBirth setFlag={setFlag} flag={flag} />
+            <RegisterBirth nextHandle={nextHandle} />
           </div>
         }
         {
           flag === 4 &&
           <div>
-            <RegisterNickname setFlag={setFlag} flag={flag} />
+            <RegisterNickname nextHandle={nextHandle} />
           </div>
         }
-        {/* <Button text={flag === 4 ? "완료" : "다음"} colorClass={'bg-[#D9D9D9] w-full rounded-[3px] p-2 mt-5'} clickEvent={nextHandle} disabled={disabled} /> */}
       </div>
     </RegisterProvider>
   );

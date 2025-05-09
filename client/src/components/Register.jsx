@@ -1,9 +1,9 @@
 import Input from "../components/Input.jsx"
 import { useEffect, useState } from 'react'
 import { useContext } from "react";
-import { RegisterContext } from '../context/RegisterContext'
+import { userRegister } from '../context/registerContext.jsx'
 
-function Register({ setFlag, flag }) {
+function Register({ nextHandle }) {
   //아이디 값
   const [user, setUser] = useState('')
   //비밀번호
@@ -28,7 +28,7 @@ function Register({ setFlag, flag }) {
   }, [])
 
   //창고에서 데이터 가져오기
-  const { updateData } = useContext(RegisterContext)
+  const { updateFormData } = userRegister()
 
   //제출 -> 아이디, 비밀번호 값 담기
   const userCheck = (e) => {
@@ -97,9 +97,8 @@ function Register({ setFlag, flag }) {
   //다음버튼 클릭이벤트
   const buttonClick = (e) => {
     e.preventDefault()
-
-    setFlag(++flag);
-    updateData({ 'user_id': user, 'password': pw })
+    updateFormData({ 'user_id': user, 'password': pw })
+    nextHandle();
   }
 
   return (
