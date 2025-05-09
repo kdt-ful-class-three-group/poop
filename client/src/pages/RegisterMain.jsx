@@ -45,13 +45,13 @@ function RegisterMain() {
         {
           flag === 3 &&
           <div>
-            <RegisterBirth setFlag={setFlag} flag={flag} />
+            <RegisterBirth nextHandle={nextHandle} />
           </div>
         }
         {
           flag === 4 &&
           <div>
-            <RegisterNickname setFlag={setFlag} flag={flag} />
+            <RegisterNickname nextHandle={nextHandle} />
           </div>
         }
       </div>
