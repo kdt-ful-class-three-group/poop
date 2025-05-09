@@ -10,7 +10,7 @@ router.get("/post", async (req, res) => {
     const [posts] = await pool.execute(`
       SELECT board.*, user.user_nick 
       FROM board 
-      JOIN user ON board.user_id = ?
+      JOIN user ON board.user_id = user.id
       ORDER BY board.board_id DESC
     `);
     res.status(200).json(posts);
