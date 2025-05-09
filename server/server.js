@@ -8,7 +8,7 @@ import register from "./routes/register.js";
 import commonsense from "./routes/commonsense.js";
 import horror from "./routes/horror.js";
 import community from "./routes/community.js";
-import login from "./routes/login.js";
+import login from "./routes/Login.js";
 import email from "./routes/email.js";
 import session from "express-session";
 
@@ -22,15 +22,13 @@ app.use(
 );
 dotenv.config();
 
-app.use(
-  session({
-    secret: process.env.SECRETKEY, // 세션 암호화 키
-    resave: false,
-    saveUninitialized: false,
-    // 개발 환경에서는 false (HTTPS 아니면 true 하면 안 됨)
-    cookie: { secure: false },
-  })
-);
+app.use(session({
+  secret: process.env.SESSION_SECRET,// 세션 암호화 키
+  resave: false,
+  saveUninitialized: false,
+  // 개발 환경에서는 false (HTTPS 아니면 true 하면 안 됨)
+  cookie: {secure: false},
+}));
 
 app.get("/", (req, res) => {
   res.send("Hello World");
