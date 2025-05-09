@@ -20,7 +20,7 @@ router.get("/post", async (req, res) => {
 router.get('/post/:id',async(req,res)=>{
   const id = req.params.id
   try{
-    const [post] = await pool.execute('SELECT * FROM board WHERE board_id=?',[id])
+    const [post] = await pool.execute('SELECT board.*, user.user_nick AS nickname FROM board LEFT JOIN user ON board.user_id = user.id WHERE board_id=?',[id])
     res.status(200).json(post)
     console.log('데이터',post)
   }
