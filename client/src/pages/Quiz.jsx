@@ -15,6 +15,10 @@ function AllCategory() {
     localStorage.setItem(`${category}Num`, num.toString())
   }, [num])
 
+  useEffect(() => {
+    setNum(Number(localStorage.getItem(`${category}Num`)));
+  }, [category]);
+
   //fetch 가져오기
   useEffect(() => {
     fetch(`http://localhost:8080/${category}`)
