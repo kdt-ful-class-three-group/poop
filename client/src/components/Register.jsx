@@ -20,11 +20,11 @@ function Register({ nextHandle }) {
   //유저 데이터
   const [userData, setUserData] = useState([])
   //유저 가져오기
-  useEffect(() => {
-    fetch('http://localhost:8080/register')
-      .then(response => response.json())
-      .then(data => setUserData(data))
-  }, [])
+  // useEffect(() => {
+  //   fetch('http://localhost:8080/register')
+  //     .then(response => response.json())
+  //     .then(data => setUserData(data))
+  // }, [])
 
   //창고에서 데이터 가져오기
   const { updateFormData } = userRegister()
@@ -51,13 +51,22 @@ function Register({ nextHandle }) {
       return
     }
 
-    const isExist = userData.some(data => data.user_id === user)
-    const text = isExist ? '이미 존재하는 아이디입니다' : '사용 가능한 아이디입니다'
+    fetch(`http://localhost:8080/register?user_id=${user}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.msg) {
+          setIdText(data.msg);
+        }
+      })
+      .catch(error => console.error('Error:', error));
 
-    //기존의 text와 같지 않으면 변경
-    if (idText !== text) {
-      setIdText(text)
-    }
+    // const isExist = userData.some(data => data.user_id === user)
+    // const text = isExist ? '이미 존재하는 아이디입니다' : '사용 가능한 아이디입니다'
+
+    // //기존의 text와 같지 않으면 변경
+    // if (idText !== text) {
+    //   setIdText(text)
+    // }
 
   }, [user, userData])
 
