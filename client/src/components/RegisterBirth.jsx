@@ -94,7 +94,7 @@ const RegisterBirth = ({ nextHandle }) => {
         <button
           onClick={handleForward}
           disabled={!gender || !birthdate}
-          className={`w-full py-2 rounded ${gender ? 'bg-yellow-900 text-white' : 'bg-gray-500 cursor-not-allowed'}`}
+          className={`w-full py-2 rounded ${gender ? 'bg-blue-500 text-white' : 'bg-gray-500 cursor-not-allowed'}`}
         >
           다음
         </button>

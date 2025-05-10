@@ -66,7 +66,7 @@ const RegisterNickname = () => {
 
       {/* 3. 다음 버튼 */}
       <div>
-        <button onClick={handelSubmit} type="submit" className="w-full py-2 bg-gray-300 rounded">다음</button>
+        <button onClick={handelSubmit} type="submit" className={`w-full py-2 rounded ${nickname === "" ? "bg-gray-300" : "bg-blue-500"}`}>다음</button>
       </div>
     </div>
   );
