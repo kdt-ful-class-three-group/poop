@@ -81,14 +81,14 @@ function CommunityDetail() {
   }, []);
 
   useEffect(() => {
-    if (!board_id) return;
-    fetch(`http://localhost:8080/comment/${board_id}`, {
+    if (!data.board_id) return;
+    fetch(`http://localhost:8080/comment/${data.board_id}`, {
       credentials: "include"
     })
       .then(res => res.json())
       .then(setComments)
       .catch(console.error);
-  }, [board_id]);
+  }, [data.board_id]);
 
 
 
@@ -108,7 +108,7 @@ function CommunityDetail() {
       body: JSON.stringify({
         content: content,
         user_id: Number(user_pk),
-        board_id: Number(board_id),
+        board_id: Number(data.board_id),
       })
     });
     if (!response.ok) throw new Error("댓글 작성 실패");
@@ -116,7 +116,7 @@ function CommunityDetail() {
 
     alert("댓글 작성 성공");
     setContent("");
-    fetch(`http://localhost:8080/comment/${board_id}`, {
+    fetch(`http://localhost:8080/comment/${data.board_id}`, {
       credentials: "include"
     })
       .then(r => r.json())
