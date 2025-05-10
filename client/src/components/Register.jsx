@@ -17,15 +17,6 @@ function Register({ nextHandle }) {
   const [pwText, setPwText] = useState('')
   const [pwCheckText, setCheckPwText] = useState('')
 
-  //유저 데이터
-  const [userData, setUserData] = useState([])
-  //유저 가져오기
-  // useEffect(() => {
-  //   fetch('http://localhost:8080/register')
-  //     .then(response => response.json())
-  //     .then(data => setUserData(data))
-  // }, [])
-
   //창고에서 데이터 가져오기
   const { updateFormData } = userRegister()
 
@@ -60,15 +51,7 @@ function Register({ nextHandle }) {
       })
       .catch(error => console.error('Error:', error));
 
-    // const isExist = userData.some(data => data.user_id === user)
-    // const text = isExist ? '이미 존재하는 아이디입니다' : '사용 가능한 아이디입니다'
-
-    // //기존의 text와 같지 않으면 변경
-    // if (idText !== text) {
-    //   setIdText(text)
-    // }
-
-  }, [user, userData])
+  }, [user])
 
 
   const pwCheck = (e) => {
@@ -95,7 +78,7 @@ function Register({ nextHandle }) {
   }
 
   useEffect(() => {
-    if (idText === '사용 가능한 아이디입니다' && pwText === '' && pwCheckText === '비밀번호가 일치합니다') {
+    if (idText === '사용 가능한 사용자입니다.' && pwText === '' && pwCheckText === '비밀번호가 일치합니다') {
       setDisabled(false);
     } else {
       setDisabled(true);
