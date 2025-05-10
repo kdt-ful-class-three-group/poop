@@ -13,43 +13,49 @@ function CommunityDetail() {
   //날짜
   const [day, setDay] = useState('')
   //로그인 상태
-  const {isLogin} = useContext(LoginContext)
+  const { isLogin } = useContext(LoginContext)
   //로그인 > 닉네임 가져오기
-  const [nick, setNick] = useState(sessionStorage.getItem('user_nick'),'')
+  const [nick, setNick] = useState(sessionStorage.getItem('user_nick'), '')
   //동일한지
   const [isSame, setIsSame] = useState(false)
   //네비게이터
   const navigate = useNavigate()
-  useEffect(()=>{
+  const { board_id } = useParams();
+  const [user_nick, setUserNick] = useState(null);
+  const [user_pk, setUserPk] = useState(null);
+  const [content, setContent] = useState("");
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
     fetch(`http://localhost:8080/community/post/${params.board_id}`)
-    .then(response => response.json())
-    .then(i => {
-      setData(i[0])
-    })
-  },[params])
-  
-  useEffect(()=>{
-    setDay((data.date||'').split('T')[0].replace(/-/g,'.'))
+      .then(response => response.json())
+      .then(i => {
+        setData(i[0])
+      })
+  }, [params])
+
+  useEffect(() => {
+    setDay((data.date || '').split('T')[0].replace(/-/g, '.'))
     console.log(data)
-    console.log('로그인 nick',nick)
-    console.log('작성자 nick',data.nickname)
-    setIsSame(nick===data.nickname)
+    console.log('로그인 nick', nick)
+    console.log('작성자 nick', data.nickname)
+    setIsSame(nick === data.nickname)
     // setData(location.state)
-  },[data,isLogin])
+  }, [data, isLogin])
 
   //삭제 함수
-  const deleteBtn = async(e)=>{
+  const deleteBtn = async (e) => {
     e.preventDefault()
 
-    console.log('삭제 요청',data.board_id)
+    console.log('삭제 요청', data.board_id)
 
     //fetch
-    const response = await fetch(`http://localhost:8080/community/delete/${data.board_id}`,{
-      method:'DELETE'
+    const response = await fetch(`http://localhost:8080/community/delete/${data.board_id}`, {
+      method: 'DELETE'
     })
 
-    
-    if(response.ok){
+
+    if (response.ok) {
       alert("삭제 성공")
       navigate('/community')
     } else {
@@ -57,15 +63,6 @@ function CommunityDetail() {
     }
     // const result = await response.json()
   }
-
-  const {board_id} = useParams();
-  const [user_nick, setUserNick] = useState(null);
-  const [user_pk, setUserPk] = useState(null);
-  const [content, setContent] = useState("");
-  const [comments, setComments] = useState([]);
-
-
-
 
   useEffect(() => {
     const storedUserId = sessionStorage.getItem("user_id");
@@ -95,23 +92,23 @@ function CommunityDetail() {
 
 
 
-  const commentWrite = async ()=>{
-    if(!content || content.trim() === ""){
+  const commentWrite = async () => {
+    if (!content || content.trim() === "") {
       alert("댓글 내용을 입력해주세요.");
       return;
     }
 
 
     const response = await fetch("http://localhost:8080/comment/write", {
-      method:"POST",
-      headers:{
+      method: "POST",
+      headers: {
         "Content-Type": "application/json",
       },
       credentials: "include",
       body: JSON.stringify({
-        content:content ,
-        user_id:Number(user_pk),
-        board_id:Number(board_id),
+        content: content,
+        user_id: Number(user_pk),
+        board_id: Number(board_id),
       })
     });
     if (!response.ok) throw new Error("댓글 작성 실패");
@@ -134,17 +131,17 @@ function CommunityDetail() {
         <h2 className="text-xl">커뮤니티 상세</h2>
       </div>
       {
-        isLogin && isSame ? 
-        <>
-          <div className="">
-            <Link to={`/community/write/${data.board_id}`} state={data}>
-            <Button text={'수정'} colorClass={'bg-gray-300'}/>
+        isLogin && isSame ?
+          <>
+            <div className="">
+              <Link to={`/community/write/${data.board_id}`} state={data}>
+                <Button text={'수정'} colorClass={'bg-gray-300'} />
               </Link>
-            <Button text={'삭제'} colorClass={'bg-gray-300'} clickEvent={(e)=>deleteBtn(e)}/>
-          </div>
-        </>
-        :
-        <></>
+              <Button text={'삭제'} colorClass={'bg-gray-300'} clickEvent={(e) => deleteBtn(e)} />
+            </div>
+          </>
+          :
+          <></>
       }
       <div className="mt-6 mb-1">
         <h4 className="text-xl">{data.title}</h4>
@@ -155,24 +152,24 @@ function CommunityDetail() {
       </div>
       <div className="flex items-center mb-5">
         <div className="mr-3">
-          <img src="" alt=""/>
+          <img src="" alt="" />
           <p className="text-sm">{data.recommand_amout}</p>
         </div>
         <div>
-          <img src="" alt=""/>
+          <img src="" alt="" />
           <p className="text-sm">{data.view_amout}</p>
         </div>
       </div>
       <div>
-        <div className="text-base" dangerouslySetInnerHTML={{__html:data.content}}></div>
+        <div className="text-base" dangerouslySetInnerHTML={{ __html: data.content }}></div>
       </div>
       <div className="flex items-center mt-3 mb-3">
         <button className="text-sm">
-          <img src="" alt=""/>
+          <img src="" alt="" />
           <p>추천</p>
         </button>
         <button className="text-sm">
-          <img src="" alt=""/>
+          <img src="" alt="" />
           <p>즐찾</p>
         </button>
       </div>
@@ -190,7 +187,7 @@ function CommunityDetail() {
           onChange={(e) => setContent(e.target.value)}
         />
         <button onClick={commentWrite}
-                className="bg-[#8E5E43] border-[#8E5E43] p-2 rounded-[0px_3px_3px_0px] text-white whitespace-nowrap text-sm cursor-pointer">
+          className="bg-[#8E5E43] border-[#8E5E43] p-2 rounded-[0px_3px_3px_0px] text-white whitespace-nowrap text-sm cursor-pointer">
           확인
         </button>
       </div>
@@ -203,9 +200,8 @@ function CommunityDetail() {
           </div>
         ))}
       </div>
-</div>
-)
-  ;
+    </div>
+  );
 }
 
 export default CommunityDetail;
