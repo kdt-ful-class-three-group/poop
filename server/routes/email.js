@@ -21,7 +21,7 @@ router.post("/send", async (req, res) => {
   });
 
   const mailOptions = {
-    from: `"Your App Name" <${process.env.EMAIL_ID}>`,
+    from: process.env.EMAIL_ID,
     to: email,
     subject: "회원가입 이메일 인증 코드",
     text: `인증 코드는 ${code} 입니다.`,
