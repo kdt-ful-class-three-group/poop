@@ -7,6 +7,7 @@ function Input({ className, type, placeholder, name, value, onChange }) {
     const hasInputForbiddenPattern = forbiddenPattern.test(inputValue);
     if (hasInputForbiddenPattern) {
       setInputPattern(false);
+      alert("허용되지 않는 문자가 포함되어 있습니다.");
       inputValue = inputValue.replace(forbiddenPattern, "");
        return;
     } else {

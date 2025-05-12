@@ -3,15 +3,20 @@
 import { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { LoginContext } from '../context/loginContext';
+import Input from '../components/Input';
 export default function Community() {
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchValue, setSearchValue] = useState('');
   const {isLogin} = useContext(LoginContext)
   const navigate = useNavigate();
 
+
   const postsPerPage = 6; // 한 페이지당 게시글 수
+
+
 
   // 게시글 더미데이터
   useEffect(() => {
@@ -109,10 +114,12 @@ export default function Community() {
             <form className="flex">
             
               <div className="relative flex-grow">
-                <input
+                <Input
                   type="text"
                   className="w-full py-2 px-3 text-sm border border-gray-300 rounded-md bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="검색"
+                  value={searchValue}
+                  onChange={(e) => setSearchValue(e.target.value)}
                 />
                 <button type="submit" className="absolute right-2 top-1/2 transform -translate-y-1/2">
                   검색
