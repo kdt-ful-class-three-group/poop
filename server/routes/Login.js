@@ -1,5 +1,5 @@
 //user_id,password
-
+import bcrypt from 'bcryptjs'
 import express from 'express'
 import pool from '../config/database.js'
 import session from "express-session";
@@ -45,8 +45,21 @@ router.post('/',async(req,res)=>{
     }
 
     //조회
-    const [rows] =await pool.execute('SELECT id, user_id, user_nick FROM user WHERE  user_id=? AND password = ?',
-      [user_id,password])
+    const [rows] =await pool.execute('SELECT id, user_id, user_nick, password FROM user WHERE  user_id=?',
+      [user_id])
+
+    if (rows.length === 0) {
+      return res.status(401).json({ success: false, message: '사용자가 존재하지 않습니다' });
+    }
+
+
+    const isMatch = await bcrypt.compare(password, rows[0].password);
+
+
+    if (!isMatch) {
+      return res.status(400).json({ msg: "비밀번호가 일치하지 않습니다." });
+    }
+
 
     //값이 없을 때
     if(rows.length===0){

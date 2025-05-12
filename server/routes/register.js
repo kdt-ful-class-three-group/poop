@@ -61,7 +61,9 @@ router.post("/", async (req, res) => {
 
     await connection.commit(); // 트랜잭션 커밋
 
+  console.log("회원가입 성공", {user_id, hashedPassword})
     return res.status(200).json({ msg: "유저 추가성공" });
+
   } catch (err) {
     await connection.rollback(); // 트랜잭션 롤백
     console.error("회원가입 실패 :", err);

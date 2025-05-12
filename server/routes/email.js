@@ -1,8 +1,10 @@
 // server/routes/email.js
 import express from "express";
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
 
 const router = express.Router();
+dotenv.config();
 
 
 
@@ -18,13 +20,13 @@ router.post("/send", async (req, res) => {
   const transporter = nodemailer.createTransport({
     service: "Gmail", // 또는 다른 SMTP
     auth: {
-      user: process.env.EMAIL_USER, // .env에서 불러오는 이메일 주소
-      pass: process.env.EMAIL_PASS, // 앱 비밀번호 or 실제 비밀번호
+      user: process.env.EMAIL_ID, // .env에서 불러오는 이메일 주소
+      pass: process.env.EMAIL_PW, // 앱 비밀번호 or 실제 비밀번호
     },
   });
 
   const mailOptions = {
-    from: `"Your App Name" <${process.env.EMAIL_USER}>`,
+    from: process.env.EMAIL_ID,
     to: email,
     subject: "회원가입 이메일 인증 코드",
     text: `인증 코드는 ${code} 입니다.`,
