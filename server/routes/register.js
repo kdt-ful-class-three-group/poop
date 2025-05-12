@@ -22,7 +22,6 @@ router.get("/", async (req, res) => {
     return res.status(500).json({ error: "Internal server error" });
   }
 });
-
 router.post("/", async (req, res) => {
   const connection = await pool.getConnection();
   try {
