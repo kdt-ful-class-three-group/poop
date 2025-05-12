@@ -38,7 +38,7 @@ function Email({ nextHandle }) {
   // 인증코드 전송
   const handleSendCode = async () => {
     // 이미 타이머가 돌아가고 있다면 막기
-    if (isCooldown) return;
+    if (isCooldown) {alert("이미 인증번호를 전송했습니다.");   return};
 
     
     try {
