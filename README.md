@@ -49,7 +49,6 @@ poop
 │  │  │  ├─ LoginInput.jsx
 │  │  │  ├─ NavButton.jsx
 │  │  │  ├─ NavDiv.jsx
-│  │  │  ├─ Post.jsx
 │  │  │  ├─ QuilEditor.jsx
 │  │  │  ├─ QuizButton.jsx
 │  │  │  ├─ QuizCard.jsx
