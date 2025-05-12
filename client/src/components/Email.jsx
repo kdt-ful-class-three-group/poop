@@ -10,6 +10,12 @@ function Email({ nextHandle }) {
   const [sentCode, setSentCode] = useState(''); // 서버에서 보낸 인증번호
   const [isCodeMatch, setIsCodeMatch] = useState(null); // null: 아직 입력 안 함, true/false
   const { updateFormData } = userRegister();
+
+  // 인증 번호 1분에 1개, 타이머와 인터벌 ID 상태 추가
+  const [timer, setTimer] = useState(0);
+  const [intervalId, setIntervalId] = useState(null);
+  const [isCooldown, setIsCooldown] = useState(false);
+
   // 이메일 정규식 검사
   const validateEmail = (email) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -20,8 +26,21 @@ function Email({ nextHandle }) {
     setShowEmailError(email !== "" && !validateEmail(email));
   }, [email]);
 
+  // 인터벌 클리어 (컴포넌트 언마운트 시)
+  useEffect(() => {
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [intervalId]);
+ 
+
+
   // 인증코드 전송
   const handleSendCode = async () => {
+    // 이미 타이머가 돌아가고 있다면 막기
+    if (isCooldown) {alert("이미 인증번호를 전송했습니다.");   return};
+
+    
     try {
       const res = await fetch("http://localhost:8080/email/send", {
         method: "POST",
@@ -32,6 +51,28 @@ function Email({ nextHandle }) {
 
       const data = await res.json();
       alert("이메일이 전송되었습니다."); // "이메일이 전송되었습니다"
+      
+      
+      // 쿨다운 시작
+      setIsCooldown(true)
+
+      // 인증번호 1분 = 1개, 1분 타이머 시작
+      // 타이머 및 쿨다운 설정
+      setTimer(60); // 60초 시작
+      const id = setInterval(() => {
+        setTimer((prev) => {
+          if (prev <= 1) {
+            clearInterval(id); // 타이머 끝나면 정지
+            setIsCooldown(false);  // 타이머 끝나면 쿨다운 해제
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+      setIntervalId(id); // 인터벌 ID 저장해서 나중에 정리
+
+
+
     } catch (err) {
       console.error(err);
       alert("인증번호 전송 실패!");
@@ -111,7 +152,7 @@ function Email({ nextHandle }) {
 
       <button
         type="button"
-        disabled={!isCodeMatch}
+        disabled={!isEmailVaild}
         onClick={handleNext}
         className={`w-full py-2 rounded ${isCodeMatch ? "bg-blue-500 text-white" : "bg-gray-300 text-gray-500"}`}
       >
