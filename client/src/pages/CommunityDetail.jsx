@@ -1,13 +1,10 @@
-import Input from "../components/Input.jsx";
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { LoginContext } from "../context/loginContext";
 import Button from "../components/Button";
+import Input from "../components/Input.jsx";
+
 function CommunityDetail() {
-  const navigate = useNavigate();
-  const [user_nick, setUserNick] = useState(null);
-  const [user_pk, setUserPk] = useState(null);
-  const [content, setContent] = useState("");
   // params
   const params = useParams();
   //데이터
@@ -20,48 +17,13 @@ function CommunityDetail() {
   const [nick, setNick] = useState(sessionStorage.getItem("user_nick"), "");
   //동일한지
   const [isSame, setIsSame] = useState(false);
-
-  useEffect(() => {
-    const storedUserId = sessionStorage.getItem("user_id");
-    const storedUserNick = sessionStorage.getItem("user_nick");
-    const id = sessionStorage.getItem("id");
-
-    if (!storedUserId || !storedUserNick) {
-      alert("로그인 후 이용해주세요.");
-      navigate("/login");
-    } else {
-      setUserNick(storedUserNick);
-      setUserPk(id);
-      console.log("세션 유저 pk", id);
-      console.log("세션 유저 닉네임", storedUserNick);
-    }
-  }, []);
-
-  const commentWrite = async () => {
-    if (!content || content.trim() === "") {
-      alert("댓글 내용을 입력해주세요.");
-      return;
-    }
-
-    const response = await fetch("http://localhost:8080/comment/write", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        content: content,
-        user_id: user_pk,
-        recommend_amount: 0,
-        board_id: 3,
-      }),
-    });
-    if (!response.ok) throw new Error("댓글 작성 실패");
-    await response.json();
-
-    alert("댓글 작성 성공");
-    setContent("");
-  };
+  //네비게이터
+  const navigate = useNavigate();
+  const { board_id } = useParams();
+  const [user_nick, setUserNick] = useState(null);
+  const [user_pk, setUserPk] = useState(null);
+  const [content, setContent] = useState("");
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     fetch(`http://localhost:8080/community/post/${params.board_id}`)
@@ -95,7 +57,7 @@ function CommunityDetail() {
     );
 
     if (response.ok) {
-      // 삭제 후 목록으로 이동
+      alert("삭제 성공");
       navigate("/community");
     } else {
       alert("삭제 실패했습니다");
@@ -103,30 +65,105 @@ function CommunityDetail() {
     // const result = await response.json()
   };
 
+  useEffect(() => {
+    const storedUserId = sessionStorage.getItem("user_id");
+    const storedUserNick = sessionStorage.getItem("user_nick");
+    const id = sessionStorage.getItem("id");
+
+    if (!storedUserId || !storedUserNick) {
+      // alert("로그인 후 이용해주세요.");
+      navigate("/login");
+    } else {
+      setUserNick(storedUserNick);
+      setUserPk(id);
+      console.log("세션 유저 pk", id);
+      console.log("세션 유저 닉네임", storedUserNick);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!data.board_id) return;
+    fetch(`http://localhost:8080/comment/${data.board_id}`, {
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then(setComments)
+      .catch(console.error);
+  }, [data.board_id]);
+
+  const commentWrite = async () => {
+    if (!content || content.trim() === "") {
+      alert("댓글 내용을 입력해주세요.");
+      return;
+    }
+
+    const response = await fetch("http://localhost:8080/comment/write", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        content: content,
+        user_id: Number(user_pk),
+        board_id: Number(data.board_id),
+      }),
+    });
+    if (!response.ok) throw new Error("댓글 작성 실패");
+    await response.json();
+
+    alert("댓글 작성 성공");
+    setContent("");
+    fetch(`http://localhost:8080/comment/${data.board_id}`, {
+      credentials: "include",
+    })
+      .then((r) => r.json())
+      .then(setComments);
+  };
+
   return (
     <div className="w-full">
       <div>
         <h2 className="text-xl">커뮤니티 상세</h2>
       </div>
+      {isLogin && isSame ? (
+        <>
+          <div className="">
+            <Link to={`/community/write/${data.board_id}`} state={data}>
+              <Button text={"수정"} colorClass={"bg-gray-300"} />
+            </Link>
+            <Button
+              text={"삭제"}
+              colorClass={"bg-gray-300"}
+              clickEvent={(e) => deleteBtn(e)}
+            />
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
       <div className="mt-6 mb-1">
-        <h4 className="text-xl">커뮤 제목</h4>
+        <h4 className="text-xl">{data.title}</h4>
       </div>
       <div className="flex items-center border-b border-[#d9d9d9] pb-1 mb-1">
-        <p className="text-sm mr-2">닉네임</p>
-        <span className="text-xs">2025.04.02</span>
+        <p className="text-sm mr-2">{data.nickname}</p>
+        <span className="text-xs">{day}</span>
       </div>
       <div className="flex items-center mb-5">
         <div className="mr-3">
           <img src="" alt="" />
-          <p className="text-sm">76</p>
+          <p className="text-sm">{data.recommand_amout}</p>
         </div>
         <div>
           <img src="" alt="" />
-          <p className="text-sm">76</p>
+          <p className="text-sm">{data.view_amout}</p>
         </div>
       </div>
       <div>
-        <p className="text-base">커뮤내용</p>
+        <div
+          className="text-base"
+          dangerouslySetInnerHTML={{ __html: data.content }}
+        ></div>
       </div>
       <div className="flex items-center mt-3 mb-3">
         <button className="text-sm">
@@ -157,12 +194,13 @@ function CommunityDetail() {
         </button>
       </div>
       <div>
-        <p className="text-lg">댓글</p>
-
-        <div className="flex items-center border-b border-[#d9d9d9] pb-1 mb-1">
-          <p className="text-sm mr-2">닉네임</p>
-          <span className="text-xs">2025.04.02</span>
-        </div>
+        {comments.map((c) => (
+          <div key={c.id} className="mb-2">
+            <p className="font-bold">{c.user_nick}</p>
+            <p>{c.content}</p>
+            <span className="text-xs text-gray-500">{c.date}</span>
+          </div>
+        ))}
       </div>
     </div>
   );

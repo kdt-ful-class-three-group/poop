@@ -12,9 +12,21 @@ import login from "./routes/Login.js";
 import email from "./routes/email.js";
 import comment from "./routes/comment.js";
 import check from "./routes/authRoutes.js";
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import YAML from 'yamljs';
+import swaggerUi from 'swagger-ui-express';
+
 
 //세션
 import session from "express-session";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const swaggerDocument = YAML.load(join(__dirname, 'swagger/swagger_final.yaml'));
+
+
 
 const app = express();
 app.use(express.json());
@@ -41,7 +53,7 @@ app.use(
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/auth", check);
 app.use("/quiz", quiz);
 app.use("/register", register);

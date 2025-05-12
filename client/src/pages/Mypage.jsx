@@ -11,7 +11,7 @@ function Mypage() {
   const user_id = sessionStorage.getItem("id");
 
   if(!user_id || !nickname){
-    alert("로그인 후 이용해주세요.");
+    // alert("로그인 후 이용해주세요.");
     navigate("/Login");
   }
 
