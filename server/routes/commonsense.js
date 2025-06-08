@@ -5,8 +5,8 @@ const router = express.Router()
 // get으로 조회
 router.get('/',async(req,res)=>{
   try{
-    const [rows] = await pool.execute("SELECT * FROM common_sense")
-    res.json(rows)
+    const result = await pool.query("SELECT * FROM common_sense")
+    res.json(result.rows)
   }
   catch(err){
     console.error(err)
@@ -24,7 +24,7 @@ router.post('/',async(req,res)=>{
   }
 
   try{
-    const [rows] = await pool.execute('INSERT INTO common_sense (question, answer) VALUES (?,?)',[question,answer])
+    await pool.query('INSERT INTO common_sense (question, answer) VALUES ($1,$2)',[question,answer])
     // 성공시 응답
     res.status(201).json({message:'데이터 추가 완료'})
   }
