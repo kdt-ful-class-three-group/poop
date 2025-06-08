@@ -4,8 +4,8 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const [rows] = await pool.query("SELECT * FROM quiz");
-    res.json(rows);
+    const result = await pool.query("SELECT * FROM quiz");
+    res.json(result.rows);
 
   } catch (error) {
     console.error(error);
@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    await pool.execute('INSERT INTO quiz (question, answer) VALUES (?,?)', [question, answer]);
+    await pool.query('INSERT INTO quiz (question, answer) VALUES ($1,$2)', [question, answer]);
     // 성공시 응답
     res.status(201).json('전송 성공');
   }
