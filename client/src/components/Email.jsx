@@ -49,15 +49,7 @@ function Email({ nextHandle }) {
           console.log("이메일이 전송 되었습니다.");
         }
       })
-      // const res = await fetch("http://localhost:8080/email/send", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   credentials: "include", // 세션 유지 필수!
-      //   body: JSON.stringify({ email }),
-      // });
 
-      // const data = await res.json();
-      
       // 쿨다운 시작
       setIsCooldown(true)
 

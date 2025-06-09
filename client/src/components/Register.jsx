@@ -45,18 +45,10 @@ function Register({ nextHandle }) {
 
     //? fetchAPI를 사용함에 따라 기존의 코드 주석
     checkUserId(user).then(data => {
-      if(data.status === 200) {
+      if (data.status === 200) {
         setIdText(data.data.msg);
       }
     });
-    // fetch(`http://localhost:8080/register?user_id=${user}`)
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     if (data.msg) {
-    //       setIdText(data.msg);
-    //     }
-    //   })
-    //   .catch(error => console.error('Error:', error));
   }, [user])
 
 
