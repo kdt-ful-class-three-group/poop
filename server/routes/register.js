@@ -9,11 +9,9 @@ router.get("/", async (req, res) => {
 
     console.log("user_id:", user_id); // 디버깅용 로그
 
-    const [rows] = await pool.execute("SELECT * FROM user WHERE user_id =?", [
-      user_id,
-    ]);
+    const result = await pool.query("SELECT * FROM users WHERE user_id = $1", [user_id]);
 
-    if (rows.length > 0) {
+    if (result.rows.length > 0) {
       return res.status(400).json({ msg: "이미 존재하는 사용자입니다." });
     }
     return res.status(200).json({ msg: "사용 가능한 사용자입니다." });
