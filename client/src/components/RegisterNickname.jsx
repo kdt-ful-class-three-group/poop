@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { checkUserNick, fetchRegister } from "../api/fectchApi.js";
 import { useNavigate } from "react-router-dom";
 import { userRegister } from "../context/RegisterContext.jsx";
@@ -26,6 +26,21 @@ const RegisterNickname = () => {
       return;
     }
 
+    try {
+      const userData = await fetchRegister(formData);
+      console.log("유저 등록 성공", userData);
+      alert("회원가입이 완료되었습니다.");
+      navigate("/login");
+    } catch (err) {
+      console.error("유저 등록 에러", err);
+    }
+  };
+
+  useEffect(() => {
+    if (nickname.length === 0) {
+      return
+    }
+
     checkUserNick(nickname).then(data => {
       if (data.status === 200) {
         setIsNickMatch(true);
@@ -36,16 +51,8 @@ const RegisterNickname = () => {
         setNickError(data.data.msg);
       }
     })
+  }, [nickname])
 
-    try {
-      const userData = await fetchRegister(formData);
-      console.log("유저 등록 성공", userData);
-      alert("회원가입이 완료되었습니다.");
-      navigate("/login");
-    } catch (err) {
-      console.error("유저 등록 에러", err);
-    }
-  };
 
   return (
     <div className="w-full ">

@@ -41,10 +41,8 @@ router.get("/check-nick", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const connection = await pool.getConnection();
   try {
-    const { user_id, password, email, user_nick, gender, birth_date } =
-      req.body;
+    const { user_id, password, email, user_nick, gender, birth_date } = req.body;
 
     console.log("Register attempt:", {
       user_id,
@@ -55,39 +53,33 @@ router.post("/", async (req, res) => {
       birth_date,
     }); // 디버깅용 로그
 
-    await connection.beginTransaction(); // 트랜잭션 시작
-
     // 비밀번호 해싱
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // user 테이블에 데이터 삽입
-    const [result] = await connection.execute(
-      "INSERT INTO user (user_id, password, email, user_nick, gender, birth_date) VALUES (?, ?, ?, ?, ?, ?)",
+    await pool.query(
+      "INSERT INTO users (user_id, password, email, user_nick, gender, birth_date) VALUES ($1, $2, $3, $4, $5, $6)",
       [user_id, hashedPassword, email, user_nick, gender, birth_date]
     );
 
+    const result = await pool.query("SELECT max(id) FROM users");
     // 삽입된 데이터의 id 가져오기
-    const userIdFromDb = result.insertId;
+    const userIdFromDb = result.rows[0].max;
 
     // user_connection 테이블에 데이터 삽입
-    await connection.execute(
-      "INSERT INTO user_connection (user_id) VALUES (?)",
+    await pool.query(
+      "INSERT INTO user_connection (user_id) VALUES ($1)",
       [userIdFromDb]
     );
 
-    await connection.commit(); // 트랜잭션 커밋
-
     return res.status(200).json({ msg: "유저 추가성공" });
   } catch (err) {
-    await connection.rollback(); // 트랜잭션 롤백
     console.error("회원가입 실패 :", err);
     res.status(500).json({
       success: false,
       msg: "서버 내부 에러",
     });
-  } finally {
-    connection.release(); // 연결 반환
   }
 });
 
