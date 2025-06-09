@@ -46,7 +46,7 @@ function Email({ nextHandle }) {
       //? fetchAPI를 사용함에 따라 기존의 코드 주석
       verifyEmail(email).then(data => {
         if(data.status === 200){
-          console.log("이메일이 전송 되었습니다.");
+          alert("이메일이 전송 되었습니다.");
         }
       })
 
