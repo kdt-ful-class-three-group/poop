@@ -1,6 +1,7 @@
 // src/components/Email.jsx
 import { useState, useEffect } from "react";
 import { userRegister } from "../context/RegisterContext";
+import { verifyEmail } from "../api/fectchApi";
 
 function Email({ nextHandle }) {
   const [email, setemail] = useState('');
@@ -42,16 +43,20 @@ function Email({ nextHandle }) {
 
     
     try {
-      const res = await fetch("http://localhost:8080/email/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include", // 세션 유지 필수!
-        body: JSON.stringify({ email }),
-      });
+      //? fetchAPI를 사용함에 따라 기존의 코드 주석
+      verifyEmail(email).then(data => {
+        if(data.status === 200){
+          console.log("이메일이 전송 되었습니다.");
+        }
+      })
+      // const res = await fetch("http://localhost:8080/email/send", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   credentials: "include", // 세션 유지 필수!
+      //   body: JSON.stringify({ email }),
+      // });
 
-      const data = await res.json();
-      alert("이메일이 전송되었습니다."); // "이메일이 전송되었습니다"
-      
+      // const data = await res.json();
       
       // 쿨다운 시작
       setIsCooldown(true)

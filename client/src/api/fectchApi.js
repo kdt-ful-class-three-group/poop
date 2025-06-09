@@ -25,7 +25,7 @@ export const checkUserId = async (user_id) => {
 };
 
 export const verifyEmail = async (email) => {
-  const response = await fetch("http://localhost:8080/verifyCode", {
+  const response = await fetch("http://localhost:8080/email/send", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
