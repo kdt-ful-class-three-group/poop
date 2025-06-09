@@ -1,5 +1,5 @@
-import React from "react";
-import { fetchRegister } from "../api/fectchApi.js";
+import React, { useState } from "react";
+import { checkUserNick, fetchRegister } from "../api/fectchApi.js";
 import { useNavigate } from "react-router-dom";
 import { userRegister } from "../context/RegisterContext.jsx";
 
@@ -9,6 +9,8 @@ const RegisterNickname = () => {
   console.log("현재까지 받은 유저 정보", formData);
 
   const [nickname, setNickname] = React.useState("");
+  const [isNickMatch, setIsNickMatch] = useState(null);
+  const [nickError, setNickError] = useState("");
 
   const handelSubmit = async (e) => {
     if (!nickname || nickname.trim() === "") {
@@ -23,12 +25,17 @@ const RegisterNickname = () => {
       alert("닉네임은 한국어 및 영문자와 숫자만 입력 가능합니다.");
       return;
     }
-    const updated = {
-      user_nick: nickname,
-    };
-    updateFormData("user_nick", nickname);
-    console.log("닉네임을 받은 유저 정보", updated);
-    console.log("최종 유저 정보", formData);
+
+    checkUserNick(nickname).then(data => {
+      if (data.status === 200) {
+        setIsNickMatch(true);
+        setNickError(data.data.msg);
+        updateFormData("user_nick", nickname);
+      } else if (data.status === 400) {
+        setIsNickMatch(false)
+        setNickError(data.data.msg);
+      }
+    })
 
     try {
       const userData = await fetchRegister(formData);
@@ -44,6 +51,12 @@ const RegisterNickname = () => {
     <div className="w-full ">
       <div className="mb-4">
         <label className="block font-bold mb-2">닉네임</label>
+        {isNickMatch === true && (
+          <p className="text-green-500 text-xs">{nickError}</p>
+        )}
+        {isNickMatch === false && (
+          <p className="text-red-500 text-xs">{nickError}</p>
+        )}
         <input
           type="text"
           name="nickname"
@@ -60,9 +73,8 @@ const RegisterNickname = () => {
         <button
           onClick={handelSubmit}
           type="submit"
-          className={`w-full py-2 rounded ${
-            nickname === "" ? "bg-gray-300" : "bg-blue-500"
-          }`}
+          className={`w-full py-2 rounded ${nickname === "" ? "bg-gray-300" : "bg-blue-500"
+            }`}
         >
           다음
         </button>

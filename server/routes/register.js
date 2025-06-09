@@ -21,6 +21,25 @@ router.get("/", async (req, res) => {
   }
 });
 
+
+router.get("/check-nick", async (req, res) => {
+  try {
+    const { user_nick } = req.query;
+
+    console.log("user_nick:", user_nick); // 디버깅용 로그
+
+    const result = await pool.query("SELECT * FROM users WHERE user_nick = $1", [user_nick]);
+
+    if (result.rows.length > 0) {
+      return res.status(400).json({ msg: "이미 존재하는 닉네임입니다." });
+    }
+    return res.status(200).json({ msg: "사용 가능한 닉네임입니다." });
+  } catch (err) {
+    console.error("Error fetching users:", err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 router.post("/", async (req, res) => {
   const connection = await pool.getConnection();
   try {

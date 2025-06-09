@@ -69,3 +69,16 @@ export const fetchRegister = async (userData) => {
   if (!response.ok) throw new Error("회원가입 실패");
   return await response.json();
 }
+
+export const checkUserNick = async (user_nick) => {
+  const response = await fetch(`http://localhost:8080/register/check-nick?user_nick=${encodeURIComponent(user_nick)}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
+
+  const data = await response.json();
+  return { status: response.status, data };
+}
