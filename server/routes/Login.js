@@ -2,6 +2,7 @@
 
 import express from 'express'
 import pool from '../config/database.js'
+import * as bcrypt from 'bcryptjs';
 import session from "express-session";
 const router = express.Router()
 
@@ -39,44 +40,46 @@ router.get('/:user_id', async (req, res) => {
 //로그인 요청 처리
 router.post('/', async (req, res) => {
   const { id, user_id, password, autoLogin, } = req.body
+  console.log(req.body);
   try {
     if (!user_id || !password) {
       return res.status(400).json({ success: false, message: '아이디와 비밀번호를 입력하세요' })
     }
 
     //조회
-    const [rows] = await pool.execute('SELECT id, user_id, user_nick FROM user WHERE  user_id=? AND password = ?',
-      [user_id, password])
-
-    //값이 없을 때
-    if (rows.length === 0) {
-      return res.status(401).json({ success: false, message: '사용자가 존재하지 않습니다' })
+    const result = await pool.query('SELECT id, user_id, user_nick, password FROM users WHERE user_id = $1', [user_id]);
+    if (result.rows.length === 0) {
+      return res.status(401).json({ success: false, message: '사용자가 존재하지 않습니다' });
     }
 
-    //응답 - 세션에 저장
-
-    //자동로그인 체크에 따른 만료시간 연장
-    if (autoLogin) {
-      //3일
-      req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 3
+    // 입력한 비밀번호와 DB의 암호화된 비밀번호 비교
+    const isMatch = await bcrypt.compare(password, result.rows[0].password);
+    if (!isMatch) {
+      return res.status(401).json({ success: false, message: '아이디 혹은 비밀번호가 일치하지 않습니다.' });
     } else {
-      //1시간
-      req.session.cookie.maxAge = 1000 * 60 * 60
+      //응답 - 세션에 저장
+
+      //자동로그인 체크에 따른 만료시간 연장
+      if (autoLogin) {
+        //3일
+        req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 3
+      } else {
+        //1시간
+        req.session.cookie.maxAge = 1000 * 60 * 60
+      }
+
+      console.log('기간확인', req.session.cookie.maxAge)
+
+      req.session.user = {
+        id: result.rows[0].id,
+        user_id: result.rows[0].user_id,
+        user_nick: result.rows[0].user_nick,
+      }
+      console.log('세션 저장 확인', req.session.user)
+
+      //성공 - 반환
+      return res.json({ success: true, message: '로그인 성공', user: req.session.user })
     }
-
-    console.log('기간확인', req.session.cookie.maxAge)
-
-    req.session.user = {
-      id: rows[0].id,
-      user_id: rows[0].user_id,
-      user_nick: rows[0].user_nick,
-    }
-    console.log('세션 저장 확인', req.session.user)
-
-    //성공 - 반환
-    return res.json({ success: true, message: '로그인 성공', user: req.session.user })
-
-
   }
   catch (err) {
     console.error('로그인 처리 중 오류', err)
