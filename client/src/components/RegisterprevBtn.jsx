@@ -7,7 +7,7 @@ function RegisterprevBtn({ flag, setFlag }) {
     <button
       className="bg-[#D9D9D9] rounded-[3px] p-2 mt-5"
       onClick={() => {
-        setFlag(--flag);
+        setFlag(flag - 1);
       }}
     >
       이전

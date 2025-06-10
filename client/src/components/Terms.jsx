@@ -1,11 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 // '자세히' 모달 컴포넌트 추가
 import DetailModal from "../components/DetailModal";
 
 function Terms({ nextHandle }) {
-
-  const navigate = useNavigate();
 
   const [allChecked, setAllChecked] = useState(false);
   const [privacyChecked, setPrivacyChecked] = useState(false);

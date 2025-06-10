@@ -19,8 +19,6 @@ function CommunityDetail() {
   const [isSame, setIsSame] = useState(false);
   //네비게이터
   const navigate = useNavigate();
-  const { board_id } = useParams();
-  const [user_nick, setUserNick] = useState(null);
   const [user_pk, setUserPk] = useState(null);
   const [content, setContent] = useState("");
   const [comments, setComments] = useState([]);
@@ -69,7 +67,7 @@ function CommunityDetail() {
       // alert("로그인 후 이용해주세요.");
       navigate("/login");
     } else {
-      setUserNick(storedUserNick);
+      setNick(storedUserNick);
       setUserPk(id);
     }
   }, []);
