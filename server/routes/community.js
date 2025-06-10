@@ -22,7 +22,7 @@ router.get("/post", async (req, res) => {
 router.get('/post/:id', async (req, res) => {
   const id = req.params.id
   try {
-    const [post] = await pool.execute('SELECT board.*, user.user_nick AS nickname FROM board LEFT JOIN user ON board.user_id = user.id WHERE board_id=?', [id])
+    const [post] = await pool.query('SELECT board.*, user.user_nick AS nickname FROM board LEFT JOIN user ON board.user_id = user.id WHERE board_id=$1', [id])
     res.status(200).json(post)
     console.log('데이터', post)
   }
@@ -40,8 +40,8 @@ router.post('/write', async (req, res) => {
   console.log("Community write attempt:", { user_id, title, content }); // 디버깅용 로그
 
   try {
-    await pool.execute(
-      "INSERT INTO board(user_id, title, content) VALUES(?, ?, ?)",
+    await pool.query(
+      "INSERT INTO board(user_id, title, content) VALUES($1, $2, $3)",
       [user_id, title, content]
     );
     return res.status(200).json({ msg: "글 작성성공" });
@@ -65,7 +65,7 @@ router.put('/update/:id', async (req, res) => {
   console.log('수정할 내용', req.body)
 
   try {
-    await pool.execute(`UPDATE board SET title = ? ,content = ? WHERE board_id=?`, [title, content, id])
+    await pool.query(`UPDATE board SET title = $1 ,content = $2 WHERE board_id=$3`, [title, content, id])
     return res.status(200).json({ msg: '글 수정 성공' })
 
   }
@@ -87,7 +87,7 @@ router.delete('/delete/:id', async (req, res) => {
   console.log('삭제할 board_id', id)
 
   try {
-    await pool.execute(`DELETE FROM board WHERE board_id=?`, [id])
+    await pool.query(`DELETE FROM board WHERE board_id=$1`, [id])
     return res.status(200).json({ msg: '글 삭제 성공' })
   }
   catch (err) {
