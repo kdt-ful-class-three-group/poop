@@ -10,7 +10,7 @@ export default function Community() {
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [searchValue, setSearchValue] = useState('');
-  const {isLogin} = useContext(LoginContext)
+  const { isLogin } = useContext(LoginContext)
   const navigate = useNavigate();
 
 
@@ -22,15 +22,15 @@ export default function Community() {
   useEffect(() => {
     //fetch로 데이터 가져오기
     fetch('http://localhost:8080/community/post')
-    .then(response => response.json())
-    .then(community => {
-      setPosts(community)
-      
-      // ✅ 총 페이지 수 계산 (최소 1페이지는 유지)
-      const calculatedPages = Math.ceil(community.length / postsPerPage);
-      setTotalPages(Math.max(1, calculatedPages));
-      setIsLoading(false);
-    })
+      .then(response => response.json())
+      .then(community => {
+        setPosts(community)
+
+        // ✅ 총 페이지 수 계산 (최소 1페이지는 유지)
+        const calculatedPages = Math.ceil(community.length / postsPerPage);
+        setTotalPages(Math.max(1, calculatedPages));
+        setIsLoading(false);
+      })
   }, []);
 
   // 글쓰기 페이지로 이동
@@ -41,7 +41,8 @@ export default function Community() {
   //현재 페이지에 맞는 게시글 잘라내기
   const startIndex = (currentPage - 1) * postsPerPage;
   const endIndex = startIndex + postsPerPage;
-  const visiblePosts = posts.slice(startIndex, endIndex);
+
+  const visiblePosts = posts.length === 0 ? [] : posts.slice(startIndex, endIndex);
 
   // 페이지네이션 버튼 생성
   const renderPagination = () => {
@@ -73,9 +74,8 @@ export default function Community() {
         <button
           key={i}
           onClick={() => setCurrentPage(i)}
-          className={`px-3 py-1 mx-1 ${
-            currentPage === i ? 'font-medium text-blue-600' : 'text-gray-600'
-          }`}
+          className={`px-3 py-1 mx-1 ${currentPage === i ? 'font-medium text-blue-600' : 'text-gray-600'
+            }`}
         >
           {i}
         </button>
@@ -101,18 +101,18 @@ export default function Community() {
         <div className="py-3 px-4">
 
           <div className="mt-3 relative">
-          <h1 className="text-lg font-medium ">커뮤니티</h1>
+            <h1 className="text-lg font-medium ">커뮤니티</h1>
             <div className='flex justify-end mb-2'>
-              {isLogin === true && 
+              {isLogin === true &&
                 <button type="button" onClick={goToWritePage} className="px-3 py-2 bg-gray-200 rounded-md text-xs">
-                글쓰기
+                  글쓰기
                 </button>
               }
             </div>
 
-              
+
             <form className="flex">
-            
+
               <div className="relative flex-grow">
                 <Input
                   type="text"
@@ -141,12 +141,12 @@ export default function Community() {
           visiblePosts.map((post) => (
             <Link to={`/Community/CommunityDetail/${post.board_id}`} key={post.board_id} className="block px-4 py-2 hover:bg-gray-50" state={post.nickname}>
               <div className="flex flex-col">
-                <h2 className="text-base font-medium text-gray-900">{post.title.length > 15 ? post.title.slice(0, 15) + "..." : post.title }</h2>
+                <h2 className="text-base font-medium text-gray-900">{post.title.length > 15 ? post.title.slice(0, 15) + "..." : post.title}</h2>
                 <div className="flex items-center text-xs text-gray-500 mt-1">
                   {/*<span>{post.user_id}</span>*/}
                   {/* <span className="mx-1">•</span> */}
                   <span>{new Date(post.date).toLocaleDateString()}</span>
-                </div>   
+                </div>
               </div>
             </Link>
           ))
