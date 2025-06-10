@@ -1,4 +1,3 @@
-import Button from "./Button";
 import {NaverBtn, GoogleBtn, KakaoBtn} from "oauth-btn";
 
 function EasyLogin(){

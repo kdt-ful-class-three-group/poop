@@ -1,5 +1,3 @@
-import React from "react";
-
 function DetailModal({ isOpen, onClose, children }) {
 if(!isOpen) return null;
 

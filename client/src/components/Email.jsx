@@ -8,7 +8,6 @@ function Email({ nextHandle }) {
   const [isEmailVaild, setIsEmailVaild] = useState(false);
   const [showEmailError, setShowEmailError] = useState(false);
   const [authCode, setAuthCode] = useState(''); // 사용자가 입력하는 인증번호
-  const [sentCode, setSentCode] = useState(''); // 서버에서 보낸 인증번호
   const [isCodeMatch, setIsCodeMatch] = useState(null); // null: 아직 입력 안 함, true/false
   const { updateFormData } = userRegister();
 

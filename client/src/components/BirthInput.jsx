@@ -1,5 +1,3 @@
-import React from 'react';
-
 const BirthDateInput = ({ value, onChange }) => {
   return (
     <div className="mb-4">

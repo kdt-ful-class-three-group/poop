@@ -63,8 +63,7 @@ export const fetchRegister = async (userData) => {
     },
     credentials: "include",
     body: JSON.stringify(userData),
-    }
-  );
+  });
 
   if (!response.ok) throw new Error("회원가입 실패");
   return await response.json();

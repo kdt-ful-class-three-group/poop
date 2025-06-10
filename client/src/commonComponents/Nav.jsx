@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 
 import NavButton from "../components/NavButton";
 import NavDiv from "../components/NavDiv";
-import { LoginProvider } from "../context/loginContext";
 
 function Nav() {
   const [btnClick, setBtnClick] = useState(false);

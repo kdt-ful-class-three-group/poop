@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // '자세히' 모달 컴포넌트 추가
 import DetailModal from "../components/DetailModal";
@@ -10,8 +10,6 @@ function Terms({ nextHandle }) {
   const [allChecked, setAllChecked] = useState(false);
   const [privacyChecked, setPrivacyChecked] = useState(false);
   const [termsChecked, setTermsChecked] = useState(false);
-  const [showPrivacyDetail, setShowPrivacyDetail] = useState(false);
-  const [showTermsDetail, setShowTermsDetail] = useState(false);
 
   // 모달 상태
   const [modalContent, setModalContent] = useState(null);

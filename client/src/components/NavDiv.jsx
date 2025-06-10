@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { LoginContext } from '../context/loginContext';
 
 function NavDiv({ navRef, btnClick, closeNav }) {

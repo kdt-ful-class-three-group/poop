@@ -1,5 +1,3 @@
-import React from "react";
-
 function RegisterprevBtn({ flag, setFlag }) {
   if (flag === 0) {
     return null; // 약관 동의 페이지에서는 이전 버튼 숨김
