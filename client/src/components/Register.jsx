@@ -47,6 +47,8 @@ function Register({ nextHandle }) {
     checkUserId(user).then(data => {
       if (data.status === 200) {
         setIdText(data.data.msg);
+      } else if (data.status === 400) {
+        setIdText(data.data.msg);
       }
     });
   }, [user])
@@ -90,22 +92,32 @@ function Register({ nextHandle }) {
     updateFormData("password", pw);
     nextHandle();
   }
-
   return (
-    <div className=" w-full h-full">
+    <div className="w-full h-full">
       <div className="h-100 flex flex-col justify-center items-center">
         <form className="w-full" onSubmit={buttonClick}>
-          <label className="text-sm text-black mb-2 ">아이디</label>
+          <label className="text-sm text-black mb-2">아이디</label>
           <p className="text-red-500 text-xs">{idText}</p>
           <Input className={"bg-gray-300 h-10 w-full border-solid mb-8 p-2"} type="text" name="username" value={user} onChange={(e) => userCheck(e)} />
           <label className="text-sm text-black mb-2">비밀번호</label>
           <p className="text-red-500 text-xs">{pwText}</p>
           <Input className={"bg-gray-300 h-10 w-full border-solid mb-8 p-2"} type="password" name="password" value={pw} onChange={(e) => pwCheck(e)} />
           <label className="text-sm text-black mb-2">비밀번호 확인</label>
-          <p className="text-red-500 text-xs">{pwCheckText}</p>
+          <p
+            className={`text-xs ${pwCheckText === "비밀번호가 일치합니다" ? "text-green-500"
+              : pwCheckText === "다시 입력해주세요"
+                ? "text-red-500"
+                : "text-red-500"
+              }`}
+          >
+            {pwCheckText}
+          </p>
           <Input className={"bg-gray-300 h-10 w-full border-solid mb-8 p-2"} type="password" name="passwordCheck" value={checkPw} onChange={(e) => samePwCheck(e)} />
-          <button type="submit"
-            className={`flex w-full justify-center rounded-[3px] p-2 mt-5  ${disabled ? "bg-gray-300" : "bg-blue-500"}`} disabled={disabled}>
+          <button
+            type="submit"
+            className={`flex w-full justify-center rounded-[3px] p-2 mt-5  ${disabled ? "bg-gray-300" : "bg-blue-500"}`}
+            disabled={disabled}
+          >
             다음
           </button>
         </form>
