@@ -11,8 +11,9 @@ router.get("/:board_id", async (req, res) => {
     const result = await pool.query(`
       SELECT c.comment_id AS id, c.content, c.date, u.user_nick, u.user_id
       FROM comment AS c
-      JOIN user AS u ON c.user_id = u.id
+      JOIN users AS u ON c.user_id = u.id
       WHERE c.board_id = $1
+      ORDER BY c.date desc
     `, [board_id]);
 
     res.status(200).json(result.rows);

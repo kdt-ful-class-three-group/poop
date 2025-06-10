@@ -29,7 +29,7 @@ function CommunityDetail() {
     fetch(`http://localhost:8080/community/post/${params.board_id}`)
       .then((response) => response.json())
       .then((i) => {
-        setData(i[0]);
+        setData(i);
       });
   }, [params]);
 
@@ -83,7 +83,6 @@ function CommunityDetail() {
 
   useEffect(() => {
     if (!data.board_id) return;
-    console.log(data);
     fetch(`http://localhost:8080/comment/${data.board_id}`, {
       credentials: "include",
     })
