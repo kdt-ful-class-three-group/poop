@@ -1,6 +1,4 @@
-
 import { useNavigate } from "react-router-dom";
-// import KnowledgeHorror from "../pages/KnowledgeHorror";
 
 function Menu() {
   const navigate = useNavigate();

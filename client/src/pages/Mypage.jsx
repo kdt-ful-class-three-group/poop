@@ -2,8 +2,6 @@ import { useContext } from "react";
 import { LoginContext } from "../context/loginContext";
 import { useNavigate } from "react-router-dom";
 
-
-
 function Mypage() {
   const navigate = useNavigate();
   const { logoutHandle } = useContext(LoginContext);
@@ -14,8 +12,6 @@ function Mypage() {
     // alert("로그인 후 이용해주세요.");
     navigate("/Login");
   }
-
-
 
   return (
     <div className="w-full">
