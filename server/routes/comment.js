@@ -8,15 +8,15 @@ router.get("/:board_id", async (req, res) => {
   console.log("댓글 요청", { board_id }); // 디버깅용 로그
 
   try {
-    const [comment] = await pool.execute(`
+    const result = await pool.query(`
       SELECT c.comment_id AS id, c.content, c.date, u.user_nick, u.user_id
       FROM comment AS c
       JOIN user AS u ON c.user_id = u.id
-      WHERE c.board_id = ?
+      WHERE c.board_id = $1
     `, [board_id]);
 
-    res.status(200).json(comment);
-    console.log("댓글 데이터", comment); // 디버깅용 로그
+    res.status(200).json(result.rows);
+    console.log("댓글 데이터", result.rows); // 디버깅용 로그
   } catch (err) {
     console.error("댓글 조회 실패", err);
     res.status(500).json({
@@ -32,8 +32,8 @@ router.post("/write", async (req, res) => {
 
   try {
     // 댓글 저장 (board_id 포함)
-    await pool.execute(
-      "INSERT INTO comment(content, user_id, board_id) VALUES(?, ?, ?)", // 3개의 컬럼
+    await pool.query(
+      "INSERT INTO comment(content, user_id, board_id) VALUES($1, $2, $3)", // 3개의 컬럼
       [content, user_id, board_id] // 3개의 값
     );
     return res.status(200).json({ msg: "댓글 작성 성공" });

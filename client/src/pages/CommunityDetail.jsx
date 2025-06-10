@@ -8,7 +8,7 @@ function CommunityDetail() {
   // params
   const params = useParams();
   //데이터
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
   //날짜
   const [day, setDay] = useState("");
   //로그인 상태
@@ -83,6 +83,7 @@ function CommunityDetail() {
 
   useEffect(() => {
     if (!data.board_id) return;
+    console.log(data);
     fetch(`http://localhost:8080/comment/${data.board_id}`, {
       credentials: "include",
     })
