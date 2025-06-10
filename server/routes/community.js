@@ -6,9 +6,9 @@ const router = express.Router();
 
 router.get("/post", async (req, res) => {
   try {
-    const result = await pool.query("SELECT board.*,   user.user_nick AS nickname FROM board LEFT JOIN user ON board.user_id = user.id ORDER BY date DESC");
+    const result = await pool.query("SELECT board.*, users.user_nick AS nickname FROM board LEFT JOIN users ON board.user_id = users.id ORDER BY date DESC");
+    console.log("게시글 데이터", result.rows); //디버깅용
     res.status(200).json(result.rows);
-    console.log("게시글 데이터", post); //디버깅용
   } catch (err) {
     console.error("Community get error:", err);
     res.status(500).json({
