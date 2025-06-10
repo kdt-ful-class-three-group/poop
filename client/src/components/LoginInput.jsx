@@ -30,11 +30,9 @@ function LoginInput({ autoLogin }) {
 
     const result = await response.json();
 
-    console.log(result);
     if (result.success) {
       setText("");
       setPw("");
-      console.log(result.success);
       //성공하면 sessionStorage에 저장
       sessionStorage.setItem("id", result.user.id);
       sessionStorage.setItem("user_id", result.user.user_id);
@@ -44,7 +42,6 @@ function LoginInput({ autoLogin }) {
       loginHandle();
     } else {
       setText(result.message);
-      console.log(result.success);
     }
   };
 

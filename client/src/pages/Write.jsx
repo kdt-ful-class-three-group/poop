@@ -19,7 +19,6 @@ function Write() {
   // 글 등록 이벤트
   const writeBtn = async (e) => {
     e.preventDefault();
-    console.log("등록 요청", data);
     //fetch
     const response = await fetch("http://localhost:8080/community/write", {
       method: "POST",
@@ -44,8 +43,6 @@ function Write() {
   //수정 클릭 이벤트
   const editBtn = async (e) => {
     e.preventDefault();
-
-    console.log("수정 요청", data.board_id);
 
     //fetch
     const response = await fetch(

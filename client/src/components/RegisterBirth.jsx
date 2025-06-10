@@ -33,16 +33,9 @@ const RegisterBirth = ({ nextHandle }) => {
     };
     updateFormData("gender", gender);
     updateFormData("birth_date", formattedBirthdate);
-    
-    console.log("생년월일을 받은 유저 정보", updated);
-    
-    console.log("생년월일 업데이트된 유저 정보", formData);
 
     nextHandle();
   }
-  useEffect(() => {
-    console.log("현재 유저 가입 정보", formData);
-  }, [formData]);
 
   return (
     <div className="w-full ">

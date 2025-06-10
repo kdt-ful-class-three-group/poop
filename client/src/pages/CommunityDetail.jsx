@@ -35,9 +35,6 @@ function CommunityDetail() {
 
   useEffect(() => {
     setDay((data.date || "").split("T")[0].replace(/-/g, "."));
-    console.log(data);
-    console.log("로그인 nick", nick);
-    console.log("작성자 nick", data.nickname);
     setIsSame(nick === data.nickname);
     // setData(location.state)
   }, [data, isLogin]);
@@ -45,8 +42,6 @@ function CommunityDetail() {
   //삭제 함수
   const deleteBtn = async (e) => {
     e.preventDefault();
-
-    console.log("삭제 요청", data.board_id);
 
     //fetch
     const response = await fetch(
@@ -76,8 +71,6 @@ function CommunityDetail() {
     } else {
       setUserNick(storedUserNick);
       setUserPk(id);
-      console.log("세션 유저 pk", id);
-      console.log("세션 유저 닉네임", storedUserNick);
     }
   }, []);
 

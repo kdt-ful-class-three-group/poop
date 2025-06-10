@@ -6,8 +6,6 @@ import { userRegister } from "../context/RegisterContext.jsx";
 const RegisterNickname = () => {
   const navigate = useNavigate();
   const { formData, updateFormData } = userRegister();
-  console.log("현재까지 받은 유저 정보", formData);
-
   const [nickname, setNickname] = React.useState("");
   const [isNickMatch, setIsNickMatch] = useState(null);
   const [nickError, setNickError] = useState("");
@@ -28,7 +26,6 @@ const RegisterNickname = () => {
 
     try {
       const userData = await fetchRegister(formData);
-      console.log("유저 등록 성공", userData);
       alert("회원가입이 완료되었습니다.");
       navigate("/login");
     } catch (err) {

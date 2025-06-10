@@ -50,7 +50,6 @@ function QuizButton({ nextBtn, prevBtn, data, category = 'quiz' }) {
     const userAnswer = inputRef.current.value.trim()
 
     if (userAnswer === data.answer) {
-      console.log('정답')
       inputRef.current.value = ''
       setIsAnswer(false)
       nextBtn()
@@ -60,7 +59,6 @@ function QuizButton({ nextBtn, prevBtn, data, category = 'quiz' }) {
       setToastText('정답입니다')
       setTextColor('text-blue-500')
     } else {
-      console.log('오답')
 
       //팝업
       setIsShow(true)
