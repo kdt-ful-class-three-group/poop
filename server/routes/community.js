@@ -22,9 +22,9 @@ router.get("/post", async (req, res) => {
 router.get('/post/:id', async (req, res) => {
   const id = req.params.id
   try {
-    const [post] = await pool.query('SELECT board.*, user.user_nick AS nickname FROM board LEFT JOIN user ON board.user_id = user.id WHERE board_id=$1', [id])
-    res.status(200).json(post)
-    console.log('데이터', post)
+    const result = await pool.query('SELECT board.*, users.user_nick AS nickname FROM board LEFT JOIN users ON board.user_id = users.id WHERE board_id=$1', [id])
+    res.status(200).json(result.rows[0])
+    console.log('데이터', result.rows[0]);
   }
   catch (err) {
     console.error("Community get error:", err);
@@ -38,11 +38,11 @@ router.get('/post/:id', async (req, res) => {
 router.post('/write', async (req, res) => {
   const { title, content, user_id } = req.body;
   console.log("Community write attempt:", { user_id, title, content }); // 디버깅용 로그
-
+  const strippedContent = content.replace(/<\/?p>/g, "");
   try {
     await pool.query(
       "INSERT INTO board(user_id, title, content) VALUES($1, $2, $3)",
-      [user_id, title, content]
+      [user_id, title, strippedContent]
     );
     return res.status(200).json({ msg: "글 작성성공" });
   } catch (err) {
